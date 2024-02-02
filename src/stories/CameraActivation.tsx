@@ -11,7 +11,7 @@ export const CameraActivation = () => (
     <div className="inline-flex flex-col items-center justify-start gap-5 px-10 py-7">
       <QrCodeScanner />
       <div className="text-center text-sm font-semibold text-zinc-900">
-        カメラで<Text>QRコード</Text>を読み取る
+        カメラで<Text>QR</Text>コードを読み取る
       </div>
     </div>
   </div>
