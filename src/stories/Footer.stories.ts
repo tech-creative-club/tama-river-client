@@ -15,12 +15,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LoggedIn: Story = {
+export const Primary: Story = {
   args: {
-    user: {
-      name: 'Jane Doe',
-    },
+    path: '/',
+    fixed: true,
   },
 };
-
-export const LoggedOut: Story = {};

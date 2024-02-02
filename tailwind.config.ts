@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   content: [
@@ -8,6 +9,11 @@ const config: Config = {
     './src/stories/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    fontSize: {
+      '3xs': '0.5rem',
+      '2xs': '0.625rem',
+      xs: '0.75rem',
+    },
     container: {
       center: true,
       padding: '2rem',
