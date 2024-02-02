@@ -14,12 +14,12 @@ module.exports = (
         actions: [
             {
                 type: 'add',
-                path: `./src/test/{{Component}}.tsx`,
+                path: `./src/stories/{{Component}}.tsx`,
                 templateFile: './src/plop-template/component.tsx.hbs'
             },
             {
                 type: 'add',
-                path: `./src/test/{{Component}}.stories.ts`,
+                path: `./src/stories/{{Component}}.stories.ts`,
                 templateFile: './src/plop-template/story.ts.hbs'
             }
         ]
