@@ -1,9 +1,9 @@
 import React from 'react';
-import Home from '@/components/icons/home';
-import Search from '@/components/icons/search';
-import Add from '@/components/icons/add';
-import Favorite from '@/components/icons/favorite';
-import History from '@/components/icons/history';
+import Home from '@/components/icons/Home';
+import Search from '@/components/icons/Search';
+import Add from '@/components/icons/Add';
+import Favorite from '@/components/icons/Favorite';
+import History from '@/components/icons/History';
 
 import { Noto_Sans_JP } from 'next/font/google';
 
