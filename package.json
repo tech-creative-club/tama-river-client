@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write src/**/*.{ts,tsx}",
     "pages:build": "npx @cloudflare/next-on-pages",
     "pages:preview": "npm run pages:build && wrangler pages dev .vercel/output/static --compatibility-date=2024-01-29 --compatibility-flag=nodejs_compat",
     "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
@@ -15,6 +16,8 @@
   },
   "dependencies": {
     "next": "14.1.0",
+    "prettier": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "react": "^18",
     "react-dom": "^18"
   },
