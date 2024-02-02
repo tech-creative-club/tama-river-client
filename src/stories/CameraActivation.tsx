@@ -5,7 +5,7 @@ const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
 export const CameraActivation = () => (
   <div
-    className={`flex w-fit min-w-80 justify-center rounded-md border-2 border-zinc-900 bg-white ${NotoSansJP.className}`}
+    className={`m-5 flex w-fit min-w-80 justify-center rounded-md border-2 border-zinc-900 bg-white ${NotoSansJP.className}`}
   >
     <div className="inline-flex flex-col items-center justify-start gap-5 px-10 py-7">
       <QrCodeScanner />
