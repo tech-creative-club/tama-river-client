@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import defaultTheme from 'tailwindcss/defaultTheme';
+import defaultThema from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   content: [
@@ -12,7 +12,19 @@ const config: Config = {
     fontSize: {
       '3xs': '0.5rem',
       '2xs': '0.625rem',
-      xs: '0.75rem',
+      xs: [...defaultThema.fontSize.xs],
+      sm: [...defaultThema.fontSize.sm],
+      base: [...defaultThema.fontSize.base],
+      lg: [...defaultThema.fontSize.lg],
+      xl: [...defaultThema.fontSize.xl],
+      '2xl': [...defaultThema.fontSize['2xl']],
+      '3xl': [...defaultThema.fontSize['3xl']],
+      '4xl': [...defaultThema.fontSize['4xl']],
+      '5xl': [...defaultThema.fontSize['5xl']],
+      '6xl': [...defaultThema.fontSize['6xl']],
+      '7xl': [...defaultThema.fontSize['7xl']],
+      '8xl': [...defaultThema.fontSize['8xl']],
+      '9xl': [...defaultThema.fontSize['9xl']],
     },
     container: {
       center: true,
