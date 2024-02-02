@@ -1,0 +1,3 @@
+{
+  "css.lint.unknownAtRules": "ignore" // Exclude globals.css due to errors
+}
