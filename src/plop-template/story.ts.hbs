@@ -1,0 +1,15 @@
+import type {Meta,StoryObj} from '@storybook/react';
+import { {{Component}} } from './{{Component}}';
+
+const meta : Meta = {
+  title: 'Components/{{Component}}',
+  component: {{Component}},
+  tags: ['components'],
+  parameters: {
+    layout: 'centered',
+  },
+} satisfies Meta<typeof {{Component}}>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+export const Primary:Story = {};
