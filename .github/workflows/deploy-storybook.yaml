@@ -33,7 +33,7 @@ jobs:
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          projectName: 'example-next-app'
+          projectName: 'tama-river-client-storybook'
           directory: 'storybook-static'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
@@ -57,4 +57,4 @@ jobs:
         with:
           token: '${{ github.token }}'
           environment-url: '${{ steps.deploy.outputs.deployment-url }}'
-          environment: preview
+          environment: storybook
