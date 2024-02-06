@@ -39,5 +39,5 @@ export const Primary:Story = {
         },
       } as SummaryCardType,
     }
-  },
+  }
 } satisfies Story;
