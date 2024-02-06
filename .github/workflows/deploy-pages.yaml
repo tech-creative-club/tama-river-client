@@ -58,4 +58,4 @@ jobs:
         with:
           token: '${{ github.token }}'
           environment-url: '${{ steps.deploy.outputs.deployment-url }}'
-          environment: preview
+          environment: production
