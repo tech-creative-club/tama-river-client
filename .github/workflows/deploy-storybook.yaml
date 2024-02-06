@@ -30,13 +30,11 @@ jobs:
 
       - name: Deploy to Cloudflare Pages
         id: deploy
-        uses: cloudflare/pages-action@1
+        uses: cloudflare/wrangler-action@v3
         with:
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          projectName: 'tama-river-client-storybook'
-          directory: 'storybook-static'
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          accountID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy storybook-static --project-name='tama-river-client-storybook'
 
       - name: Add publish URL as commit status
         uses: actions/github-script@v7
