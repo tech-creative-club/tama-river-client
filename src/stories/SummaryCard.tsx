@@ -10,7 +10,7 @@ import { SummaryCardImage } from './SummaryCardImage';
 
 export const SummaryCardComp = ({ plop }: { plop: SummaryCardType }) => {
   return (
-    <Link href={typeof plop.url !== undefined ? plop.url : 'http://localhost:3000'} legacyBehavior>
+    <Link href={typeof plop !== undefined ? plop.url : 'http://localhost:3000'} legacyBehavior>
       <div className="rounded-lg border border-b-0 border-l-2 border-r-0	border-t-2 border-inherit bg-white p-3 shadow-lg hover:bg-slate-100 dark:bg-slate-400">
         {plop.image !== undefined && (
           <SummaryCardImage
