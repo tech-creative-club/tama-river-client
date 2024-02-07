@@ -3,6 +3,17 @@ const url = process.env.URL || process.env.VERCEL_URL || process.env.CF_PAGES_UR
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  /**モック用に表示している画像の読み込みに必要なので記述
+   * 本番環境のときに消す必要あり。
+  */
+  images: {
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 'source.unsplash.com',
+      //pathname: '/**/*',
+    }]
+  },
+
   // Headers
   async headers() {
     const headers = [
