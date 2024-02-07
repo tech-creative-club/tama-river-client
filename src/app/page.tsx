@@ -20,10 +20,10 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="p-5">
       {ResponseJSON.map((plop, index) => {
         return <SummaryCardComp plop={plop} key={index} />;
       })}
-    </>
+    </div>
   );
 }
