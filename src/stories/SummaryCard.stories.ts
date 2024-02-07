@@ -37,5 +37,6 @@ export const Primary: Story = {
         capacity: '100',
       },
     } as SummaryCardType,
+    pulse: true,
   },
 } satisfies Story;

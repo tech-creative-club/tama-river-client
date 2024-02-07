@@ -33,6 +33,14 @@ const config: Config = {
         '2xl': '1400px',
       },
     },
+    borderWidth: {
+      smart: '0.05px',
+      DEFAULT: '1px',
+      0: '0',
+      2: '2px',
+      4: '4px',
+      8: '8px',
+    },
     extend: {
       colors: {
         border: 'hsl(var(--border))',
