@@ -8,10 +8,10 @@ export default async function Home() {
   );
   const ResponseJSON = (await fetchData.json()) as SummaryCardType[];
   return (
-    <>
+    <main>
       {ResponseJSON.map((plop, index) => {
         return <SummaryCardComp plop={plop} key={index} />;
       })}
-    </>
+    </main>
   );
 }
