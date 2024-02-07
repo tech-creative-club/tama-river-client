@@ -4,7 +4,7 @@ import { Label } from './Label';
 export const QRCodeReader = () => {
   return (
     <div className="absolute left-0 top-0 flex h-screen w-screen flex-col items-center justify-center space-y-5 bg-black/85">
-      <Label innerText="QRコードを枠内にうつしてください" className="text-white" />
+      <Label innerText="QRコードを枠内にうつしてください" className="text-white" size="secondary" />
       <div className="relative size-60 bg-gray-500">
         <div>
           <div className="absolute left-2 top-2 h-8 w-1.5 bg-white"></div>

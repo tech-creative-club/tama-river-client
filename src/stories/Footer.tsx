@@ -4,6 +4,7 @@ import Search from '@/components/icons/Search';
 import Add from '@/components/icons/Add';
 import Favorite from '@/components/icons/Favorite';
 import History from '@/components/icons/History';
+import { Label } from './Label';
 
 import { Noto_Sans_JP } from 'next/font/google';
 
@@ -14,29 +15,25 @@ interface FooterProps {
   fixed?: boolean;
 }
 
+const icons = [
+  { icon: <Home />, label: 'ホーム' },
+  { icon: <Search />, label: '検索' },
+  { icon: <Add />, label: '追加' },
+  { icon: <Favorite />, label: 'いいね' },
+  { icon: <History />, label: '履歴' },
+];
+
 export const Footer = ({ path, fixed }: FooterProps) => (
   <footer
-    className={`mt-5 flex w-full justify-center space-x-12 border-t border-border pb-9 pt-3 ${fixed && 'fixed bottom-0'} ${NotoSansJP.className}`}
+    className={`mt-5 flex w-full justify-center space-x-9 border-t border-border pb-6 ${fixed && 'fixed bottom-0'} ${NotoSansJP.className}`}
   >
-    <div className="flex w-6 flex-col space-y-1">
-      <Home />
-      <span className="text-center text-3xs font-semibold">ホーム</span>
-    </div>
-    <div className="flex w-6 flex-col space-y-1">
-      <Search />
-      <span className="text-center text-3xs font-semibold">検索</span>
-    </div>
-    <div className="flex w-6 flex-col space-y-1">
-      <Add />
-      <span className="text-center text-3xs font-semibold">追加</span>
-    </div>
-    <div className="flex w-6 flex-col space-y-1">
-      <Favorite />
-      <span className="text-center text-3xs font-semibold">いいね</span>
-    </div>
-    <div className="flex w-6 flex-col space-y-1">
-      <History />
-      <span className="text-center text-3xs font-semibold">履歴</span>
-    </div>
+    {icons.map((item, index) => (
+      <button key={index} className="p-3">
+        <div className="flex w-6 flex-col space-y-1">
+          {item.icon}
+          <Label innerText={item.label} size="quinary" weight="semibold" />
+        </div>
+      </button>
+    ))}
   </footer>
 );

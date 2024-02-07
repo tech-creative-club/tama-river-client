@@ -13,6 +13,7 @@ const label = tv({
       secondary: 'text-sm',
       tertiary: 'text-xs',
       quaternary: 'text-2xs',
+      quinary: 'text-3xs',
     },
     weight: {
       thin: 'font-thin',
@@ -35,7 +36,7 @@ interface LabelProps {
   weight?: Weight;
 }
 
-type Size = 'primary' | 'secondary' | 'tertiary' | 'quaternary';
+type Size = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
 type Weight =
   | 'thin'
   | 'extralight'
