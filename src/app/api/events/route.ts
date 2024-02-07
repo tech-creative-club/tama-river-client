@@ -21,8 +21,8 @@ function randomSport() {
 }
 
 function randomItems() {
-  const maxItemCount = 4;
-  const randomItemCount = Math.floor(Math.random() * maxItemCount) + 1;
+  const maxItemCount = 10;
+  const randomItemCount = Math.floor(Math.random() * maxItemCount) + 4;
   return Array.from({ length: randomItemCount }, () => {
     const [name, sport] = randomSport();
     return {
