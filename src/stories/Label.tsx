@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
-const base = 'text-center text-sm font-semibold text-zinc-900 text-white';
+const base = 'text-center text-sm font-semibold text-zinc-900 text-black';
 
 interface LabelProps {
   innerText: string;
