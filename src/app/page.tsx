@@ -25,8 +25,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex h-full w-full justify-center space-y-5 p-2">
-      <div className="w-full h-full max-w-md">
+    <div className="flex size-full justify-center space-y-5 p-2">
+      <div className="size-full max-w-md">
         <div className="flex flex-col space-y-5 divide-y-smart border-border pb-10">
           {ResponseJSON.map((plop, index) => {
             return <SummaryCardComp plop={plop} key={index} pulse={Loading} />;
