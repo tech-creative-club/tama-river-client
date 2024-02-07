@@ -6,7 +6,7 @@ import { tv } from 'tailwind-variants';
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
 const label = tv({
-  base: 'text-center text-sm font-medium',
+  base: 'text-sm font-medium',
   variants: {
     size: {
       primary: 'text-base',

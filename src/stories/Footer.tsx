@@ -13,7 +13,7 @@ import { Noto_Sans_JP } from 'next/font/google';
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
 const footer = tv({
-  base: `flex w-full justify-center space-x-9 border-t border-border pb-6 pt-5`,
+  base: `flex w-full justify-center border-t border-border pb-6 pt-5`,
 });
 
 interface FooterProps {
@@ -40,13 +40,15 @@ export const Footer = ({ path, fixed, className }: FooterProps) => (
   <footer
     className={`${footer({ className: `${fixed && 'fixed bottom-0'} ${className}` })} ${NotoSansJP.className}`}
   >
-    {items.map((item, index) => (
-      <Link key={index} className="cursor-pointer p-3" href={item.link}>
-        <div className="flex w-6 flex-col space-y-1">
-          {item.icon}
-          <Label innerText={item.label} size="quinary" weight="semibold" />
-        </div>
-      </Link>
-    ))}
+    <div className="flex w-full max-w-sm justify-between">
+      {items.map((item, index) => (
+        <Link key={index} className="cursor-pointer p-3" href={item.link}>
+          <div className="flex w-6 flex-col items-center space-y-1">
+            {item.icon}
+            <Label innerText={item.label} size="quinary" weight="semibold" />
+          </div>
+        </Link>
+      ))}
+    </div>
   </footer>
 );

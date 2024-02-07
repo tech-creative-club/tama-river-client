@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import '@/styles/globals.css';
 
 // Component
+import { Header } from '@/stories/Header';
 import { Footer } from '@/stories/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="flex h-screen w-screen flex-col overflow-hidden">
+          <Header />
           <main className="flex-1 overflow-scroll">{children}</main>
           <Footer className="bg-white" />
         </div>

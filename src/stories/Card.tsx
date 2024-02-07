@@ -9,10 +9,12 @@ interface CardProps {
 
 export const Card = ({ children }: CardProps) => {
   return (
-    <div
-      className={`flex w-fit min-w-80 cursor-pointer justify-center rounded-md border-2 border-zinc-900 bg-white ${NotoSansJP.className}`}
-    >
-      {children}
+    <div className="p-5">
+      <div
+        className={`flex w-full space-x-5 rounded-md border border-border bg-white p-5 text-justify ${NotoSansJP.className}`}
+      >
+        {children}
+      </div>
     </div>
   );
 };

@@ -17,13 +17,18 @@ export const SummaryCardComp = ({ plop, pulse = false }: SummaryCardProps) => {
 
   return (
     <Link href={typeof plop !== undefined ? plop.url : 'http://localhost:3000'} legacyBehavior>
-      <div className={`flex w-full flex-row space-x-3 bg-white p-5 pb-0 ${pulse && 'animate-pulse'}`}>
+      <div className={`flex w-full flex-row space-x-3 bg-white p-5 py-4 ${pulse && 'animate-pulse'}`}>
         <div className="m-1 h-20 w-28 rounded bg-zinc-200"></div>
-        <div className="m-1 flex w-full flex-1 flex-col">
+        <div className="m-1 flex w-full flex-1 flex-col space-y-1.5 truncate">
           {pulse ? (
             <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
           ) : (
-            <h1 className="rounded text-lg font-semibold">{plop.name}</h1>
+            <Label
+              innerText={plop.name}
+              size="primary"
+              weight="semibold"
+              className="w-full overflow-hidden truncate text-left text-zinc-900"
+            />
           )}
 
           {pulse ? (
