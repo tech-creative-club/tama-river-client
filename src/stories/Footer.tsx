@@ -6,6 +6,7 @@ import Favorite from '@/components/icons/Favorite';
 import History from '@/components/icons/History';
 import { Label } from './Label';
 import { tv } from 'tailwind-variants';
+import Link from 'next/link';
 
 import { Noto_Sans_JP } from 'next/font/google';
 
@@ -21,25 +22,31 @@ interface FooterProps {
   className?: string;
 }
 
-const icons = [
-  { icon: <Home />, label: 'ホーム' },
-  { icon: <Search />, label: '検索' },
-  { icon: <Add />, label: '追加' },
-  { icon: <Favorite />, label: 'いいね' },
-  { icon: <History />, label: '履歴' },
-];
+type Items = {
+  icon: JSX.Element;
+  label: string;
+  link: string;
+};
+
+const items = [
+  { icon: <Home />, label: 'ホーム', link: '/' },
+  { icon: <Search />, label: '検索', link: '/search' },
+  { icon: <Add />, label: '追加', link: '/add' },
+  { icon: <Favorite />, label: 'いいね', link: '/favorite' },
+  { icon: <History />, label: '履歴', link: '/history' },
+] as Items[];
 
 export const Footer = ({ path, fixed, className }: FooterProps) => (
   <footer
     className={`${footer({ className: `${fixed && 'fixed bottom-0'} ${className}` })} ${NotoSansJP.className}`}
   >
-    {icons.map((item, index) => (
-      <button key={index} className="p-3">
+    {items.map((item, index) => (
+      <Link key={index} className="cursor-pointer p-3" href={item.link}>
         <div className="flex w-6 flex-col space-y-1">
           {item.icon}
           <Label innerText={item.label} size="quinary" weight="semibold" />
         </div>
-      </button>
+      </Link>
     ))}
   </footer>
 );
