@@ -13,7 +13,7 @@ import { Noto_Sans_JP } from 'next/font/google';
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
 const footer = tv({
-  base: `mt-5 flex w-full justify-center space-x-9 border-t border-border pb-6`,
+  base: `flex w-full justify-center space-x-9 border-t border-border pb-6 pt-5`,
 });
 
 interface FooterProps {

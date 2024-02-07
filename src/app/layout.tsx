@@ -20,8 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
-        <Footer fixed={true} className="bg-white" />
+        <div className="flex h-screen w-screen flex-col overflow-hidden">
+          <main className="flex-1 overflow-scroll">{children}</main>
+          <Footer className="bg-white" />
+        </div>
       </body>
     </html>
   );
