@@ -1,4 +1,6 @@
 on:
+  workflow_dispatch:
+  pull_request:
   push:
     branches:
       - main
@@ -16,6 +18,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: change_deploy_env
+        id: deploy_env
+        run: |
+          if [[ ${{ github.event_name }} == 'push' ]]; then
+            echo -n "deploy=production" >> $GITHUB_OUTPUT
+          else
+            echo -n "deploy=development" >> $GITHUB_OUTPUT
+          fi
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -35,7 +45,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy .vercel/output/static --project-name=tama-river-client
-
       - name: Add publish URL as commit status
         uses: actions/github-script@v7
         with:
@@ -56,4 +65,22 @@ jobs:
         with:
           token: '${{ github.token }}'
           environment-url: '${{ steps.deploy.outputs.deployment-url }}'
-          environment: production
+          environment: '${{ steps.deploy_env.outputs.deploy }}'
+
+      - name: Update deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: "${{ steps.deploy.outputs.deployment-url }}"
+          state: 'success'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+
+      - name: Update deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: "${{ steps.deploy.outputs.deployment-url }}"
+          state: 'failure'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}

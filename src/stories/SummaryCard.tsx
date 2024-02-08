@@ -8,11 +8,11 @@ import { SummaryCardImage } from './SummaryCardImage';
   onClick?: () => void;
 } */
 
-export const SummaryCardComp = ({ plop }: { plop: SummaryCardType }) => {
+export const SummaryCardComp = ({ prop }: { prop: SummaryCardType }) => {
   return (
-    <Link href={typeof plop !== undefined ? plop.url : 'http://localhost:3000'} legacyBehavior>
+    <Link href={typeof prop !== undefined ? prop.url : 'http://localhost:3000'} legacyBehavior>
       <div className="rounded-lg border border-b-0 border-l-2 border-r-0	border-t-2 border-inherit bg-white p-3 shadow-lg hover:bg-slate-100 dark:bg-slate-400">
-        {plop.image !== undefined && (
+        {prop.image !== undefined && (
           <SummaryCardImage
             icon={
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 56 56">
@@ -22,17 +22,17 @@ export const SummaryCardComp = ({ plop }: { plop: SummaryCardType }) => {
                 />
               </svg>
             }
-            img={plop.image}
-            view={plop.location.name}
+            img={prop.image}
+            view={prop.location.name}
           />
         )}
-        <h3 className="mt-5 text-2xl">{plop.name}</h3>
+        <h3 className="mt-5 text-2xl">{prop.name}</h3>
         <div className="flex justify-between">
           <div className="flex items-center justify-center rounded-full border border-black px-2">
-            {new Date(plop.date).toLocaleString()}
+            {new Date(prop.date).toLocaleString()}
           </div>
           <div className="flex items-center justify-center">
-            {plop.sport?.map((sport, index) => {
+            {prop.sport?.map((sport, index) => {
               return (
                 <div key={index} className="m-1 rounded-full border p-1 text-xl">
                   {sport}
