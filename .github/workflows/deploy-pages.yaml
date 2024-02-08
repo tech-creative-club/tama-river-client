@@ -41,9 +41,9 @@ jobs:
         id: deploy_env
         run: |
           if [[ ${{ github.event_name }} == 'push' ]]; then
-            echo "production" >> $GITHUB_OUTPUT
+            echo -n "production" >> $GITHUB_OUTPUT
           else
-            echo "development" >> $GITHUB_OUTPUT
+            echo -n "development" >> $GITHUB_OUTPUT
           fi
       - name: Add publish URL as commit status
         uses: actions/github-script@v7
@@ -66,3 +66,21 @@ jobs:
           token: '${{ github.token }}'
           environment-url: '${{ steps.deploy.outputs.deployment-url }}'
           environment: '${{ steps.deploy_env.outputs.GITHUB_OUTPUT }}'
+
+      - name: Update deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: "${{ steps.deploy.outputs.deployment-url }}"
+          state: 'success'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+
+      - name: Update deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: "${{ steps.deploy.outputs.deployment-url }}"
+          state: 'failure'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
