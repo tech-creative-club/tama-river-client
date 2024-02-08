@@ -1,6 +1,6 @@
 'use client';
 
-import { SummaryCardComp } from '@/stories/SummaryCard';
+import { SummaryCard } from '@/stories/SummaryCard';
 import SummaryCardType from '@/types/SummaryCardType';
 import { useEffect, useState } from 'react';
 import { Card } from '@/stories/Card';
@@ -43,7 +43,7 @@ export default function Home() {
           </Card>
           <div className="divide-y-smart border-border">
             {ResponseJSON.map((plop, index) => {
-              return <SummaryCardComp plop={plop} key={index} pulse={Loading} />;
+              return <SummaryCard plop={plop} key={index} pulse={Loading} />;
             })}
           </div>
         </div>

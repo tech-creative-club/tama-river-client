@@ -7,7 +7,7 @@ const meta: Meta = {
   component: SummaryCard,
   tags: ['components', 'autodocs'],
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
   argTypes: {
     plop: {

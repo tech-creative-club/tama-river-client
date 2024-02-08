@@ -17,30 +17,32 @@ export const SummaryCard = ({ plop, pulse = false }: SummaryCardProps) => {
 
   return (
     <Link href={typeof plop !== undefined ? plop.url : 'http://localhost:3000'} legacyBehavior>
-      <div className={`flex w-full flex-row space-x-3 bg-white p-5 py-4 ${pulse && 'animate-pulse'}`}>
-        <div className="m-1 h-20 w-28 rounded bg-zinc-200"></div>
-        <div className="m-1 flex w-full flex-1 flex-col space-y-1.5 truncate">
-          {pulse ? (
-            <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
-          ) : (
-            <Label
-              innerText={plop.name}
-              size="primary"
-              weight="semibold"
-              className="w-full overflow-hidden truncate text-left text-zinc-900"
-            />
-          )}
+      <div className={`flex w-full justify-center space-x-3 bg-white p-5 py-4 ${pulse && 'animate-pulse'}`}>
+        <div className="flex w-full max-w-md flex-row">
+          <div className="m-1 h-20 w-28 rounded bg-zinc-200"></div>
+          <div className="m-1 flex w-full flex-1 flex-col space-y-1.5 truncate">
+            {pulse ? (
+              <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
+            ) : (
+              <Label
+                innerText={plop.name}
+                size="primary"
+                weight="semibold"
+                className="w-full overflow-hidden truncate text-left text-zinc-900"
+              />
+            )}
 
-          {pulse ? (
-            <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
-          ) : (
-            <Label
-              innerText={formattedDate}
-              size="tertiary"
-              weight="normal"
-              className="w-full text-left text-zinc-500"
-            />
-          )}
+            {pulse ? (
+              <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
+            ) : (
+              <Label
+                innerText={formattedDate}
+                size="tertiary"
+                weight="normal"
+                className="w-full text-left text-zinc-500"
+              />
+            )}
+          </div>
         </div>
       </div>
     </Link>
