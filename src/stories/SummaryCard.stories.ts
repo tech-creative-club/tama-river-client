@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SummaryCardComp } from './SummaryCard';
+import { SummaryCard } from './SummaryCard';
 import SummaryCardType from '@/types/SummaryCardType';
 
 const meta: Meta = {
   title: 'Components/SummaryCard',
-  component: SummaryCardComp,
+  component: SummaryCard,
   tags: ['components', 'autodocs'],
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
   argTypes: {
     prop: {
@@ -17,7 +17,7 @@ const meta: Meta = {
       },
     },
   },
-} satisfies Meta<typeof SummaryCardComp>;
+} satisfies Meta<typeof SummaryCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -37,5 +37,6 @@ export const Primary: Story = {
         capacity: '100',
       },
     } as SummaryCardType,
+    pulse: true,
   },
 } satisfies Story;

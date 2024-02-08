@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/styles/globals.css';
 
+// Component
+import { Header } from '@/stories/Header';
+import { Footer } from '@/stories/Footer';
 export const runtime = 'edge';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -18,7 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="flex h-screen w-screen flex-col overflow-hidden">
+          <Header />
+          <main className="flex-1 overflow-scroll">{children}</main>
+          <Footer className="bg-white" />
+        </div>
+      </body>
     </html>
   );
 }

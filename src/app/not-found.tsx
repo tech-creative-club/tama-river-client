@@ -1,57 +1,17 @@
-export const runtime = 'edge';
+import { Label } from '@/stories/Label';
 
 export default function NotFound() {
   return (
-    <>
-      <title>404: This page could not be found.</title>
-      <div style={styles.error}>
-        <div>
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}`,
-            }}
-          />
-          <h1 className="text-lg" style={styles.h1}>
-            404
-          </h1>
-          <div style={styles.desc}>
-            <h2 style={styles.h2}>This page could not be found.</h2>
-          </div>
-        </div>
+    <div className="flex h-screen w-screen items-center justify-center">
+      <div className="flex flex-col items-center space-y-2 pb-20">
+        <Label innerText="このページはご利用いただけません" size="primary" weight="medium" />
+        <Label
+          innerText="リンクに問題があるか、ページが削除された可能性があります。"
+          size="tertiary"
+          weight="normal"
+          className="text-zinc-500"
+        />
       </div>
-    </>
+    </div>
   );
 }
-
-const styles = {
-  error: {
-    fontFamily: 'system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"',
-    height: '100vh',
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  desc: {
-    display: 'inline-block',
-  },
-
-  h1: {
-    display: 'inline-block',
-    margin: '0 20px 0 0',
-    padding: '0 23px 0 0',
-    fontSize: 24,
-    fontWeight: 500,
-    verticalAlign: 'top',
-    lineHeight: '49px',
-  },
-
-  h2: {
-    fontSize: 14,
-    fontWeight: 400,
-    lineHeight: '49px',
-    margin: 0,
-  },
-} as const;
