@@ -8,7 +8,7 @@ interface SummaryCardProps {
   pulse?: boolean;
 }
 
-export const SummaryCardComp = ({ plop, pulse = false }: SummaryCardProps) => {
+export const SummaryCard = ({ plop, pulse = false }: SummaryCardProps) => {
   const formattedDate = new Date(plop.date).toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: '2-digit',
