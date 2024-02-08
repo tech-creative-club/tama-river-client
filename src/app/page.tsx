@@ -5,6 +5,7 @@ import SummaryCardType from '@/types/SummaryCardType';
 import { useEffect, useState } from 'react';
 import { Card } from '@/stories/Card';
 import { Label } from '@/stories/Label';
+import { GET } from '@/app/api/events/route';
 
 export default function Home() {
   const [ResponseJSON, setResponseJSON] = useState<SummaryCardType[]>([]);
@@ -12,9 +13,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const fetchData = await fetch(
-        `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : 'http://localhost:3000'}/api/events`
-      );
+      const fetchData = await GET();
 
       setResponseJSON((await fetchData.json()) as SummaryCardType[]);
     }
@@ -42,8 +41,8 @@ export default function Home() {
             </div>
           </Card>
           <div className="divide-y-smart border-border">
-            {ResponseJSON.map((plop, index) => {
-              return <SummaryCard plop={plop} key={index} pulse={Loading} />;
+            {ResponseJSON.map((prop, index) => {
+              return <SummaryCard prop={prop} key={index} pulse={Loading} />;
             })}
           </div>
         </div>

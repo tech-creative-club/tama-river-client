@@ -1,4 +1,6 @@
 on:
+  workflow_dispatch:
+  pull_request:
   push:
     branches:
       - main
@@ -57,3 +59,21 @@ jobs:
           token: '${{ github.token }}'
           environment-url: '${{ steps.deploy.outputs.deployment-url }}'
           environment: storybook
+
+      - name: Update deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: "${{ steps.deploy.outputs.deployment-url }}"
+          state: 'success'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+
+      - name: Update deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: "${{ steps.deploy.outputs.deployment-url }}"
+          state: 'failure'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}

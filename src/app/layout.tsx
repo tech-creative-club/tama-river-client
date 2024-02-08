@@ -5,6 +5,7 @@ import '@/styles/globals.css';
 // Component
 import { Header } from '@/stories/Header';
 import { Footer } from '@/stories/Footer';
+export const runtime = 'edge';
 
 const inter = Inter({ subsets: ['latin'] });
 

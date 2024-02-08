@@ -10,7 +10,7 @@ const meta: Meta = {
     layout: 'fullscreen',
   },
   argTypes: {
-    plop: {
+    prop: {
       description: 'SummaryCardのデータ',
       control: {
         type: 'object',
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    plop: {
+    prop: {
       id: '000000',
       name: 'イベントの名前',
       sport: ['サッカー', '野球'],
