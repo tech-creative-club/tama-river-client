@@ -37,7 +37,14 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy .vercel/output/static --project-name=tama-river-client
-
+      - name: change_deploy_env
+        id: deploy_env
+        run: |
+          if [[ ${{ github.event_name }} == 'push' ]]; then
+            echo "production" >> $GITHUB_OUTPUT
+          else
+            echo "development" >> $GITHUB_OUTPUT
+          fi
       - name: Add publish URL as commit status
         uses: actions/github-script@v7
         with:
@@ -58,4 +65,4 @@ jobs:
         with:
           token: '${{ github.token }}'
           environment-url: '${{ steps.deploy.outputs.deployment-url }}'
-          environment: production
+          environment: '${{ steps.deploy_env.outputs.GITHUB_OUTPUT }}'
