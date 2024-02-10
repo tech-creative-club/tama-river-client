@@ -64,13 +64,13 @@ export default function Home() {
           <div className="p-5 pt-0">
             <div className="hidden-scrollbar w-full overflow-scroll">
               <div className="flex flex-row space-x-3">
-                <Button onClick={() => handleSelect('すべて')}>
+                <Button onClick={() => handleSelect('すべて')} active={isSelect === 'すべて'}>
                   <Label innerText="すべて" size="secondary" weight="medium" />
                 </Button>
                 {ResponseJSON &&
                   tags.map((tag, index) => {
                     return (
-                      <Button key={index} onClick={() => handleSelect(tag)}>
+                      <Button key={index} onClick={() => handleSelect(tag)} active={isSelect === tag}>
                         <Label innerText={tag as string} size="secondary" weight="medium" />
                       </Button>
                     );
