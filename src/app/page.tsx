@@ -82,7 +82,6 @@ export default function Home() {
               if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
                 return <SummaryCard prop={prop} key={index} pulse={Loading} />;
               }
-              return null;
             })}
           </div>
         </div>
