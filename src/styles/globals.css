@@ -74,3 +74,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+.hidden-scrollbar {
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}

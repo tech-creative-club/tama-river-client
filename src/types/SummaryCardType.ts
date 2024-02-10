@@ -2,6 +2,7 @@ type SummaryCard = {
   id: string;
   name: string;
   sport: string[];
+  tag: { name: string }[];
   date: string;
   url: string;
   image?: string;
