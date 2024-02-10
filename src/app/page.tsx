@@ -12,7 +12,7 @@ export default function Home() {
   const [ResponseJSON, setResponseJSON] = useState<SummaryCardType[]>([]);
   const [Loading, setLoading] = useState(true);
   const [tags, setTags] = useState<String[]>([]);
-  const [isSelect, setIsSelect] = useState<String>('すべて');
+  const [selectedTag, setTag] = useState<String>('すべて');
 
   useEffect(() => {
     async function fetchData() {
@@ -43,7 +43,7 @@ export default function Home() {
 
   function handleSelect(str: String) {
     console.log(str);
-    setIsSelect(str);
+    setTag(str);
   }
 
   return (
@@ -64,27 +64,25 @@ export default function Home() {
           <div className="p-5 pt-0">
             <div className="hidden-scrollbar w-full overflow-scroll">
               <div className="flex flex-row space-x-3">
-                <Button onClick={() => handleSelect('すべて')} active={isSelect === 'すべて'}>
+                <Button onClick={() => handleSelect('すべて')} active={selectedTag === 'すべて'}>
                   <Label innerText="すべて" size="secondary" weight="medium" />
                 </Button>
-                {ResponseJSON &&
-                  tags.map((tag, index) => {
-                    return (
-                      <Button key={index} onClick={() => handleSelect(tag)} active={isSelect === tag}>
-                        <Label innerText={tag as string} size="secondary" weight="medium" />
-                      </Button>
-                    );
-                  })}
+                {tags?.map((tag, index) => {
+                  return (
+                    <Button key={index} onClick={() => handleSelect(tag)} active={selectedTag === tag}>
+                      <Label innerText={tag as string} size="secondary" weight="medium" />
+                    </Button>
+                  );
+                })}
               </div>
             </div>
           </div>
           <div className="divide-y-smart border-border">
             {ResponseJSON.map((prop, index) => {
-              if (isSelect === 'すべて') {
-                return <SummaryCard prop={prop} key={index} pulse={Loading} />;
-              } else if (prop.tag[0].name === isSelect) {
+              if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
                 return <SummaryCard prop={prop} key={index} pulse={Loading} />;
               }
+              return null;
             })}
           </div>
         </div>
