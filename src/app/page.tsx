@@ -42,7 +42,6 @@ export default function Home() {
   }, []);
 
   function handleSelect(str: String) {
-    console.log(str);
     setTag(str);
   }
 
