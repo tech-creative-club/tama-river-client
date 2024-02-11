@@ -3,6 +3,7 @@ import { Items } from './Items';
 import { tv } from 'tailwind-variants';
 
 import { Noto_Sans_JP } from 'next/font/google';
+import { Label } from './Label';
 
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
@@ -17,12 +18,27 @@ interface FooterProps {
   desktop?: boolean;
 }
 
+const year = new Date().getFullYear();
+
 export const Footer = ({ path, fixed, className, desktop = false }: FooterProps) => (
-  <footer
-    className={`${footer({ className: `${fixed && 'fixed bottom-0'} ${className} ${desktop && 'hidden'}` })} ${NotoSansJP.className}`}
-  >
-    <div className="flex w-full max-w-sm justify-between">
-      <Items />
-    </div>
-  </footer>
+  <>
+    <footer
+      className={`${footer({ className: `${fixed && 'fixed bottom-0'} ${className} ${desktop && 'hidden'}` })} ${NotoSansJP.className}`}
+    >
+      <div className="flex w-full max-w-sm justify-between">
+        <Items />
+      </div>
+    </footer>
+    <footer>
+      {/* Copylight */}
+      <div className="flex justify-start p-6 px-5">
+        <Label
+          innerText={`© ${year} たまりば`}
+          size="secondary"
+          weight="normal"
+          className="text-muted-foreground"
+        />
+      </div>
+    </footer>
+  </>
 );
