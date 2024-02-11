@@ -89,7 +89,7 @@ export default function Home() {
         </div>
       </div>
       {/* PC用 */}
-      <div className="flex size-full flex-col items-center">
+      <div className="hidden size-full flex-col items-center md:flex">
         <div className="hidden-scrollbar w-full max-w-7xl overflow-scroll p-5 pb-0">
           <div className="flex flex-row space-x-3">
             <Button onClick={() => handleSelect('すべて')} active={selectedTag === 'すべて'}>

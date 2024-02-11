@@ -19,5 +19,6 @@ export const Primary: Story = {
   args: {
     path: '/',
     fixed: true,
+    desktop: false,
   },
 };
