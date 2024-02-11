@@ -46,45 +46,72 @@ export default function Home() {
   }
 
   return (
-    <div className="flex size-full justify-center space-y-5 p-2">
-      <div className="size-full max-w-md">
-        <div className="flex flex-col space-y-5 pb-5">
-          <Card>
-            <div className="flex flex-col space-y-1.5">
-              <Label innerText="注意！" weight="medium" size="primary" />
-              <Label
-                innerText="開発中の画面のため、リリース版とは一部使用が異なる場合がございます。"
-                weight="normal"
-                size="secondary"
-                className="text-muted-foreground"
-              />
-            </div>
-          </Card>
-          <div className="p-5 pt-0">
-            <div className="hidden-scrollbar w-full overflow-scroll">
-              <div className="flex flex-row space-x-3">
-                <Button onClick={() => handleSelect('すべて')} active={selectedTag === 'すべて'}>
-                  <Label innerText="すべて" size="secondary" weight="medium" />
-                </Button>
-                {tags?.map((tag, index) => {
-                  return (
-                    <Button key={index} onClick={() => handleSelect(tag)} active={selectedTag === tag}>
-                      <Label innerText={tag as string} size="secondary" weight="medium" />
-                    </Button>
-                  );
-                })}
+    <>
+      {/* スマホ&タブレット用 */}
+      <div className="flex size-full justify-center space-y-5 p-2 md:hidden">
+        <div className="size-full max-w-md">
+          <div className="flex flex-col space-y-5 pb-5">
+            <Card>
+              <div className="flex flex-col space-y-1.5">
+                <Label innerText="注意！" weight="medium" size="primary" />
+                <Label
+                  innerText="開発中の画面のため、リリース版とは一部使用が異なる場合がございます。"
+                  weight="normal"
+                  size="secondary"
+                  className="text-muted-foreground"
+                />
+              </div>
+            </Card>
+            <div className="p-5 pt-0">
+              <div className="hidden-scrollbar w-full overflow-scroll">
+                <div className="flex flex-row space-x-3">
+                  <Button onClick={() => handleSelect('すべて')} active={selectedTag === 'すべて'}>
+                    <Label innerText="すべて" size="secondary" weight="medium" />
+                  </Button>
+                  {tags?.map((tag, index) => {
+                    return (
+                      <Button key={index} onClick={() => handleSelect(tag)} active={selectedTag === tag}>
+                        <Label innerText={tag as string} size="secondary" weight="medium" />
+                      </Button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="divide-y-smart border-border">
-            {ResponseJSON.map((prop, index) => {
-              if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
-                return <SummaryCard prop={prop} key={index} pulse={Loading} />;
-              }
-            })}
+            <div className="divide-y-smart border-border">
+              {ResponseJSON.map((prop, index) => {
+                if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
+                  return <SummaryCard prop={prop} key={index} pulse={Loading} />;
+                }
+              })}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      {/* PC用 */}
+      <div className="flex size-full flex-col items-center">
+        <div className="hidden-scrollbar w-full max-w-7xl overflow-scroll p-5 pb-0">
+          <div className="flex flex-row space-x-3">
+            <Button onClick={() => handleSelect('すべて')} active={selectedTag === 'すべて'}>
+              <Label innerText="すべて" size="secondary" weight="medium" />
+            </Button>
+            {tags?.map((tag, index) => {
+              return (
+                <Button key={index} onClick={() => handleSelect(tag)} active={selectedTag === tag}>
+                  <Label innerText={tag as string} size="secondary" weight="medium" />
+                </Button>
+              );
+            })}
+          </div>
+        </div>
+        <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
+          {ResponseJSON.map((prop, index) => {
+            if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
+              return <SummaryCard prop={prop} key={index} pulse={Loading} desktop={true} />;
+            }
+          })}
+        </div>
+      </div>
+    </>
   );
 }
