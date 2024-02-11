@@ -38,5 +38,6 @@ export const Primary: Story = {
       },
     } as SummaryCardType,
     pulse: true,
+    desktop: false,
   },
 } satisfies Story;
