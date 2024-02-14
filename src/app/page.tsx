@@ -5,7 +5,6 @@ import SummaryCardType from '@/types/SummaryCardType';
 import { useEffect, useState } from 'react';
 import { Card } from '@/stories/Card';
 import { Label } from '@/stories/Label';
-import { GET } from '@/app/api/events/route';
 import { Button } from '@/stories/Button';
 
 export default function Home() {
@@ -16,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const fetchData = await GET();
+      const fetchData = await fetch('/api/events');
       const ResponseJSON = (await fetchData.json()) as SummaryCardType[];
 
       let newTags: String[] = [];
