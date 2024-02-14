@@ -2,6 +2,12 @@
 export const runtime = 'edge';
 import SummaryCard from '@/types/SummaryCardType';
 import { nanoid } from 'nanoid';
+import { LRUCache } from 'lru-cache';
+
+const cache = new LRUCache({
+  max: 500, // The maximum size of the cache
+  ttl: 10 * 60 * 1000, // 10 minutes
+});
 
 /**
  * @params URL一覧とSummaryCardの型を定義
@@ -28,7 +34,13 @@ function randomSport() {
 function randomItems() {
   const maxItemCount = 10;
   const randomItemCount = Math.floor(Math.random() * maxItemCount) + 4;
-  return Array.from({ length: randomItemCount }, () => {
+
+  // キャッシュを取得し、存在する場合はそのまま返す
+  let items = cache.get('items');
+  if (items) return items;
+
+  // 存在しない場合は作成する
+  items = Array.from({ length: randomItemCount }, () => {
     const [name, sport, tag] = randomSport();
     return {
       id: nanoid(8),
@@ -45,6 +57,10 @@ function randomItems() {
       },
     } as SummaryCard;
   });
+
+  // キャッシュに保存し、返す
+  cache.set('items', items);
+  return items;
 }
 
 async function Handler() {

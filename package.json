@@ -20,6 +20,7 @@
     "gen": "plop"
   },
   "dependencies": {
+    "lru-cache": "^10.2.0",
     "nanoid": "^5.0.5",
     "next": "14.1.0",
     "react": "^18",
