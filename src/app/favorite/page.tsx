@@ -5,7 +5,7 @@ import SummaryCardType from '@/types/SummaryCardType';
 import { SummaryCard } from '@/stories/SummaryCard';
 import { getFavoriteStorage } from '@/utils/favoriteStorage';
 
-export default function Add() {
+export default function Favorite() {
   const [ResponseJSON, setResponseJSON] = useState<SummaryCardType[]>([]);
   const [Loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState<number>(0);
