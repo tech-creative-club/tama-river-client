@@ -8,6 +8,7 @@ import { getFavoriteStorage } from '@/utils/favoriteStorage';
 export default function Add() {
   const [ResponseJSON, setResponseJSON] = useState<SummaryCardType[]>([]);
   const [Loading, setLoading] = useState(true);
+  const [favorites, setFavorites] = useState<number>(0);
 
   useEffect(() => {
     async function fetchData() {
@@ -40,10 +41,12 @@ export default function Add() {
       ) : (
         ResponseJSON.map((prop, index) => {
           if (getFavoriteStorage().includes(prop.id)) {
+            setFavorites(favorites + 1);
             return <SummaryCard prop={prop} key={index} pulse={Loading} />;
           }
         })
       )}
+      {!Loading && favorites === 0 ? <h2>お気に入りはありません</h2> : null}
     </div>
   );
 }
