@@ -42,7 +42,7 @@ export default function Search() {
   return (
     <div className="flex size-full flex-col items-center space-y-5 pt-20">
       <div className="w-full px-5">
-        <Input id="search" onChange={() => handle()} />
+        <Input id="search" onChange={() => handle()} placeholder="検索する文字" />
       </div>
       {Loading ? (
         <h2>Loading...</h2>
