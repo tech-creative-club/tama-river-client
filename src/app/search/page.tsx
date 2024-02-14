@@ -1,30 +1,28 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import SummaryCardType from '@/types/SummaryCardType';
 import { SummaryCard } from '@/stories/SummaryCard';
 import { Input } from '@/stories/Input';
+import fetchEvents from '@/utils/fetchEvents';
 
 export default function Search() {
-  const [ResponseJSON, setResponseJSON] = useState<SummaryCardType[]>([]);
+  const [ResponseJSON, setResponseJSON] = useState<any[]>([]);
   const [Loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
     async function fetchData() {
-      const fetchData = await fetch('/api/events');
-      const ResponseJSON = (await fetchData.json()) as SummaryCardType[];
+      const response = await fetchEvents();
+      setResponseJSON(response as any[]);
 
       let newTags: String[] = [];
-      ResponseJSON.map((prop) => {
+      ResponseJSON.flat().map((prop) => {
         const { tag } = prop;
 
         if (tag[0]?.name && !newTags.includes(tag[0].name)) {
           newTags.push(tag[0].name);
         }
       });
-
-      setResponseJSON(ResponseJSON);
     }
 
     fetchData();
@@ -32,6 +30,7 @@ export default function Search() {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handle() {
@@ -47,7 +46,7 @@ export default function Search() {
       {Loading ? (
         <h2>Loading...</h2>
       ) : (
-        ResponseJSON.map((prop, index) => {
+        ResponseJSON.flat().map((prop, index) => {
           if (prop.name.includes(searchText) || prop.tag[0].name.includes(searchText)) {
             return <SummaryCard prop={prop} key={index} pulse={Loading} />;
           }

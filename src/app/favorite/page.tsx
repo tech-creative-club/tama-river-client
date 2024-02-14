@@ -1,30 +1,28 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import SummaryCardType from '@/types/SummaryCardType';
 import { SummaryCard } from '@/stories/SummaryCard';
 import { getFavoriteStorage } from '@/utils/favoriteStorage';
+import fetchEvents from '@/utils/fetchEvents';
 
 export default function Favorite() {
-  const [ResponseJSON, setResponseJSON] = useState<SummaryCardType[]>([]);
+  const [ResponseJSON, setResponseJSON] = useState<any[]>([]);
   const [Loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState<number>(0);
 
   useEffect(() => {
     async function fetchData() {
-      const fetchData = await fetch('/api/events');
-      const ResponseJSON = (await fetchData.json()) as SummaryCardType[];
+      const response = await fetchEvents();
+      setResponseJSON(response as any[]);
 
       let newTags: String[] = [];
-      ResponseJSON.map((prop) => {
+      ResponseJSON.flat().map((prop) => {
         const { tag } = prop;
 
         if (tag[0]?.name && !newTags.includes(tag[0].name)) {
           newTags.push(tag[0].name);
         }
       });
-
-      setResponseJSON(ResponseJSON);
     }
 
     fetchData();
@@ -32,6 +30,7 @@ export default function Favorite() {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
