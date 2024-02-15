@@ -11,10 +11,6 @@ export default function Search() {
   const [Loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState<string>('');
 
-  function handle(text: string): void {
-    setSearchText(text);
-  }
-
   useEffect(() => {
     async function fetchData() {
       const response = await fetchEvents();
@@ -28,7 +24,12 @@ export default function Search() {
   return (
     <div className="flex size-full flex-col items-center space-y-5 pt-20">
       <div className="w-full px-5">
-        <TextField label="検索" variant="outlined" fullWidth onChange={(e) => handle(e.target.value)} />
+        <TextField
+          label="検索"
+          variant="outlined"
+          fullWidth
+          onChange={(e) => setSearchText(e.target.value)}
+        />
       </div>
       {Loading ? (
         <h2>Loading...</h2>
