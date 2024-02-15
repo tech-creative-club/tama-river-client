@@ -25,6 +25,8 @@ export default function Favorite() {
     <div className="flex size-full flex-col items-center space-y-5 pt-20">
       {Loading ? (
         <h2>Loading...</h2>
+      ) : favoritesCount === 0 ? (
+        <h2>お気に入りがありません</h2>
       ) : (
         ResponseJSON.map((prop, index) => {
           if (getFavoriteStorage().includes(prop.id)) {
@@ -33,7 +35,6 @@ export default function Favorite() {
           }
         })
       )}
-      {!Loading && favoritesCount === 0 ? <h2>お気に入りはありません</h2> : null}
     </div>
   );
 }
