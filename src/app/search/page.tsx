@@ -3,13 +3,17 @@
 import { useEffect, useState } from 'react';
 import { SummaryCard } from '@/stories/SummaryCard';
 import SummaryCardType from '@/types/SummaryCardType';
-import { Input } from '@/stories/Input';
 import fetchEvents from '@/utils/fetchEvents';
+import TextField from '@mui/material/TextField';
 
 export default function Search() {
   const [ResponseJSON, setResponseJSON] = useState<SummaryCardType[]>([]);
   const [Loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState<string>('');
+
+  function handle(text: string): void {
+    setSearchText(text);
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -21,14 +25,10 @@ export default function Search() {
     fetchData();
   }, []);
 
-  function handle(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchText(e.target.value);
-  }
-
   return (
     <div className="flex size-full flex-col items-center space-y-5 pt-20">
       <div className="w-full px-5">
-        <Input id="search" onChange={(e) => handle(e)} placeholder="検索する文字" />
+        <TextField label="検索" variant="outlined" fullWidth onChange={(e) => handle(e.target.value)} />
       </div>
       {Loading ? (
         <h2>Loading...</h2>

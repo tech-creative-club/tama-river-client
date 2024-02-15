@@ -20,6 +20,9 @@
     "gen": "plop"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.10",
     "lru-cache": "^10.2.0",
     "nanoid": "^5.0.5",
     "next": "14.1.0",
