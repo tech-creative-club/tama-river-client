@@ -48,7 +48,7 @@ function randomItems() {
 }
 
 async function Handler() {
-  const content = randomItems();
+  const content: SummaryCard[] = randomItems();
   return Response.json(content);
 }
 
