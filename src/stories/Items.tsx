@@ -32,7 +32,6 @@ const items = [
   { icon: <Search />, label: '検索', link: '/search' },
   { icon: <Add />, label: '追加', link: '/add' },
   { icon: <Favorite />, label: 'いいね', link: '/favorite' },
-  { icon: <History />, label: '履歴', link: '/history' },
 ] as Items[];
 
 export const Items = ({ desktop = false }: ItemsProps) => {
