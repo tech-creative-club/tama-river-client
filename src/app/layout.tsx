@@ -16,12 +16,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isMdScreen, setIsMdScreen] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      setIsMdScreen(width > 768);
+      setIsDesktop(width > 768);
     };
 
     handleResize(); // Call the function initially
@@ -37,9 +37,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="flex h-screen w-screen flex-col overflow-hidden">
-          <Header desktop={isMdScreen} />
+          <Header desktop={isDesktop} />
           <main className="flex-1 overflow-scroll">{children}</main>
-          <Footer className="bg-white" desktop={isMdScreen} />
+          <Footer className="bg-white" desktop={isDesktop} />
         </div>
       </body>
     </html>
