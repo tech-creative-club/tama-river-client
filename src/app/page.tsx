@@ -1,25 +1,25 @@
 'use client';
 
 import { SummaryCard } from '@/stories/SummaryCard';
-import SummaryCardType from '@/types/SummaryCardType';
 import { useEffect, useState } from 'react';
 import { Card } from '@/stories/Card';
 import { Label } from '@/stories/Label';
 import { Button } from '@/stories/Button';
+import fetchEvents from '@/utils/fetchEvents';
 
 export default function Home() {
-  const [ResponseJSON, setResponseJSON] = useState<SummaryCardType[]>([]);
+  const [ResponseJSON, setResponseJSON] = useState<any[]>([]);
   const [Loading, setLoading] = useState(true);
   const [tags, setTags] = useState<String[]>([]);
   const [selectedTag, setTag] = useState<String>('すべて');
 
   useEffect(() => {
     async function fetchData() {
-      const fetchData = await fetch('/api/events');
-      const ResponseJSON = (await fetchData.json()) as SummaryCardType[];
+      let response = await fetchEvents();
+      setResponseJSON(response as any[]);
 
       let newTags: String[] = [];
-      ResponseJSON.map((prop) => {
+      ResponseJSON.flat().map((prop) => {
         const { tag } = prop;
 
         if (tag[0]?.name && !newTags.includes(tag[0].name)) {
@@ -28,7 +28,6 @@ export default function Home() {
       });
 
       setTags(newTags);
-      setResponseJSON(ResponseJSON);
     }
 
     fetchData();

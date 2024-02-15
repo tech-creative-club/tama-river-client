@@ -39,7 +39,7 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
 
   return (
     <div className="w-full">
-      <Link href={typeof prop !== undefined ? prop.url : 'http://localhost:3000'} legacyBehavior>
+      <Link href={typeof prop !== undefined ? String(prop.url) : 'http://localhost:3000'} legacyBehavior>
         <div
           className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${pulse && 'animate-pulse'}`}
         >
