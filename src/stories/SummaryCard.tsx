@@ -5,8 +5,8 @@ import SummaryCardType from '@/types/SummaryCardType';
 import Link from 'next/link';
 import { Label } from './Label';
 import Favorite from '@/components/icons/Favorite';
+import FavoriteActive from '@/components/icons/FavoriteActive';
 import favoriteStorage, { getFavoriteStorage, removeFavoriteStorage } from '@/utils/favoriteStorage';
-import { get } from 'http';
 
 interface SummaryCardProps {
   prop: SummaryCardType;
@@ -26,7 +26,7 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
     return DesktopSummaryCard(prop, formattedDate, pulse);
   }
 
-  const handleClick = (id: string) => {
+  const handleFavoriteClick = (id: string) => {
     console.log(id);
     if (favorite) {
       removeFavoriteStorage(id);
@@ -73,12 +73,12 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
       </Link>
       <div className="flex w-full flex-row px-5">
         {favorite ? (
-          <button onClick={() => handleClick(prop.id)}>
-            <Favorite active={true} />
+          <button onClick={() => handleFavoriteClick(prop.id)}>
+            <FavoriteActive />
           </button>
         ) : (
-          <button onClick={() => handleClick(prop.id)}>
-            <Favorite active={false} />
+          <button onClick={() => handleFavoriteClick(prop.id)}>
+            <Favorite />
           </button>
         )}
       </div>

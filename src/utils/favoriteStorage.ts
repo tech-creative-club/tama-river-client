@@ -1,8 +1,9 @@
-export default function favoriteStorage(id: string) {
-  const key = 'favorite';
+const key = 'favorite';
+
+export default function favoriteStorage(id: string): void {
   const favorites = localStorage.getItem(key);
   if (favorites) {
-    const parsed = JSON.parse(favorites);
+    const parsed: string[] = favorites ? JSON.parse(favorites) : [];
     if (parsed.includes(id) === false) {
       const parsedFavorites = JSON.parse(favorites);
       parsedFavorites.push(id);
@@ -13,8 +14,7 @@ export default function favoriteStorage(id: string) {
   }
 }
 
-export function removeFavoriteStorage(id: string) {
-  const key = 'favorite';
+export function removeFavoriteStorage(id: string): void {
   const favorites = localStorage.getItem(key);
   if (favorites) {
     const parsed = JSON.parse(favorites);
@@ -23,8 +23,7 @@ export function removeFavoriteStorage(id: string) {
   }
 }
 
-export function getFavoriteStorage() {
-  const key = 'favorite';
+export function getFavoriteStorage(): string[] {
   const favorites = localStorage.getItem(key);
   if (favorites) {
     return JSON.parse(favorites);
