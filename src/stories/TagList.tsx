@@ -13,7 +13,7 @@ export const TagList = ({ tags, onChange, selectedTag }: TagListProps) => {
       <Button onClick={() => onChange('すべて')} active={selectedTag === 'すべて'}>
         <Label innerText="すべて" size="secondary" weight="medium" />
       </Button>
-      {tags?.map((tag, index) => {
+      {tags.map((tag, index) => {
         return (
           <Button key={index} onClick={() => onChange(tag)} active={selectedTag === tag}>
             <Label innerText={tag as string} size="secondary" weight="medium" />
