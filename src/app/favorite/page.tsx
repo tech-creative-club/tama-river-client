@@ -29,7 +29,7 @@ export default function Favorite() {
         <h2>お気に入りがありません</h2>
       ) : (
         ResponseJSON.map((prop, index) => {
-          if (getFavoriteStorage().includes(prop.id)) {
+          if (getFavoriteStorage().includes(prop.url)) {
             setFavoritesCount(favoritesCount + 1);
             return <SummaryCard prop={prop} key={index} pulse={Loading} />;
           }
