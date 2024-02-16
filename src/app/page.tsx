@@ -4,7 +4,6 @@ import { SummaryCard } from '@/stories/SummaryCard';
 import { useEffect, useState } from 'react';
 import { Card } from '@/stories/Card';
 import { Label } from '@/stories/Label';
-import { Button } from '@/stories/Button';
 import fetchEvents from '@/utils/fetchEvents';
 import { TagList } from '@/stories/TagList';
 
@@ -20,7 +19,7 @@ export default function Home() {
       setResponseJSON(response as any[]);
 
       let newTags: string[] = [];
-      ResponseJSON.flat().map((prop) => {
+      response.flat().map((prop) => {
         const { tag } = prop;
 
         if (tag[0]?.name && !newTags.includes(tag[0].name)) {
