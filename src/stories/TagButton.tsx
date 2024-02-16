@@ -1,21 +1,21 @@
 import { Button } from './Button';
 import { Label } from './Label';
 
-interface TagListProps {
+interface TagButtonProps {
   tags: string[];
   selectedTag: string;
-  onChange: (str: string) => void;
+  onClick: (str: string) => void;
 }
 
-export const TagList = ({ tags, onChange, selectedTag }: TagListProps) => {
+export const TagButton = ({ tags, onClick, selectedTag }: TagButtonProps) => {
   return (
     <>
-      <Button onClick={() => onChange('すべて')} active={selectedTag === 'すべて'}>
+      <Button onClick={() => onClick('すべて')} active={selectedTag === 'すべて'}>
         <Label innerText="すべて" size="secondary" weight="medium" />
       </Button>
       {tags.map((tag, index) => {
         return (
-          <Button key={index} onClick={() => onChange(tag)} active={selectedTag === tag}>
+          <Button key={index} onClick={() => onClick(tag)} active={selectedTag === tag}>
             <Label innerText={tag as string} size="secondary" weight="medium" />
           </Button>
         );

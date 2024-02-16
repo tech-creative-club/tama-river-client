@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { Card } from '@/stories/Card';
 import { Label } from '@/stories/Label';
 import fetchEvents from '@/utils/fetchEvents';
-import { TagList } from '@/stories/TagList';
+import { TagButton } from '@/stories/TagButton';
 
 export default function Home() {
   const [ResponseJSON, setResponseJSON] = useState<any[]>([]);
@@ -59,7 +59,7 @@ export default function Home() {
             <div className="p-5 pt-0">
               <div className="hidden-scrollbar w-full overflow-scroll">
                 <div className="flex flex-row space-x-3">
-                  <TagList tags={tags} selectedTag={selectedTag} onChange={(str) => setTag(str)} />
+                  <TagButton tags={tags} selectedTag={selectedTag} onClick={(str) => setTag(str)} />
                 </div>
               </div>
             </div>
@@ -77,7 +77,7 @@ export default function Home() {
       <div className="hidden size-full flex-col items-center md:flex">
         <div className="hidden-scrollbar w-full max-w-7xl overflow-scroll p-5 pb-0">
           <div className="flex flex-row space-x-3">
-            <TagList tags={tags} selectedTag={selectedTag} onChange={(str) => setTag(str)} />
+            <TagButton tags={tags} selectedTag={selectedTag} onClick={(str) => setTag(str)} />
           </div>
         </div>
         <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
