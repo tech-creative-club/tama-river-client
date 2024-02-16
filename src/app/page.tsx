@@ -6,19 +6,20 @@ import { Card } from '@/stories/Card';
 import { Label } from '@/stories/Label';
 import { Button } from '@/stories/Button';
 import fetchEvents from '@/utils/fetchEvents';
+import { TagList } from '@/stories/TagList';
 
 export default function Home() {
   const [ResponseJSON, setResponseJSON] = useState<any[]>([]);
   const [Loading, setLoading] = useState(true);
-  const [tags, setTags] = useState<String[]>([]);
-  const [selectedTag, setTag] = useState<String>('すべて');
+  const [tags, setTags] = useState<string[]>([]);
+  const [selectedTag, setTag] = useState<string>('すべて');
 
   useEffect(() => {
     async function fetchData() {
       let response = await fetchEvents();
       setResponseJSON(response as any[]);
 
-      let newTags: String[] = [];
+      let newTags: string[] = [];
       ResponseJSON.flat().map((prop) => {
         const { tag } = prop;
 
@@ -38,10 +39,6 @@ export default function Home() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  function handleSelect(str: String) {
-    setTag(str);
-  }
 
   return (
     <>
@@ -63,16 +60,7 @@ export default function Home() {
             <div className="p-5 pt-0">
               <div className="hidden-scrollbar w-full overflow-scroll">
                 <div className="flex flex-row space-x-3">
-                  <Button onClick={() => handleSelect('すべて')} active={selectedTag === 'すべて'}>
-                    <Label innerText="すべて" size="secondary" weight="medium" />
-                  </Button>
-                  {tags?.map((tag, index) => {
-                    return (
-                      <Button key={index} onClick={() => handleSelect(tag)} active={selectedTag === tag}>
-                        <Label innerText={tag as string} size="secondary" weight="medium" />
-                      </Button>
-                    );
-                  })}
+                  <TagList tags={tags} selectedTag={selectedTag} onChange={(str) => setTag(str)} />
                 </div>
               </div>
             </div>
@@ -90,16 +78,7 @@ export default function Home() {
       <div className="hidden size-full flex-col items-center md:flex">
         <div className="hidden-scrollbar w-full max-w-7xl overflow-scroll p-5 pb-0">
           <div className="flex flex-row space-x-3">
-            <Button onClick={() => handleSelect('すべて')} active={selectedTag === 'すべて'}>
-              <Label innerText="すべて" size="secondary" weight="medium" />
-            </Button>
-            {tags?.map((tag, index) => {
-              return (
-                <Button key={index} onClick={() => handleSelect(tag)} active={selectedTag === tag}>
-                  <Label innerText={tag as string} size="secondary" weight="medium" />
-                </Button>
-              );
-            })}
+            <TagList tags={tags} selectedTag={selectedTag} onChange={(str) => setTag(str)} />
           </div>
         </div>
         <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
