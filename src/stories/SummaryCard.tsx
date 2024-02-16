@@ -38,7 +38,7 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
   };
 
   return (
-    <div className="w-full">
+    <div className="relative h-fit w-full">
       <Link href={typeof prop !== undefined ? String(prop.url) : 'http://localhost:3000'} legacyBehavior>
         <div
           className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${pulse && 'animate-pulse'}`}
@@ -71,7 +71,7 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
           </div>
         </div>
       </Link>
-      <div className="flex w-full flex-row px-5">
+      <div className="absolute bottom-1 right-0 flex flex-row px-5">
         {favorite ? (
           <button onClick={() => handleFavoriteClick(prop.id)}>
             <FavoriteActive />
@@ -87,8 +87,21 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
 };
 
 const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse: boolean) => {
+  const [favorite, setFavorite] = useState(getFavoriteStorage().includes(prop.id));
+
+  const handleFavoriteClick = (id: string) => {
+    console.log(id);
+    if (favorite) {
+      removeFavoriteStorage(id);
+      setFavorite(false);
+    } else {
+      favoriteStorage(id);
+      setFavorite(true);
+    }
+  };
+
   return (
-    <div className="m-5">
+    <div className="relative w-full p-5">
       <div className="aspect-video w-full rounded bg-zinc-200"></div>
       {pulse ? (
         <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
@@ -111,6 +124,17 @@ const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse:
           className="w-full text-left text-zinc-500"
         />
       )}
+      <div className="absolute bottom-5 right-5 flex flex-row">
+        {favorite ? (
+          <button onClick={() => handleFavoriteClick(prop.id)}>
+            <FavoriteActive />
+          </button>
+        ) : (
+          <button onClick={() => handleFavoriteClick(prop.id)}>
+            <Favorite />
+          </button>
+        )}
+      </div>
     </div>
   );
 };
