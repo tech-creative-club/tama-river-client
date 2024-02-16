@@ -3,7 +3,7 @@ import Home from '@/components/icons/Home';
 import Search from '@/components/icons/Search';
 import Add from '@/components/icons/Add';
 import Favorite from '@/components/icons/Favorite';
-import History from '@/components/icons/History';
+import Setting from '@/components/icons/Setting';
 import { Label } from './Label';
 import Link from 'next/link';
 import { tv } from 'tailwind-variants';
@@ -32,6 +32,7 @@ const items = [
   { icon: <Search />, label: '検索', link: '/search' },
   { icon: <Add />, label: '追加', link: '/add' },
   { icon: <Favorite />, label: 'いいね', link: '/favorite' },
+  { icon: <Setting />, label: '設定', link: '/setting' },
 ] as Items[];
 
 export const Items = ({ desktop = false }: ItemsProps) => {
