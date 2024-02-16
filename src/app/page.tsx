@@ -4,30 +4,21 @@ import { SummaryCard } from '@/stories/SummaryCard';
 import { useEffect, useState } from 'react';
 import { Card } from '@/stories/Card';
 import { Label } from '@/stories/Label';
-import fetchEvents from '@/utils/fetchEvents';
 import { TagButton } from '@/stories/TagButton';
+import SummaryCardType from '@/types/SummaryCardType';
 
 export default function Home() {
-  const [ResponseJSON, setResponseJSON] = useState<any[]>([]);
+  const [summaryCardJSON, setSummaryCardJSON] = useState<SummaryCardType[]>([]);
   const [Loading, setLoading] = useState(true);
   const [tags, setTags] = useState<string[]>([]);
   const [selectedTag, setTag] = useState<string>('すべて');
 
   useEffect(() => {
     async function fetchData() {
-      let response = await fetchEvents();
-      setResponseJSON(response as any[]);
-
-      let newTags: string[] = [];
-      response.flat().map((prop) => {
-        const { tag } = prop;
-
-        if (tag[0]?.name && !newTags.includes(tag[0].name)) {
-          newTags.push(tag[0].name);
-        }
-      });
-
-      setTags(newTags);
+      let response = await (await fetch('/api/events')).json() as SummaryCardType[];
+      setSummaryCardJSON(response);
+      // TODO: ここでタグを取得する処理を書く
+      setTags(['すべて', '身体障害', '発達障害', '視覚・聴覚障害', '知的障害', '精神障害']);
     }
 
     fetchData();
@@ -64,7 +55,7 @@ export default function Home() {
               </div>
             </div>
             <div className="divide-y-smart border-border">
-              {ResponseJSON.map((prop, index) => {
+              {summaryCardJSON.map((prop, index) => {
                 if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
                   return <SummaryCard prop={prop} key={index} pulse={Loading} />;
                 }
@@ -81,7 +72,7 @@ export default function Home() {
           </div>
         </div>
         <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
-          {ResponseJSON.map((prop, index) => {
+          {summaryCardJSON.map((prop, index) => {
             if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
               return <SummaryCard prop={prop} key={index} pulse={Loading} desktop={true} />;
             }

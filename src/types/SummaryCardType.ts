@@ -1,4 +1,4 @@
-type SummaryCard = {
+type SummaryCardType = {
   title: string;
   sport: string[];
   tag: { name: string }[];
@@ -11,4 +11,4 @@ type SummaryCard = {
     capacity: number | string;
   };
 };
-export default SummaryCard;
+export default SummaryCardType;
