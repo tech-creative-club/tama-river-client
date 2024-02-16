@@ -2,6 +2,7 @@
 export const runtime = 'edge';
 import SummaryCard from '@/types/SummaryCardType';
 import { nanoid } from 'nanoid';
+import { fakeDataJson } from './const';
 
 /**
  * @params URL一覧とSummaryCardの型を定義
@@ -32,12 +33,12 @@ function randomItems() {
     const [name, sport, tag] = randomSport();
     return {
       id: nanoid(8),
-      name: name,
+      title: name,
       sport: [sport],
       tag: [{ name: tag }],
       date: '2024-01-01T00:00:00Z',
       url: 'https://example.com',
-      image: 'https://source.unsplash.com/700x500?park',
+      image_url: 'https://source.unsplash.com/700x500?park',
       location: {
         name: '〇〇広場',
         address: '住所',
@@ -48,7 +49,8 @@ function randomItems() {
 }
 
 async function Handler() {
-  const content: SummaryCard[] = randomItems();
+  // const content: SummaryCard[] = randomItems();
+  const content: SummaryCard[] = fakeDataJson;
   return Response.json(content);
 }
 

@@ -41,3 +41,9 @@ next-env.d.ts
 # wrangler
 
 .wrangler
+
+# python
+venv/
+/test.json
+__pycache__/
+

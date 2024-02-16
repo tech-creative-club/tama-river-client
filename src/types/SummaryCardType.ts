@@ -1,11 +1,10 @@
 type SummaryCard = {
-  id: string;
-  name: string;
+  title: string;
   sport: string[];
   tag: { name: string }[];
   date: string;
   url: string;
-  image?: string;
+  image_url?: string;
   location: {
     name: string;
     address: string;

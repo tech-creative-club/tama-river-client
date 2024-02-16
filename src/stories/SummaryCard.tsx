@@ -15,7 +15,7 @@ interface SummaryCardProps {
 }
 
 export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCardProps) => {
-  const [favorite, setFavorite] = useState(getFavoriteStorage().includes(prop.id));
+  const [favorite, setFavorite] = useState(getFavoriteStorage().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: '2-digit',
@@ -50,7 +50,7 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
                 <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
               ) : (
                 <Label
-                  innerText={prop.name}
+                  innerText={prop.title}
                   size="primary"
                   weight="semibold"
                   className="w-full overflow-hidden truncate text-left text-zinc-900"
@@ -73,11 +73,11 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
       </Link>
       <div className="absolute bottom-1 right-0 flex flex-row px-5">
         {favorite ? (
-          <button onClick={() => handleFavoriteClick(prop.id)}>
+          <button onClick={() => handleFavoriteClick(prop.url)}>
             <FavoriteActive />
           </button>
         ) : (
-          <button onClick={() => handleFavoriteClick(prop.id)}>
+          <button onClick={() => handleFavoriteClick(prop.url)}>
             <Favorite />
           </button>
         )}
@@ -87,7 +87,7 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
 };
 
 const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse: boolean) => {
-  const [favorite, setFavorite] = useState(getFavoriteStorage().includes(prop.id));
+  const [favorite, setFavorite] = useState(getFavoriteStorage().includes(prop.url));
 
   const handleFavoriteClick = (id: string) => {
     console.log(id);
@@ -107,7 +107,7 @@ const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse:
         <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
       ) : (
         <Label
-          innerText={prop.name}
+          innerText={prop.title}
           size="primary"
           weight="semibold"
           className="w-full overflow-hidden truncate text-left text-zinc-900"
@@ -126,11 +126,11 @@ const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse:
       )}
       <div className="absolute bottom-5 right-5 flex flex-row">
         {favorite ? (
-          <button onClick={() => handleFavoriteClick(prop.id)}>
+          <button onClick={() => handleFavoriteClick(prop.url)}>
             <FavoriteActive />
           </button>
         ) : (
-          <button onClick={() => handleFavoriteClick(prop.id)}>
+          <button onClick={() => handleFavoriteClick(prop.url)}>
             <Favorite />
           </button>
         )}

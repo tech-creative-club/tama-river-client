@@ -35,7 +35,7 @@ export default function Search() {
         <h2>Loading...</h2>
       ) : (
         ResponseJSON.flat().map((prop, index) => {
-          if (prop.name.includes(searchText) || prop.tag[0].name.includes(searchText)) {
+          if (prop.title.includes(searchText) || prop.tag[0].name.includes(searchText)) {
             return <SummaryCard prop={prop} key={index} pulse={Loading} />;
           }
         })
