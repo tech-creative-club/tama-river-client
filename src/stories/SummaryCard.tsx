@@ -30,17 +30,14 @@ interface SummaryCardProps {
 }
 
 // TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
-export function SummaryCard ({ prop, loading = false, desktop = false }: SummaryCardProps){
+function MobileSummaryCard (props : SummaryCardProps){
+  const { prop, loading } = props;
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
   });
-
-  if (desktop) {
-    return DesktopSummaryCard(prop, formattedDate, loading);
-  }
   // TODO: もっとマシな名前をつける
   const favorite = (url: string) => {
     if (isFavorite) {
@@ -121,7 +118,8 @@ export function SummaryCard ({ prop, loading = false, desktop = false }: Summary
 };
 
 // TODO: DesktopでComponent分けるのバグの温床なのでなんとか考える(SOLID原則のOCP違反)
-function DesktopSummaryCard (prop: SummaryCardType, formattedDate: string, loading: boolean){
+function DesktopSummaryCard (props : SummaryCardProps){
+  const { prop, loading } = props;
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
 
   const favorite = (url: string) => {
@@ -153,7 +151,7 @@ function DesktopSummaryCard (prop: SummaryCardType, formattedDate: string, loadi
         <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
       ) : (
         <Label
-          innerText={formattedDate}
+          innerText={"test"}
           size="tertiary"
           weight="normal"
           className="w-full text-left text-zinc-500"
@@ -173,3 +171,12 @@ function DesktopSummaryCard (prop: SummaryCardType, formattedDate: string, loadi
     </div>
   );
 };
+
+export function SummaryCard(props : SummaryCardProps) {
+  const { desktop } = props;
+  return desktop ? (
+    <DesktopSummaryCard {...props}/>
+  ) : (
+    <MobileSummaryCard {...props}/>
+  );
+}
