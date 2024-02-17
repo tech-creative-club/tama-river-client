@@ -27,7 +27,9 @@ export const Footer = ({ path, fixed, className }: FooterProps) => {
   return (
     <>
       <footer
-        className={`${footer({ className: `${fixed && 'fixed bottom-0'} ${className} ${isDesktop && 'hidden'}` })} ${NotoSansJP.className}`}
+        className={footer({
+          className: `${fixed && 'fixed bottom-0'} ${className} ${isDesktop && 'hidden'} ${NotoSansJP.className}`,
+        })}
       >
         <div className="flex w-full max-w-sm justify-between">
           <Items />
