@@ -8,7 +8,7 @@ export default function Favorite() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await (await fetch('/api/events')).json() as SummaryCardProp[];
+      const response = (await (await fetch('/api/events')).json()) as SummaryCardProp[];
       const favorites = JSON.parse(localStorage.getItem('favorite') ?? '[]');
       const favSumCardJSON = response.filter((event) => favorites.includes(event.url));
       setFavoriteSummaryCardJSON(favSumCardJSON);
