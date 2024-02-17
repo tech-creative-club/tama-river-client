@@ -7,6 +7,7 @@ import { Label } from '@/components/common/Label';
 import Favorite from '@/components/icons/Favorite';
 import { removeFavorite, setFavorite } from '@/model/localStorage';
 import SampleImage from '@/stories/assets/park.jpg';
+import { NoImage } from './NoImage';
 
 export type SummaryCardProp = {
   title: string;
@@ -62,7 +63,7 @@ function MobileSummaryCard(props: SummaryCardProps) {
                     className="absolute left-1/2 top-1/2 h-20 w-fit -translate-x-1/2 -translate-y-1/2 object-cover"
                   />
                 ) : (
-                  <p>No Image</p>
+                  <NoImage />
                 )
               ) : (
                 <></>
@@ -113,19 +114,16 @@ function DesktopSummaryCard(props: SummaryCardProps) {
     <div className="relative w-full p-5">
       {loading ? (
         <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200"></div>
+      ) : prop.image_url ? (
+        <Image
+          src={SampleImage.src}
+          width={200}
+          height={200}
+          alt="photos"
+          className="relative m-1 h-20 w-28 overflow-hidden rounded"
+        />
       ) : (
-        prop.image_url ? (
-          <Image
-            src={SampleImage.src}
-            width={200}
-            height={200}
-            alt="photos"
-            className="relative m-1 h-20 w-28 overflow-hidden rounded"
-          />
-        ) : (
-          // TODO: 中央にグレーでNo Imageと表示する
-          <p>No Image</p>
-        )
+        <NoImage />
       )}
       {loading ? (
         <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
