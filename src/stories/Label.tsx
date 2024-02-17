@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { GeistSans } from 'geist/font/sans';
-import { Noto_Sans_JP } from 'next/font/google';
+import { Inter, Noto_Sans_JP } from 'next/font/google';
 import { tv } from 'tailwind-variants';
 
+const inter = Inter({ subsets: ['latin'] });
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
 const makeClassLabel = tv({
@@ -39,29 +39,13 @@ interface LabelProps {
   border?: boolean;
 }
 
-type tagType =
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'p'
-  | 'span'
+type tagType = 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
 
-type variantType =
-  | 'blockquote'
-  | 'inline-code'
-  | 'lead'
-  | 'large'
-  | 'small'
-  | 'muthed';
+type variantType = 'blockquote' | 'inline-code' | 'lead' | 'large' | 'small' | 'muthed';
 
-export function Label (props : LabelProps) {
-  const { children, className = "", tag = "p", variant, border = tag === 'h2'} = props;
+export function Label(props: LabelProps) {
+  const { children, className = '', tag = 'p', variant, border = tag === 'h2' } = props;
   const HTMLTag = tag as keyof JSX.IntrinsicElements;
-  const styleClass = `${className} ${GeistSans.className} ${NotoSansJP.className} ${makeClassLabel({tag: tag, variant: variant, border: border})}`;
-  return (
-    <HTMLTag className={styleClass}>
-      {children}
-    </HTMLTag>
-  );
-};
+  const styleClass = `${className} ${inter.className} ${NotoSansJP.className} ${makeClassLabel({ tag: tag, variant: variant, border: border })}`;
+  return <HTMLTag className={styleClass}>{children}</HTMLTag>;
+}
