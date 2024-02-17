@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "v20.11.0"
+    "node": "v20.11.1"
   },
   "scripts": {
     "dev": "next dev",
@@ -11,6 +11,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "clean": "rm -r ./.next ./node_modules ./.vercel ; npm i",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "pages:build": "npx @cloudflare/next-on-pages",
     "pages:preview": "npm run pages:build && wrangler pages dev .vercel/output/static --compatibility-date=2024-01-29 --compatibility-flag=nodejs_compat",
@@ -20,6 +21,11 @@
     "gen": "plop"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "lru-cache": "^10.2.0",
     "nanoid": "^5.0.5",
     "next": "14.1.0",
     "react": "^18",

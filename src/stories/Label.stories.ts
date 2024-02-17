@@ -15,7 +15,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    innerText: 'Label',
-    size: 'md',
+    children: 'Label',
+    type: 'p',
+    border: false,
   },
 };
