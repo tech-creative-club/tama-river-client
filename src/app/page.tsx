@@ -94,22 +94,25 @@ export default function Home() {
   const [tags, setTags] = useState<string[]>([]);
   const [selectedTag, setTag] = useState<string>('すべて');
 
+  function onlyUnique(value: any, index: any, array: any) {
+    return array.indexOf(value) === index;
+  }
+
   useEffect(() => {
     async function fetchData() {
       let response = (await (await fetch('/api/events')).json()) as SummaryCardProp[];
       setSummaryCardJSON(response);
 
-      let newTags: string[] = [];
-      for (let i = 0; i < response.length; i++) {
-        for (let j = 0; j < response[i].tag.length; j++) {
-          if (!newTags.includes(response[i].tag[j].name)) {
-            newTags.push(response[i].tag[j].name);
-          }
-        }
-      }
-      setTags(['すべて', ...newTags]);
+      const tagsLists = response.map((e) => {
+        return e.tag.map((t) => {
+          return t.name;
+        });
+      });
+      let uniqueTags = tagsLists.flat().filter(onlyUnique);
+      console.log(uniqueTags);
+      setTags(['すべて', ...uniqueTags]);
 
-      // // TODO: 視覚と聴覚障害は別だろうと思うのと、発達障害と精神障害は同じ括りで良いかもしれない。
+      // TODO: 視覚と聴覚障害は別だろうと思うのと、発達障害と精神障害は同じ括りで良いかもしれない。
     }
 
     fetchData();
