@@ -30,8 +30,6 @@ interface SummaryCardProps {
   desktop?: boolean;
 }
 
-
-
 // TODO: 共通プロパティをまとめる
 // TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
 function MobileSummaryCard(props: SummaryCardProps) {
@@ -41,6 +39,12 @@ function MobileSummaryCard(props: SummaryCardProps) {
     month: '2-digit',
     day: '2-digit',
   });
+  const [isFavorite, setIsFavorite] = useState(prop.isFavorite);
+
+  function ClickFavoriteButton(url: string) {
+    isFavorite ? removeFavorite(url) : setFavorite(url);
+    setIsFavorite(!isFavorite);
+  }
 
   return (
     <div className="relative h-fit w-full">
@@ -85,16 +89,9 @@ function MobileSummaryCard(props: SummaryCardProps) {
         </div>
       </Link>
       <div className="absolute bottom-1 right-0 flex flex-row px-5">
-        {/* TODO: ここ、favorite側でclickロジックを持っているので、3項演算子にする意味ない */}
-        {prop.isFavorite ? (
-          <button onClick={() => removeFavorite(prop.url)}>
-            <FavoriteActive />
-          </button>
-        ) : (
-          <button onClick={() => setFavorite(prop.url)}>
-            <Favorite />
-          </button>
-        )}
+        <button onClick={() => ClickFavoriteButton(prop.url)}>
+          {isFavorite ? <FavoriteActive /> : <Favorite />}
+        </button>
       </div>
     </div>
   );
@@ -108,6 +105,13 @@ function DesktopSummaryCard(props: SummaryCardProps) {
     month: '2-digit',
     day: '2-digit',
   });
+  const [isFavorite, setIsFavorite] = useState(prop.isFavorite);
+
+  function ClickFavoriteButton(url: string) {
+    isFavorite ? removeFavorite(url) : setFavorite(url);
+    setIsFavorite(!isFavorite);
+  }
+
   return (
     <div className="relative w-full p-5">
       <div className="aspect-video w-full rounded bg-zinc-200"></div>
@@ -124,16 +128,9 @@ function DesktopSummaryCard(props: SummaryCardProps) {
       )}
       <div className="absolute bottom-5 right-5 flex flex-row">
         {/* TODO: FavoriteActiveと分けるんじゃなく、variant="filled"で設定できるようにする。 */}
-        {/* TODO: removeFavoriteするとstateが変わらないのでリレンダリングするようにせねばならぬ */}
-        {prop.isFavorite ? (
-          <button onClick={() => removeFavorite(prop.url)}>
-            <FavoriteActive />
-          </button>
-        ) : (
-          <button onClick={() => setFavorite(prop.url)}>
-            <Favorite />
-          </button>
-        )}
+        <button onClick={() => ClickFavoriteButton(prop.url)}>
+          {isFavorite ? <FavoriteActive /> : <Favorite />}
+        </button>
       </div>
     </div>
   );
