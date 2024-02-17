@@ -3,13 +3,13 @@
 import { SummaryCard } from '@/stories/SummaryCard';
 import { useEffect, useState } from 'react';
 import { TagButton } from '@/stories/TagButton'; // TODO: storiesからimportするのやめろ
-import { SummaryCardType } from '@/stories/SummaryCard';
+import { SummaryCardProp } from '@/stories/SummaryCard';
 import { Notification } from '@/stories/Notification';
 
 type DeviceType = 'mobile' | 'desktop';
 
 interface RenderComponentProps {
-  summaryCardJSON: SummaryCardType[];
+  summaryCardJSON: SummaryCardProp[];
   Loading: boolean;
   tags: string[];
   selectedTag: string;
@@ -76,14 +76,14 @@ function RenderComponent(props: RenderComponentProps) {
 };
 
 export default function Home() {
-  const [summaryCardJSON, setSummaryCardJSON] = useState<SummaryCardType[]>([]);
+  const [summaryCardJSON, setSummaryCardJSON] = useState<SummaryCardProp[]>([]);
   const [Loading, setLoading] = useState(true);
   const [tags, setTags] = useState<string[]>([]);
   const [selectedTag, setTag] = useState<string>('すべて');
 
   useEffect(() => {
     async function fetchData() {
-      let response = (await (await fetch('/api/events')).json()) as SummaryCardType[];
+      let response = (await (await fetch('/api/events')).json()) as SummaryCardProp[];
       setSummaryCardJSON(response);
       // TODO: ここでタグを取得する処理を書く
       // TODO: 視覚と聴覚障害は別だろうと思うのと、発達障害と精神障害は同じ括りで良いかもしれない。

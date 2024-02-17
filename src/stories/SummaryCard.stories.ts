@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SummaryCard, SummaryCardType } from './SummaryCard';
+import { SummaryCard, SummaryCardProp } from './SummaryCard';
 import sampleImageFile from './assets/park.jpg';
 const meta: Meta = {
   title: 'Components/SummaryCard',
@@ -45,7 +45,7 @@ export const Primary: StoryObj<typeof meta> = {
         address: '住所',
         capacity: '100',
       },
-    } as SummaryCardType,
+    } as SummaryCardProp,
     loading: false,
     desktop: false,
   },

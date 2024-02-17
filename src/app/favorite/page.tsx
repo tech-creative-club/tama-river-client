@@ -1,14 +1,14 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { SummaryCard, SummaryCardType } from '@/stories/SummaryCard';
+import { SummaryCard, SummaryCardProp } from '@/stories/SummaryCard';
 
 export default function Favorite() {
-  const [favoriteSummaryCardJSON, setFavoriteSummaryCardJSON] = useState<SummaryCardType[]>([]);
+  const [favoriteSummaryCardJSON, setFavoriteSummaryCardJSON] = useState<SummaryCardProp[]>([]);
   const [Loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await (await fetch('/api/events')).json() as SummaryCardType[];
+      const response = await (await fetch('/api/events')).json() as SummaryCardProp[];
       const favorites = JSON.parse(localStorage.getItem('favorite') ?? '[]');
       const favSumCardJSON = response.filter((event) => favorites.includes(event.url));
       setFavoriteSummaryCardJSON(favSumCardJSON);

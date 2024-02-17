@@ -1,18 +1,18 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { SummaryCard, SummaryCardType } from '@/stories/SummaryCard';
+import { SummaryCard, SummaryCardProp } from '@/stories/SummaryCard';
 import TextField from '@mui/material/TextField';
 
 export default function Search() {
-  const [ResponseJSON, setResponseJSON] = useState<SummaryCardType[]>([]);
+  const [ResponseJSON, setResponseJSON] = useState<SummaryCardProp[]>([]);
   const [Loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
     async function fetchData() {
-      const response = await (await fetch('/api/events')).json() as SummaryCardType[];
-      setResponseJSON(response as SummaryCardType[]);
+      const response = await (await fetch('/api/events')).json() as SummaryCardProp[];
+      setResponseJSON(response as SummaryCardProp[]);
       setLoading(false);
     }
 

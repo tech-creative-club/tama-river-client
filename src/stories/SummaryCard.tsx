@@ -124,6 +124,7 @@ function DesktopSummaryCard(props: SummaryCardProps) {
       )}
       <div className="absolute bottom-5 right-5 flex flex-row">
         {/* TODO: FavoriteActiveと分けるんじゃなく、variant="filled"で設定できるようにする。 */}
+        {/* TODO: removeFavoriteするとstateが変わらないのでリレンダリングするようにせねばならぬ */}
         {prop.isFavorite ? (
           <button onClick={() => removeFavorite(prop.url)}>
             <FavoriteActive />
