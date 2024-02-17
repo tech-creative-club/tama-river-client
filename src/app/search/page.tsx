@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { SummaryCard, SummaryCardProp } from '@/stories/SummaryCard';
+import { SummaryCard, SummaryCardProp } from '@/components/common/SummaryCard';
 import TextField from '@mui/material/TextField';
 
 export default function Search() {

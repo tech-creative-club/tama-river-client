@@ -1,6 +1,6 @@
 // URL一覧とSummaryCardを定義
 export const runtime = 'edge';
-import { SummaryCardProp } from '@/stories/SummaryCard';
+import { SummaryCardProp } from '@/components/common/SummaryCard';
 import { nanoid } from 'nanoid';
 import { fakeDataJson } from './const';
 

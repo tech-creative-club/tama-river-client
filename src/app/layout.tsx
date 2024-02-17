@@ -5,8 +5,8 @@ import '@/styles/globals.css';
 import { Metadata } from 'next';
 
 // Component
-import { Header } from '@/stories/Header';
-import { Footer } from '@/stories/Footer';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 export const runtime = 'edge';
 
 const inter = Inter({ subsets: ['latin'] });

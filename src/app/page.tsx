@@ -1,10 +1,10 @@
 'use client';
 
-import { SummaryCard } from '@/stories/SummaryCard';
+import { SummaryCard } from '@/components/common/SummaryCard';
 import { useEffect, useState } from 'react';
-import { TagButton } from '@/stories/TagButton'; // TODO: storiesからimportするのやめろ
-import { SummaryCardProp } from '@/stories/SummaryCard';
-import { Notification } from '@/stories/Notification';
+import { TagButton } from '@/components/TagButton';
+import { SummaryCardProp } from '@/components/common/SummaryCard';
+import { Notification } from '@/components/common/Notification';
 
 type DeviceType = 'mobile' | 'desktop';
 

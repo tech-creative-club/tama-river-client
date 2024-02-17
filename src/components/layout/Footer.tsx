@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Items } from './Items';
+import { Items } from '@/components/Items';
 import { tv } from 'tailwind-variants';
 import useIsDesktop from '@/utils/useIsDesktop';
 import { Noto_Sans_JP } from 'next/font/google';
-import { Label } from './Label';
+import { Label } from '@/components/common/Label';
 
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 

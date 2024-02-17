@@ -6,7 +6,7 @@ import Search from '@/components/icons/Search';
 import Add from '@/components/icons/Add';
 import Favorite from '@/components/icons/Favorite';
 import Setting from '@/components/icons/Setting';
-import { Label } from './Label';
+import { Label } from '@/components/common/Label';
 import Link from 'next/link';
 import { tv } from 'tailwind-variants';
 
