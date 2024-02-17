@@ -34,6 +34,7 @@ export const Header = ({ title, fixed, className, desktop = false }: FooterProps
         weight="medium"
         className="flex items-center justify-center"
       />
+      {/* TODO:意味わからん書きかたやめたい */}
       <div className="flex">{desktop && <Items desktop={true} />}</div>
     </div>
   </header>

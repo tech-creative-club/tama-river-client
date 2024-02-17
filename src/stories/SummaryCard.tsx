@@ -6,16 +6,18 @@ import Link from 'next/link';
 import { Label } from './Label';
 import Favorite from '@/components/icons/Favorite';
 import FavoriteActive from '@/components/icons/FavoriteActive';
-import favoriteStorage, { getFavoriteStorage, removeFavoriteStorage } from '@/utils/favoriteStorage';
+import { getFavorite, removeFavorite, setFavorite } from '@/model/localStorage';
 
 interface SummaryCardProps {
   prop: SummaryCardType;
   pulse?: boolean;
-  desktop?: boolean; // is Desktop
+  desktop?: boolean;
 }
-
+// TODO: localstorage系の処理関数を変える
+// TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
+// TODO: functionで書き直す
 export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCardProps) => {
-  const [favorite, setFavorite] = useState(getFavoriteStorage().includes(prop.url));
+  const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: '2-digit',
@@ -25,21 +27,20 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
   if (desktop) {
     return DesktopSummaryCard(prop, formattedDate, pulse);
   }
-
-  const handleFavoriteClick = (id: string) => {
-    console.log(id);
-    if (favorite) {
-      removeFavoriteStorage(id);
-      setFavorite(false);
+  // TODO: もっとマシな名前をつける
+  const favorite = (url: string) => {
+    if (isFavorite) {
+      removeFavorite(url);
+      setIsFavorite(false);
     } else {
-      favoriteStorage(id);
-      setFavorite(true);
+      setFavorite(url);
+      setIsFavorite(true);
     }
   };
 
   return (
     <div className="relative h-fit w-full">
-      <Link href={typeof prop !== undefined ? String(prop.url) : 'http://localhost:3000'} legacyBehavior>
+      <Link href={ prop ? prop.url : 'http://localhost:3000'} legacyBehavior>
         <div
           className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${pulse && 'animate-pulse'}`}
         >
@@ -72,12 +73,13 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
         </div>
       </Link>
       <div className="absolute bottom-1 right-0 flex flex-row px-5">
-        {favorite ? (
-          <button onClick={() => handleFavoriteClick(prop.url)}>
+        {/* TODO: ここ、favorite側でclickロジックを持っているので、3項演算子にする意味ない */}
+        {isFavorite ? (
+          <button onClick={() => favorite(prop.url)}>
             <FavoriteActive />
           </button>
         ) : (
-          <button onClick={() => handleFavoriteClick(prop.url)}>
+          <button onClick={() => favorite(prop.url)}>
             <Favorite />
           </button>
         )}
@@ -86,17 +88,19 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
   );
 };
 
+// TODO: ここもfunctionで書き直す
+// TODO: DesktopでComponent分けるのバグの温床なのでなんとか考える(SOLID原則のOCP違反)
 const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse: boolean) => {
-  const [favorite, setFavorite] = useState(getFavoriteStorage().includes(prop.url));
+  const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
 
-  const handleFavoriteClick = (id: string) => {
-    console.log(id);
-    if (favorite) {
-      removeFavoriteStorage(id);
-      setFavorite(false);
+  const favorite = (url: string) => {
+    console.log(url);
+    if (isFavorite) {
+      removeFavorite(url);
+      setIsFavorite(false);
     } else {
-      favoriteStorage(id);
-      setFavorite(true);
+      setFavorite(url);
+      setIsFavorite(true);
     }
   };
 
@@ -125,12 +129,12 @@ const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse:
         />
       )}
       <div className="absolute bottom-5 right-5 flex flex-row">
-        {favorite ? (
-          <button onClick={() => handleFavoriteClick(prop.url)}>
+        {isFavorite ? (
+          <button onClick={() => favorite(prop.url)}>
             <FavoriteActive />
           </button>
         ) : (
-          <button onClick={() => handleFavoriteClick(prop.url)}>
+          <button onClick={() => favorite(prop.url)}>
             <Favorite />
           </button>
         )}

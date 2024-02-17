@@ -1,6 +1,7 @@
 'use client';
 
 export function getFavorite(): string[] {
+  // TODO:もっとかっこいい書き方があるはず
   const favorites : string | null = localStorage.getItem('favorite');
   if (favorites) {
     return JSON.parse(favorites);
@@ -8,23 +9,27 @@ export function getFavorite(): string[] {
   return [];
 }
 
-export function setFavorite({url}: {url:string}): void {
+export function setFavorite(url: string ): void {
   const favorites = getFavorite();
   //重複チェック
   if (favorites) {
     if (favorites.includes(url)) {
-      // adhocな書き方だが一旦これで凌ぐ
+      // TODO:adhocな書き方なのでじき直す
       return;
     }
   } else {
-    localStorage.setItem('favorite', JSON.stringify([...favorites, url]));
+    overrideFavorites([...favorites, url]);
   }
 }
 
-export function removeFavorite({url}: {url:string}): void {
+export function removeFavorite(url: string): void {
   const favorites = getFavorite();
   if (favorites) {
     const filtered = favorites.filter((item: string) => item !== url);
-    localStorage.setItem('favorite', JSON.stringify(filtered));
+    overrideFavorites(filtered);
   }
+}
+
+function overrideFavorites(favorites: string[]): void {
+  localStorage.setItem('favorite', JSON.stringify(favorites));
 }

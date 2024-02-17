@@ -18,6 +18,7 @@ export default function Home() {
       let response = await (await fetch('/api/events')).json() as SummaryCardType[];
       setSummaryCardJSON(response);
       // TODO: ここでタグを取得する処理を書く
+      // TODO: 視覚と聴覚障害は別だろうと思うのと、発達障害と精神障害は同じ括りで良いかもしれない。
       setTags(['すべて', '身体障害', '発達障害', '視覚・聴覚障害', '知的障害', '精神障害']);
     }
 
