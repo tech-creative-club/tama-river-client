@@ -11,6 +11,7 @@ export const TagButton = (props: TagButtonProps) => {
   const { tags, selectedTag, onClick } = props;
   return (
     <>
+      {/* TODO: オプショナルチェイニングは本来おかしい。string[]なので、mapは動くはず。何かおかしい。 */}
       {tags?.map((tag, index) => {
         return (
           <Button key={index} onClick={() => onClick(tag)} active={selectedTag === tag}>
