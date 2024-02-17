@@ -27,7 +27,6 @@ interface NotificationTitleProps {
 }
 
 function NotificationTitle({title, type}: NotificationTitleProps) {
-  //TODO: Icon＋titleの形にする。
   const Icon = NotificationIconComponents[type];
   return (
     <Box className="flex items-start space-x-1 text-2xl">

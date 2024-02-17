@@ -34,6 +34,7 @@ export default function Home() {
 
   return (
     <>
+      {/* TODO: コンポーネントを切り出す */}
       {/* スマホ&タブレット用 */}
       <div className="flex size-full justify-center space-y-5 p-2 md:hidden">
         <div className="size-full max-w-md">
