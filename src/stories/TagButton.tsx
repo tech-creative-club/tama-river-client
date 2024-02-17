@@ -8,14 +8,15 @@ interface TagButtonProps {
 }
 
 export const TagButton = (props: TagButtonProps) => {
+  const { tags, selectedTag, onClick } = props;
   return (
     <>
-      <Button onClick={() => props.onClick('すべて')} active={props.selectedTag === 'すべて'}>
+      <Button onClick={() => onClick('すべて')} active={selectedTag === 'すべて'}>
         <Label innerText="すべて" size="secondary" weight="medium" />
       </Button>
-      {/* {props.tags.map((tag, index) => {
+      {/* {tags.map((tag, index) => {
         return (
-          <Button key={index} onClick={() => props.onClick(tag)} active={props.selectedTag === tag}>
+          <Button key={index} onClick={() => onClick(tag)} active={selectedTag === tag}>
             <Label innerText={tag as string} size="secondary" weight="medium" />
           </Button>
         );
