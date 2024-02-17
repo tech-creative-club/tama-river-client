@@ -114,7 +114,23 @@ function DesktopSummaryCard(props: SummaryCardProps) {
 
   return (
     <div className="relative w-full p-5">
-      <div className="aspect-video w-full rounded bg-zinc-200"></div>
+      {/* <div className="aspect-video w-full rounded bg-zinc-200"></div> */}
+      {loading ? (
+        <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200"></div>
+      ) : (
+        prop.image_url ? (
+          <Image
+            src={SampleImage.src}
+            width={200}
+            height={200}
+            alt="photos"
+            className="relative m-1 h-20 w-28 overflow-hidden rounded"
+          />
+        ) : (
+          // TODO: 中央にグレーでNo Imageと表示する
+          <p>No Image</p>
+        )
+      )}
       {loading ? (
         <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
       ) : (
