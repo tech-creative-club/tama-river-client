@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
 import { Items } from './Items';
 import { tv } from 'tailwind-variants';
-
+import useIsDesktop from '@/utils/useIsDesktop';
 import { Noto_Sans_JP } from 'next/font/google';
 import { Label } from './Label';
 
@@ -15,25 +17,28 @@ interface FooterProps {
   path?: string;
   fixed?: boolean;
   className?: string;
-  desktop?: boolean;
 }
 
 const year = new Date().getFullYear();
 
-export const Footer = ({ path, fixed, className, desktop = false }: FooterProps) => (
-  <>
-    <footer
-      className={`${footer({ className: `${fixed && 'fixed bottom-0'} ${className} ${desktop && 'hidden'}` })} ${NotoSansJP.className}`}
-    >
-      <div className="flex w-full max-w-sm justify-between">
-        <Items />
-      </div>
-    </footer>
-    <footer>
-      {/* Copylight */}
-      <div className={`${desktop ? 'flex' : 'hidden'} justify-start p-6 px-5`}>
-        <Label variant="small">{`© ${year} たまりば`}</Label>
-      </div>
-    </footer>
-  </>
-);
+export const Footer = ({ path, fixed, className }: FooterProps) => {
+  const isDesktop = useIsDesktop();
+
+  return (
+    <>
+      <footer
+        className={`${footer({ className: `${fixed && 'fixed bottom-0'} ${className} ${isDesktop && 'hidden'}` })} ${NotoSansJP.className}`}
+      >
+        <div className="flex w-full max-w-sm justify-between">
+          <Items />
+        </div>
+      </footer>
+      <footer>
+        {/* Copylight */}
+        <div className={`${isDesktop ? 'flex' : 'hidden'} justify-start p-6 px-5`}>
+          <Label variant="small">{`© ${year} たまりば`}</Label>
+        </div>
+      </footer>
+    </>
+  );
+};
