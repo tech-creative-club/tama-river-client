@@ -1,23 +1,12 @@
 'use client';
 
 export function getFavorite(): string[] {
-  // TODO:もっとかっこいい書き方があるはず
-  const favorites: string | null = localStorage.getItem('favorite');
-  if (favorites) {
-    return JSON.parse(favorites);
-  }
-  return [];
+  return JSON.parse(localStorage.getItem('favorite') ?? '[]');
 }
 
 export function setFavorite(url: string): void {
   const favorites = getFavorite();
-  //重複チェック
-  if (favorites) {
-    if (favorites.includes(url)) {
-      // TODO:adhocな書き方なのでじき直す
-      return;
-    }
-  } else {
+  if (favorites.includes(url)) {
     overrideFavorites([...favorites, url]);
   }
 }
