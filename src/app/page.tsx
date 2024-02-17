@@ -52,7 +52,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      let response = await (await fetch('/api/events')).json() as SummaryCardType[];
+      let response = (await (await fetch('/api/events')).json()) as SummaryCardType[];
       setSummaryCardJSON(response);
       // TODO: ここでタグを取得する処理を書く
       // TODO: 視覚と聴覚障害は別だろうと思うのと、発達障害と精神障害は同じ括りで良いかもしれない。
@@ -69,7 +69,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className='flex-1 overflow-scroll'>
+    <main className="flex-1 overflow-scroll">
       {/* TODO: コンポーネントを切り出す */}
       {/* スマホ&タブレット用 */}
       <div className="flex size-full justify-center space-y-5 p-2 md:hidden">
