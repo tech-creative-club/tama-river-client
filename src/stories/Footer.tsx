@@ -11,6 +11,11 @@ const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
 const footer = tv({
   base: `flex w-full justify-center border-t border-border pb-6 pt-5`,
+  variants: {
+    isDesktop: {
+      true: 'hidden',
+    },
+  },
 });
 
 interface FooterProps {
@@ -28,7 +33,8 @@ export const Footer = ({ path, fixed, className }: FooterProps) => {
     <>
       <footer
         className={footer({
-          className: `${fixed && 'fixed bottom-0'} ${className} ${isDesktop && 'hidden'} ${NotoSansJP.className}`,
+          className: `${fixed && 'fixed bottom-0'} ${className} ${NotoSansJP.className}`,
+          isDesktop,
         })}
       >
         <div className="flex w-full max-w-sm justify-between">
