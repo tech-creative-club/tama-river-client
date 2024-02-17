@@ -97,6 +97,7 @@ function MobileSummaryCard(props: SummaryCardProps) {
 }
 
 // TODO: DesktopでComponent分けるのバグの温床なのでなんとか考える(SOLID原則のOCP違反)
+// TODO: Desktopの場合はカードのようにして表示したい。
 function DesktopSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {

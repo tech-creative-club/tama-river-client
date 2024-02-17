@@ -1,3 +1,5 @@
+// TODO: 名前が変。HeaderとFooterで使っているコンポーネントで、機能であることを示してほしい
+// TODO: Story的にはHeaderとFooterをparamsで分けておきたい
 import React from 'react';
 import Home from '@/components/icons/Home';
 import Search from '@/components/icons/Search';

@@ -31,7 +31,6 @@ const meta: Meta = {
 } satisfies Meta<typeof SummaryCard>;
 
 export default meta;
-// TODO: なんかバグってるのを修正
 export const Primary: StoryObj<typeof meta> = {
   args: {
     prop: {
