@@ -2,10 +2,10 @@
 
 import { SummaryCard } from '@/stories/SummaryCard';
 import { useEffect, useState } from 'react';
-import { Card } from '@/stories/Card';
+import { Card } from '@/stories/Card'; // TODO: storiesからimportするのやめろ
 import { Label } from '@/stories/Label';
 import { TagButton } from '@/stories/TagButton';
-import SummaryCardType from '@/types/SummaryCardType';
+import { SummaryCardType } from '@/stories/SummaryCard';
 import { Notification } from '@/stories/Notification';
 
 export default function Home() {
