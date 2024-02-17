@@ -28,12 +28,7 @@ export const Header = ({ title, fixed, className, desktop = false }: FooterProps
     className={`${footer({ className: `${fixed && 'fixed top-0'} ${className}`, desktop })} ${NotoSansJP.className}`}
   >
     <div className="flex w-full max-w-sm justify-between p-1 md:max-w-full">
-      <Label
-        innerText={title ? title : 'たまりば'}
-        size="primary"
-        weight="medium"
-        className="flex items-center justify-center"
-      />
+      <Label type="large">{title ? title : 'たまりば'}</Label>
       {/* TODO:意味わからん書きかたやめたい */}
       <div className="flex">{desktop && <Items desktop={true} />}</div>
     </div>

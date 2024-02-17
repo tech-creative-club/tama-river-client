@@ -42,7 +42,7 @@ export const Items = ({ desktop = false }: ItemsProps) => {
         <Link key={index} className="cursor-pointer p-3" href={item.link}>
           <div className={itemsStyle({ desktop })}>
             {desktop === false && item.icon}
-            <Label innerText={item.label} size={desktop ? 'secondary' : 'quaternary'} weight="semibold" />
+            <Label type="small">{item.label}</Label>
           </div>
         </Link>
       ))}

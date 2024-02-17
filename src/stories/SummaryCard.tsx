@@ -30,7 +30,7 @@ interface SummaryCardProps {
 }
 
 // TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
-function MobileSummaryCard (props : SummaryCardProps){
+function MobileSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
@@ -80,22 +80,12 @@ function MobileSummaryCard (props : SummaryCardProps){
               {loading ? (
                 <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
               ) : (
-                <Label
-                  innerText={prop.title}
-                  size="primary"
-                  weight="semibold"
-                  className="w-full overflow-hidden truncate text-left text-zinc-900"
-                />
+                <Label type="large">{prop.title}</Label>
               )}
               {loading ? (
                 <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
               ) : (
-                <Label
-                  innerText={formattedDate}
-                  size="tertiary"
-                  weight="normal"
-                  className="w-full text-left text-zinc-500"
-                />
+                <Label type="small">{formattedDate}</Label>
               )}
             </div>
           </div>
@@ -115,12 +105,17 @@ function MobileSummaryCard (props : SummaryCardProps){
       </div>
     </div>
   );
-};
+}
 
 // TODO: DesktopでComponent分けるのバグの温床なのでなんとか考える(SOLID原則のOCP違反)
-function DesktopSummaryCard (props : SummaryCardProps){
+function DesktopSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
+  const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
 
   const favorite = (url: string) => {
     console.log(url);
@@ -139,23 +134,13 @@ function DesktopSummaryCard (props : SummaryCardProps){
       {loading ? (
         <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
       ) : (
-        <Label
-          innerText={prop.title}
-          size="primary"
-          weight="semibold"
-          className="w-full overflow-hidden truncate text-left text-zinc-900"
-        />
+        <Label type="large">{prop.title}</Label>
       )}
 
       {loading ? (
         <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
       ) : (
-        <Label
-          innerText={"test"}
-          size="tertiary"
-          weight="normal"
-          className="w-full text-left text-zinc-500"
-        />
+        <Label type="small">{formattedDate}</Label>
       )}
       <div className="absolute bottom-5 right-5 flex flex-row">
         {isFavorite ? (
@@ -170,13 +155,9 @@ function DesktopSummaryCard (props : SummaryCardProps){
       </div>
     </div>
   );
-};
+}
 
-export function SummaryCard(props : SummaryCardProps) {
+export function SummaryCard(props: SummaryCardProps) {
   const { desktop } = props;
-  return desktop ? (
-    <DesktopSummaryCard {...props}/>
-  ) : (
-    <MobileSummaryCard {...props}/>
-  );
+  return desktop ? <DesktopSummaryCard {...props} /> : <MobileSummaryCard {...props} />;
 }
