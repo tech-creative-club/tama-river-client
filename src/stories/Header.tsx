@@ -29,8 +29,11 @@ export const Header = ({ title, fixed, className, desktop = false }: FooterProps
   >
     <div className="flex w-full max-w-sm justify-between p-1 md:max-w-full">
       <Label type="large">{title ? title : 'たまりば'}</Label>
-      {/* TODO:意味わからん書きかたやめたい */}
-      <div className="flex">{desktop && <Items desktop={true} />}</div>
+      {desktop && (
+        <div className="flex">
+          <Items hideIcon={true} />
+        </div>
+      )}
     </div>
   </header>
 );

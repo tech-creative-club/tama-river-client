@@ -11,14 +11,14 @@ import { tv } from 'tailwind-variants';
 const itemsStyle = tv({
   base: `flex w-8 flex-col items-center space-y-1`,
   variants: {
-    desktop: {
+    hideIcon: {
       true: `w-fit flex-row`,
     },
   },
 });
 
 interface ItemsProps {
-  desktop?: boolean;
+  hideIcon?: boolean;
 }
 
 type Items = {
@@ -35,13 +35,13 @@ const items = [
   { icon: <Setting />, label: '設定', link: '/setting' },
 ] as Items[];
 
-export const Items = ({ desktop = false }: ItemsProps) => {
+export const Items = ({ hideIcon = false }: ItemsProps) => {
   return (
     <>
       {items.map((item, index) => (
         <Link key={index} className="cursor-pointer p-3" href={item.link}>
-          <div className={itemsStyle({ desktop })}>
-            {desktop === false && item.icon}
+          <div className={itemsStyle({ hideIcon })}>
+            {hideIcon === false && item.icon}
             <Label type="small">{item.label}</Label>
           </div>
         </Link>
