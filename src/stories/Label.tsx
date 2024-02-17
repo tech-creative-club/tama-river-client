@@ -1,59 +1,62 @@
+'use client';
+
 import React from 'react';
+import { GeistSans } from 'geist/font/sans';
 import { Noto_Sans_JP } from 'next/font/google';
-import Text from '@/components/Text';
 import { tv } from 'tailwind-variants';
 
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
 const label = tv({
-  base: 'text-sm font-medium',
   variants: {
-    size: {
-      primary: 'text-base',
-      secondary: 'text-sm',
-      tertiary: 'text-xs',
-      quaternary: 'text-2xs',
-      quinary: 'text-3xs',
+    type: {
+      h1: 'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl',
+      h2: 'scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0',
+      h3: 'scroll-m-20 text-2xl font-semibold tracking-tight',
+      h4: 'scroll-m-20 text-xl font-semibold tracking-tight',
+      p: 'leading-7',
+      blockquote: 'mt-6 border-l-2 pl-6 italic',
+      'inline-code': 'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
+      lead: 'text-xl text-muted-foreground',
+      large: 'text-lg font-semibold',
+      small: 'text-sm font-medium leading-none',
+      muthed: 'text-sm text-muted-foreground',
     },
-    weight: {
-      thin: 'font-thin',
-      extralight: 'font-extralight',
-      light: 'font-light',
-      normal: 'font-normal',
-      medium: 'font-medium',
-      semibold: 'font-semibold',
-      bold: 'font-bold',
-      extrabold: 'font-extrabold',
-      black: 'font-black',
+    border: {
+      true: 'border-b pb-2',
     },
   },
 });
 
 interface LabelProps {
-  innerText: string;
+  children?: React.ReactNode;
   className?: string;
-  size?: Size;
-  weight?: Weight;
+  type?: labelType;
+  border?: boolean;
 }
 
-type Size = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
-type Weight =
-  | 'thin'
-  | 'extralight'
-  | 'light'
-  | 'normal'
-  | 'medium'
-  | 'semibold'
-  | 'bold'
-  | 'extrabold'
-  | 'black';
+type labelType =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'p'
+  | 'blockquote'
+  | 'inline-code'
+  | 'lead'
+  | 'large'
+  | 'small'
+  | 'muthed';
 
-export const Label = ({ innerText, className, size = 'primary', weight = 'medium' }: LabelProps) => {
-  const containsAlphabet = /[a-zA-Z]/.test(innerText);
+export const Label = ({ children, className, type = 'p', border }: LabelProps) => {
+  const Tag = type as keyof JSX.IntrinsicElements;
+
+  // If no border is specified and it is an h2, a border is automatically added
+  if (typeof border === 'undefined') border = type === 'h2' ? true : false;
 
   return (
-    <div className={`${label({ className, size, weight })} ${NotoSansJP.className}`}>
-      {containsAlphabet ? <Text>{innerText}</Text> : innerText}
-    </div>
+    <Tag className={`${label({ className, type, border })} ${GeistSans.className} ${NotoSansJP.className}`}>
+      {children}
+    </Tag>
   );
 };
