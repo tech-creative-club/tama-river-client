@@ -38,7 +38,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="flex h-screen w-screen flex-col overflow-hidden">
           <Header desktop={isDesktop} />
-          <main className="flex-1 overflow-scroll">{children}</main>
+            {children}
           <Footer className="bg-white" desktop={isDesktop} />
         </div>
       </body>

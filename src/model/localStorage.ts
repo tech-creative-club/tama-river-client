@@ -2,14 +2,14 @@
 
 export function getFavorite(): string[] {
   // TODO:もっとかっこいい書き方があるはず
-  const favorites : string | null = localStorage.getItem('favorite');
+  const favorites: string | null = localStorage.getItem('favorite');
   if (favorites) {
     return JSON.parse(favorites);
   }
   return [];
 }
 
-export function setFavorite(url: string ): void {
+export function setFavorite(url: string): void {
   const favorites = getFavorite();
   //重複チェック
   if (favorites) {

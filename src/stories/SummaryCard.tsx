@@ -55,7 +55,7 @@ export const SummaryCard = ({ prop, loading = false, desktop = false }: SummaryC
 
   return (
     <div className="relative h-fit w-full">
-      <Link href={ prop ? prop.url : 'http://localhost:3000'} legacyBehavior>
+      <Link href={prop ? prop.url : 'http://localhost:3000'} legacyBehavior>
         <div
           className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${loading && 'animate-pulse'}`}
         >
@@ -63,7 +63,14 @@ export const SummaryCard = ({ prop, loading = false, desktop = false }: SummaryC
             {/* TODO: pulse false時はbgを変える */}
             <div className="m-1 h-20 w-28 rounded bg-zinc-200">
               {!loading ? (
-                prop.image_url ? <Image src={prop.image_url} width={200} height={200} alt="photos" /> : <p>No Image</p>) : (<></>)}
+                prop.image_url ? (
+                  <Image src={prop.image_url} width={200} height={200} alt="photos" />
+                ) : (
+                  <p>No Image</p>
+                )
+              ) : (
+                <></>
+              )}
             </div>
             <div className="m-1 flex w-full flex-1 flex-col space-y-1.5 truncate">
               {/* TODO: ここloadingでロジック統一したい。 */}

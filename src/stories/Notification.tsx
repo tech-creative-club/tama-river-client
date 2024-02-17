@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Card } from "@mui/material";
+import { Box, Card } from '@mui/material';
 import ErrorIcon from '@mui/icons-material/Error';
 import WarningIcon from '@mui/icons-material/Warning';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
@@ -19,18 +19,18 @@ const NotificationIconComponents: NotificationIconComponentsType = {
   warning: WarningIcon,
   error: ErrorIcon,
   success: CheckCircleIcon,
-}
+};
 
 interface NotificationTitleProps {
   title: string;
   type: NotificationType;
 }
 
-function NotificationTitle({title, type}: NotificationTitleProps) {
+function NotificationTitle({ title, type }: NotificationTitleProps) {
   const Icon = NotificationIconComponents[type];
   return (
     <Box className="flex items-start space-x-1 text-2xl">
-      <Icon fontSize="large"/>
+      <Icon fontSize="large" />
       <Box>
         <span>{title}</span>
       </Box>
@@ -38,20 +38,17 @@ function NotificationTitle({title, type}: NotificationTitleProps) {
   );
 }
 
-function NotificationText({text}: {text: string}) {
-  return (
-    <p className="text-gray-500">{text}</p>
-  );
+function NotificationText({ text }: { text: string }) {
+  return <p className="text-gray-500">{text}</p>;
 }
 
 export function Notification(props: NotificationProps) {
   return (
-
     <Card className="m-3 p-3" variant="outlined">
       <Box className="flex flex-col space-y-1.5 p-3">
         <NotificationTitle title={props.title} type={props.notificationType} />
         <NotificationText text={props.text} />
       </Box>
     </Card>
-);
-};
+  );
+}
