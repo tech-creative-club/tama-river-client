@@ -1,5 +1,5 @@
-import { Button } from './Button';
-import { Label } from './Label';
+import { Button } from '@/components/base/Button';
+import { Label } from '@/components/common/Label';
 
 type TagButtonVariant = 'normal' | 'wrapped';
 

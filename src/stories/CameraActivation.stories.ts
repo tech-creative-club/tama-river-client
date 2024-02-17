@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CameraActivation } from './CameraActivation';
+import { CameraActivation } from '@/components/page/CameraActivation';
 
 const meta = {
   title: 'Components/CameraActivation',

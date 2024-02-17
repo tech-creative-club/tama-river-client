@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Label } from './Label';
+import { Label } from '@/components/common/Label';
 
 const meta: Meta = {
-  title: 'Components/Label',
+  title: 'Common/Label',
   component: Label,
   tags: ['components', 'autodocs'],
   parameters: {

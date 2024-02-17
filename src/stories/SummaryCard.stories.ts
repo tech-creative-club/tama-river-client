@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SummaryCard, SummaryCardProp } from './SummaryCard';
-import sampleImageFile from './assets/park.jpg';
+import { SummaryCard, SummaryCardProp } from '@/components/common/SummaryCard';
+import sampleImageFile from '@/stories/assets/park.jpg';
 const meta: Meta = {
-  title: 'Components/SummaryCard',
+  title: 'Common/SummaryCard',
   component: SummaryCard,
   tags: ['components', 'autodocs'],
   parameters: {
@@ -31,7 +31,8 @@ const meta: Meta = {
 } satisfies Meta<typeof SummaryCard>;
 
 export default meta;
-export const Primary: StoryObj<typeof meta> = {
+
+export const Mobile: StoryObj<typeof meta> = {
   args: {
     prop: {
       title: 'イベントの名前',
@@ -47,5 +48,62 @@ export const Primary: StoryObj<typeof meta> = {
     } as SummaryCardProp,
     loading: false,
     desktop: false,
+  },
+};
+
+export const Desktop: StoryObj<typeof meta> = {
+  args: {
+    prop: {
+      title: 'イベントの名前',
+      sport: ['サッカー', '野球'],
+      date: '2024-01-01T00:00:00Z',
+      url: 'https://example.com',
+      image_url: sampleImageFile.src,
+      location: {
+        name: '会場の名前',
+        address: '住所',
+        capacity: '100',
+      },
+    } as SummaryCardProp,
+    loading: false,
+    desktop: true,
+  },
+};
+
+export const LoadingMobile: StoryObj<typeof meta> = {
+  args: {
+    prop: {
+      title: 'イベントの名前',
+      sport: ['サッカー', '野球'],
+      date: '2024-01-01T00:00:00Z',
+      url: 'https://example.com',
+      image_url: sampleImageFile.src,
+      location: {
+        name: '会場の名前',
+        address: '住所',
+        capacity: '100',
+      },
+    } as SummaryCardProp,
+    loading: true,
+    desktop: false,
+  },
+};
+
+export const LoadingDesktop: StoryObj<typeof meta> = {
+  args: {
+    prop: {
+      title: 'イベントの名前',
+      sport: ['サッカー', '野球'],
+      date: '2024-01-01T00:00:00Z',
+      url: 'https://example.com',
+      image_url: sampleImageFile.src,
+      location: {
+        name: '会場の名前',
+        address: '住所',
+        capacity: '100',
+      },
+    } as SummaryCardProp,
+    loading: true,
+    desktop: true,
   },
 };

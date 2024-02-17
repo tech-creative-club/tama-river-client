@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Notification } from './Notification';
+import { Notification } from '@/components/common/Notification';
 
 const meta = {
-  title: 'Components/Notification',
+  title: 'Common/Notification',
   component: Notification,
   tags: ['components', 'autodocs'],
   parameters: {

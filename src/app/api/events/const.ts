@@ -1,4 +1,4 @@
-import {SummaryCardProp} from "@/stories/SummaryCard";
+import {SummaryCardProp} from "@/components/common/SummaryCard";
 
 const fakeData = [
   {

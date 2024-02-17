@@ -1,4 +1,4 @@
-import { Label } from '@/stories/Label';
+import { Label } from '@/components/common/Label';
 
 export default function NotFound() {
   return (

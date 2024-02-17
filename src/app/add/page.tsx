@@ -1,6 +1,6 @@
-import { CameraActivation } from '@/stories/CameraActivation';
-import { LoadImageFromSaved } from '@/stories/LoadImageFromSaved';
-import { Label } from '@/stories/Label';
+import { CameraActivation } from '@/components/page/CameraActivation';
+import { LoadImageFromSaved } from '@/components/misc/LoadImageFromSaved';
+import { Label } from '@/components/common/Label';
 
 export default function Add() {
   return (

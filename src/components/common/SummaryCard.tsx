@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Label } from './Label';
+import { Label } from '@/components/common/Label';
 import Favorite from '@/components/icons/Favorite';
 import { removeFavorite, setFavorite } from '@/model/localStorage';
 import SampleImage from '@/stories/assets/park.jpg';

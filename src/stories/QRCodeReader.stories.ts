@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { QRCodeReader } from './QRCodeReader';
+import { QRCodeReader } from '@/components/page/qr/QRCodeReader';
 
 const meta: Meta = {
-  title: 'Components/QRCodeReader',
+  title: 'QR/QRCodeReader',
   component: QRCodeReader,
   tags: ['components', 'autodocs'],
   parameters: {
