@@ -1,4 +1,4 @@
-import { Label } from '../Label';
+import { Label } from '@/components/common/Label';
 
 export function NoImage() {
   return (
