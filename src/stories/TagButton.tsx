@@ -35,8 +35,7 @@ const WappedTagButton = (props: TagButtonProps) => {
   return (
     <div className="hidden-scrollbar w-full overflow-scroll">
       <div className="flex flex-row space-x-3">
-        {/* TODO: オプショナルチェイニングは本来おかしい。string[]なので、mapは動くはず。何かおかしい。 */}
-        {tags?.map((tag, index) => {
+        {tags.map((tag, index) => {
           return (
             <Button key={index} onClick={() => onClick(tag)} active={selectedTag === tag}>
               <Label type="small">{tag}</Label>
