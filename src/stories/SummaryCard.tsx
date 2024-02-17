@@ -7,6 +7,7 @@ import { Label } from './Label';
 import Favorite from '@/components/icons/Favorite';
 import FavoriteActive from '@/components/icons/FavoriteActive';
 import { getFavorite, removeFavorite, setFavorite } from '@/model/localStorage';
+import SampleImage from '@/stories/assets/park.jpg';
 
 export type SummaryCardType = {
   title: string;
@@ -27,10 +28,8 @@ interface SummaryCardProps {
   loading?: boolean;
   desktop?: boolean;
 }
-// TODO: localstorage系の処理関数を変える
 // TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
 // TODO: functionで書き直す
-// TODO: image_urlを指定する
 export const SummaryCard = ({ prop, loading = false, desktop = false }: SummaryCardProps) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
@@ -64,7 +63,8 @@ export const SummaryCard = ({ prop, loading = false, desktop = false }: SummaryC
             <div className="m-1 h-20 w-28 rounded bg-zinc-200">
               {!loading ? (
                 prop.image_url ? (
-                  <Image src={prop.image_url} width={200} height={200} alt="photos" />
+                  // TODO: ちゃんとした画像が入るようにする
+                  <Image src={SampleImage.src} width={200} height={200} alt="photos" />
                 ) : (
                   <p>No Image</p>
                 )
