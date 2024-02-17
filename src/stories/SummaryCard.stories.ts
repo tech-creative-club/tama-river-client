@@ -9,7 +9,7 @@ const meta: Meta = {
     layout: 'fullscreen',
   },
   argTypes: {
-    pulse: {
+    loading: {
       control: 'boolean',
     },
     desktop: {
@@ -46,7 +46,7 @@ export const Primary: StoryObj<typeof meta> = {
         capacity: '100',
       },
     } as SummaryCardType,
-    pulse: false,
+    loading: false,
     desktop: false,
   },
 };

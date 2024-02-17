@@ -25,7 +25,7 @@ export default function Favorite() {
         <h2>お気に入り登録するとここに表示されます！</h2>
       ) : (
         favoriteSummaryCardJSON.map((prop, index) => {
-          return <SummaryCard prop={prop} key={index} pulse={Loading} />;
+          return <SummaryCard prop={prop} key={index} loading={Loading} />;
         })
       )}
     </div>

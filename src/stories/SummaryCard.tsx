@@ -24,14 +24,14 @@ export type SummaryCardType = {
 
 interface SummaryCardProps {
   prop: SummaryCardType;
-  pulse?: boolean;
+  loading?: boolean;
   desktop?: boolean;
 }
 // TODO: localstorage系の処理関数を変える
 // TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
 // TODO: functionで書き直す
 // TODO: image_urlを指定する
-export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCardProps) => {
+export const SummaryCard = ({ prop, loading = false, desktop = false }: SummaryCardProps) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
     year: 'numeric',
@@ -40,7 +40,7 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
   });
 
   if (desktop) {
-    return DesktopSummaryCard(prop, formattedDate, pulse);
+    return DesktopSummaryCard(prop, formattedDate, loading);
   }
   // TODO: もっとマシな名前をつける
   const favorite = (url: string) => {
@@ -57,16 +57,17 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
     <div className="relative h-fit w-full">
       <Link href={ prop ? prop.url : 'http://localhost:3000'} legacyBehavior>
         <div
-          className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${pulse && 'animate-pulse'}`}
+          className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${loading && 'animate-pulse'}`}
         >
           <div className="flex w-full max-w-md flex-row">
             {/* TODO: pulse false時はbgを変える */}
             <div className="m-1 h-20 w-28 rounded bg-zinc-200">
-              {!pulse ? (
+              {!loading ? (
                 prop.image_url ? <Image src={prop.image_url} width={200} height={200} alt="photos" /> : <p>No Image</p>) : (<></>)}
             </div>
             <div className="m-1 flex w-full flex-1 flex-col space-y-1.5 truncate">
-              {pulse ? (
+              {/* TODO: ここloadingでロジック統一したい。 */}
+              {loading ? (
                 <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
               ) : (
                 <Label
@@ -76,7 +77,7 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
                   className="w-full overflow-hidden truncate text-left text-zinc-900"
                 />
               )}
-              {pulse ? (
+              {loading ? (
                 <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
               ) : (
                 <Label
@@ -108,7 +109,7 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
 
 // TODO: ここもfunctionで書き直す
 // TODO: DesktopでComponent分けるのバグの温床なのでなんとか考える(SOLID原則のOCP違反)
-const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse: boolean) => {
+const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, loading: boolean) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
 
   const favorite = (url: string) => {
@@ -125,7 +126,7 @@ const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse:
   return (
     <div className="relative w-full p-5">
       <div className="aspect-video w-full rounded bg-zinc-200"></div>
-      {pulse ? (
+      {loading ? (
         <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
       ) : (
         <Label
@@ -136,7 +137,7 @@ const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, pulse:
         />
       )}
 
-      {pulse ? (
+      {loading ? (
         <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
       ) : (
         <Label

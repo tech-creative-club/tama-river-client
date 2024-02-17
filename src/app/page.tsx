@@ -50,7 +50,7 @@ export default function Home() {
             <div className="divide-y-smart border-border">
               {summaryCardJSON.map((prop, index) => {
                 if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
-                  return <SummaryCard prop={prop} key={index} pulse={Loading} />;
+                  return <SummaryCard prop={prop} key={index} loading={Loading} />;
                 }
               })}
             </div>
@@ -68,7 +68,7 @@ export default function Home() {
         <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
           {summaryCardJSON.map((prop, index) => {
             if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
-              return <SummaryCard prop={prop} key={index} pulse={Loading} desktop={true} />;
+              return <SummaryCard prop={prop} key={index} loading={Loading} desktop={true} />;
             }
           })}
         </div>
