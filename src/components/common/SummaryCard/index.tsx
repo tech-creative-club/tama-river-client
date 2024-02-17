@@ -8,6 +8,7 @@ import Favorite from '@/components/icons/Favorite';
 import { removeFavorite, setFavorite } from '@/model/localStorage';
 import SampleImage from '@/stories/assets/park.jpg';
 import { NoImage } from './NoImage';
+import { Card } from '@mui/material';
 
 export type SummaryCardProp = {
   title: string;
@@ -112,7 +113,7 @@ function DesktopSummaryCard(props: SummaryCardProps) {
 
   return (
     // TODO: 単体でカード横幅を決めたい
-    <div className="relative w-full p-5">
+    <Card className="relative w-full p-5">
       {loading ? (
         <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200"></div>
       ) : prop.image_url ? (
@@ -142,7 +143,7 @@ function DesktopSummaryCard(props: SummaryCardProps) {
           <Favorite active={isFavorite} />
         </button>
       </div>
-    </div>
+    </Card>
   );
 }
 
