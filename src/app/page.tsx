@@ -77,7 +77,7 @@ export default function Home() {
       </div>
       {/* PC用 */}
       <div className="hidden size-full flex-col items-center md:flex">
-        {/* <div className="hidden-scrollbar w-full max-w-7xl overflow-scroll p-5 pb-0">
+        <div className="hidden-scrollbar w-full max-w-7xl overflow-scroll p-5 pb-0">
           <Notification title="開発中のお知らせ" text="現在開発中の画面のため、本番とは違う可能性があります。" notificationType="warning"/>
           <div className="flex flex-row space-x-3">
             <TagButton tags={tags} selectedTag={selectedTag} onClick={(str) => setTag(str)} />
@@ -89,8 +89,7 @@ export default function Home() {
               return <SummaryCard prop={prop} key={index} loading={Loading} desktop={true} />;
             }
           })}
-        </div> */}
-        <Notification title="テスト" text="描画テスト中" notificationType="warning" />
+        </div>
       </div>
     </main>
   );
