@@ -29,8 +29,6 @@ interface SummaryCardProps {
   desktop?: boolean;
 }
 
-// TODO: 共通プロパティをまとめる
-// TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
 function MobileSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
@@ -52,7 +50,6 @@ function MobileSummaryCard(props: SummaryCardProps) {
           className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${loading && 'animate-pulse'}`}
         >
           <div className="flex w-full max-w-md flex-row">
-            {/* TODO: pulse false時はbgを変える */}
             <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200">
               {!loading ? (
                 prop.image_url ? (
