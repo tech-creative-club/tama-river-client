@@ -1,18 +1,25 @@
 import { Button } from './Button';
 import { Label } from './Label';
 
+type TagButtonVariant = 'normal' | 'wrapped';
+
 interface TagButtonProps {
   tags: string[];
   selectedTag: string;
   onClick: (str: string) => void;
+  variant?: TagButtonVariant;
 }
 
-export const TagButton = (props: TagButtonProps) => {
+const variantType = {
+  normal: 'normal',
+  wrapped: 'wrapped',
+}
+
+function NomalTagButton (props: TagButtonProps) {
   const { tags, selectedTag, onClick } = props;
   return (
     <div className="flex flex-row space-x-3">
-      {/* TODO: オプショナルチェイニングは本来おかしい。string[]なので、mapは動くはず。何かおかしい。 */}
-      {tags?.map((tag, index) => {
+      {tags.map((tag, index) => {
         return (
           <Button key={index} onClick={() => onClick(tag)} active={selectedTag === tag}>
             <Label innerText={tag as string} size="secondary" weight="medium" />
@@ -22,3 +29,31 @@ export const TagButton = (props: TagButtonProps) => {
     </div>
   );
 };
+
+const WappedTagButton = (props: TagButtonProps) => {
+  const { tags, selectedTag, onClick } = props;
+  return (
+    <div className="hidden-scrollbar w-full overflow-scroll">
+      <div className="flex flex-row space-x-3">
+        {/* TODO: オプショナルチェイニングは本来おかしい。string[]なので、mapは動くはず。何かおかしい。 */}
+        {tags?.map((tag, index) => {
+          return (
+            <Button key={index} onClick={() => onClick(tag)} active={selectedTag === tag}>
+              <Label innerText={tag as string} size="secondary" weight="medium" />
+            </Button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export function TagButton (props: TagButtonProps) {
+  const { variant } = props;
+  return (
+    <>
+      {variant === variantType.wrapped ? <WappedTagButton {...props} /> : <NomalTagButton {...props} />}
+    </>
+  );
+};
+
