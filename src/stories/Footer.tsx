@@ -15,6 +15,9 @@ const footer = tv({
     isDesktop: {
       true: 'hidden',
     },
+    fixed: {
+      true: 'fixed bottom-0',
+    },
   },
 });
 
@@ -28,15 +31,11 @@ const year = new Date().getFullYear();
 
 export const Footer = ({ path, fixed, className }: FooterProps) => {
   const isDesktop = useIsDesktop();
+  className = `${className} ${NotoSansJP.className}`;
 
   return (
     <>
-      <footer
-        className={footer({
-          className: `${fixed && 'fixed bottom-0'} ${className} ${NotoSansJP.className}`,
-          isDesktop,
-        })}
-      >
+      <footer className={footer({ className, isDesktop, fixed })}>
         <div className="flex w-full max-w-sm justify-between">
           <Items />
         </div>
