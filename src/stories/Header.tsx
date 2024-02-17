@@ -10,7 +10,7 @@ import { Noto_Sans_JP } from 'next/font/google';
 
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
-const footer = tv({
+const header = tv({
   base: `flex w-full justify-center border-b border-border py-4`,
   variants: {
     isDesktop: {
@@ -19,18 +19,18 @@ const footer = tv({
   },
 });
 
-interface FooterProps {
+interface HeaderProps {
   title?: string;
   fixed?: boolean;
   className?: string;
 }
 
-export const Header = ({ title, fixed, className }: FooterProps) => {
+export const Header = ({ title, fixed, className }: HeaderProps) => {
   const isDesktop = useIsDesktop();
 
   return (
     <header
-      className={`${footer({ className: `${fixed && 'fixed top-0'} ${className}`, isDesktop })} ${NotoSansJP.className}`}
+      className={`${header({ className: `${fixed && 'fixed top-0'} ${className}`, isDesktop })} ${NotoSansJP.className}`}
     >
       <div className="flex w-full max-w-sm justify-between p-1 md:max-w-full">
         <Label variant="large">{title ?? 'たまりば'}</Label>
