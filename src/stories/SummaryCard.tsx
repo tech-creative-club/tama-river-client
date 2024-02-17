@@ -6,16 +6,17 @@ import Link from 'next/link';
 import { Label } from './Label';
 import Favorite from '@/components/icons/Favorite';
 import FavoriteActive from '@/components/icons/FavoriteActive';
-import { getFavorite, removeFavorite, setFavorite } from '@/model/localStorage';
+import { removeFavorite, setFavorite } from '@/model/localStorage';
 import SampleImage from '@/stories/assets/park.jpg';
 
-export type SummaryCardType = {
+export type SummaryCardProp = {
   title: string;
   sport: string[];
   tag: { name: string }[];
   date: string;
   url: string;
   image_url?: string;
+  isFavorite?: boolean;
   location: {
     name: string;
     address: string;
@@ -24,30 +25,22 @@ export type SummaryCardType = {
 };
 
 interface SummaryCardProps {
-  prop: SummaryCardType;
+  prop: SummaryCardProp;
   loading?: boolean;
   desktop?: boolean;
 }
 
+
+
+// TODO: 共通プロパティをまとめる
 // TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
 function MobileSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
-  const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
   });
-  // TODO: もっとマシな名前をつける
-  const favorite = (url: string) => {
-    if (isFavorite) {
-      removeFavorite(url);
-      setIsFavorite(false);
-    } else {
-      setFavorite(url);
-      setIsFavorite(true);
-    }
-  };
 
   return (
     <div className="relative h-fit w-full">
@@ -93,12 +86,12 @@ function MobileSummaryCard(props: SummaryCardProps) {
       </Link>
       <div className="absolute bottom-1 right-0 flex flex-row px-5">
         {/* TODO: ここ、favorite側でclickロジックを持っているので、3項演算子にする意味ない */}
-        {isFavorite ? (
-          <button onClick={() => favorite(prop.url)}>
+        {prop.isFavorite ? (
+          <button onClick={() => removeFavorite(prop.url)}>
             <FavoriteActive />
           </button>
         ) : (
-          <button onClick={() => favorite(prop.url)}>
+          <button onClick={() => setFavorite(prop.url)}>
             <Favorite />
           </button>
         )}
@@ -110,24 +103,11 @@ function MobileSummaryCard(props: SummaryCardProps) {
 // TODO: DesktopでComponent分けるのバグの温床なのでなんとか考える(SOLID原則のOCP違反)
 function DesktopSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
-  const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
   });
-
-  const favorite = (url: string) => {
-    console.log(url);
-    if (isFavorite) {
-      removeFavorite(url);
-      setIsFavorite(false);
-    } else {
-      setFavorite(url);
-      setIsFavorite(true);
-    }
-  };
-
   return (
     <div className="relative w-full p-5">
       <div className="aspect-video w-full rounded bg-zinc-200"></div>
@@ -143,12 +123,13 @@ function DesktopSummaryCard(props: SummaryCardProps) {
         <Label type="small">{formattedDate}</Label>
       )}
       <div className="absolute bottom-5 right-5 flex flex-row">
-        {isFavorite ? (
-          <button onClick={() => favorite(prop.url)}>
+        {/* TODO: FavoriteActiveと分けるんじゃなく、variant="filled"で設定できるようにする。 */}
+        {prop.isFavorite ? (
+          <button onClick={() => removeFavorite(prop.url)}>
             <FavoriteActive />
           </button>
         ) : (
-          <button onClick={() => favorite(prop.url)}>
+          <button onClick={() => setFavorite(prop.url)}>
             <Favorite />
           </button>
         )}
@@ -156,7 +137,7 @@ function DesktopSummaryCard(props: SummaryCardProps) {
     </div>
   );
 }
-
+// TODO: SummaryCards というコンポーネントを作成して、map関数を吸収する
 export function SummaryCard(props: SummaryCardProps) {
   const { desktop } = props;
   return desktop ? <DesktopSummaryCard {...props} /> : <MobileSummaryCard {...props} />;

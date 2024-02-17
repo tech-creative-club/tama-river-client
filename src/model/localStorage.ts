@@ -6,7 +6,8 @@ export function getFavorite(): string[] {
 
 export function setFavorite(url: string): void {
   const favorites = getFavorite();
-  if (favorites.includes(url)) {
+  // 重複入力を避けるバリデーション
+  if (!favorites.includes(url)) {
     overrideFavorites([...favorites, url]);
   }
 }
