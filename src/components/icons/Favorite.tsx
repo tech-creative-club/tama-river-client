@@ -6,13 +6,5 @@ interface FavIconPropsType {
 
 export default function Favorite(props: FavIconPropsType) {
   const { active = false } = props;
-  return (
-    <>
-      {active ? (
-        <FavoriteIcon />
-      ) : (
-        <FavoriteBorderIcon />
-      )}
-    </>
-  );
+  return <>{active ? <FavoriteIcon /> : <FavoriteBorderIcon />}</>;
 }

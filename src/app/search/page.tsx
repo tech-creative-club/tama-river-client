@@ -11,7 +11,7 @@ export default function Search() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await (await fetch('/api/events')).json() as SummaryCardProp[];
+      const response = (await (await fetch('/api/events')).json()) as SummaryCardProp[];
       setResponseJSON(response as SummaryCardProp[]);
       setLoading(false);
     }
