@@ -60,11 +60,17 @@ export const SummaryCard = ({ prop, loading = false, desktop = false }: SummaryC
         >
           <div className="flex w-full max-w-md flex-row">
             {/* TODO: pulse false時はbgを変える */}
-            <div className="m-1 h-20 w-28 rounded bg-zinc-200">
+            <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200">
               {!loading ? (
                 prop.image_url ? (
                   // TODO: ちゃんとした画像が入るようにする
-                  <Image src={SampleImage.src} width={200} height={200} alt="photos" />
+                  <Image
+                    src={SampleImage.src}
+                    width={200}
+                    height={200}
+                    alt="photos"
+                    className="absolute left-1/2 top-1/2 h-20 w-fit -translate-x-1/2 -translate-y-1/2 object-cover"
+                  />
                 ) : (
                   <p>No Image</p>
                 )
