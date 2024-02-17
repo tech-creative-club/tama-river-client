@@ -7,19 +7,19 @@ interface TagButtonProps {
   onClick: (str: string) => void;
 }
 
-export const TagButton = ({ tags, onClick, selectedTag }: TagButtonProps) => {
+export const TagButton = (props: TagButtonProps) => {
   return (
     <>
-      <Button onClick={() => onClick('すべて')} active={selectedTag === 'すべて'}>
+      <Button onClick={() => props.onClick('すべて')} active={props.selectedTag === 'すべて'}>
         <Label innerText="すべて" size="secondary" weight="medium" />
       </Button>
-      {tags.map((tag, index) => {
+      {/* {props.tags.map((tag, index) => {
         return (
-          <Button key={index} onClick={() => onClick(tag)} active={selectedTag === tag}>
+          <Button key={index} onClick={() => props.onClick(tag)} active={props.selectedTag === tag}>
             <Label innerText={tag as string} size="secondary" weight="medium" />
           </Button>
         );
-      })}
+      })} */}
     </>
   );
 };

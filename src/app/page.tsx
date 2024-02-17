@@ -28,8 +28,7 @@ function RenderComponent(props: RenderComponentProps) {
         <div className="p-5 pt-0">
           <div className="hidden-scrollbar w-full overflow-scroll">
             <div className="flex flex-row space-x-3">
-              {/* <TagButton tags={tags} selectedTag={selectedTag} onClick={(tagStr) => setTag(tagStr)} /> */}
-              test
+              <TagButton tags={tags} selectedTag={selectedTag} onClick={(tagStr) => setTag(tagStr)} />
             </div>
           </div>
         </div>
@@ -39,7 +38,6 @@ function RenderComponent(props: RenderComponentProps) {
               return <SummaryCard prop={prop} key={index} loading={Loading} />;
             }
           })}
-          test
         </div>
       </div>
     </div>
@@ -76,7 +74,6 @@ export default function Home() {
       {/* スマホ&タブレット用 */}
       <div className="flex size-full justify-center space-y-5 p-2 md:hidden">
         <RenderComponent summaryCardJSON={summaryCardJSON} Loading={Loading} tags={tags} selectedTag={selectedTag} setTag={setTag} />
-        {/* <Notification title="テスト" text="描画テスト中" notificationType="warning" /> */}
       </div>
       {/* PC用 */}
       <div className="hidden size-full flex-col items-center md:flex">
