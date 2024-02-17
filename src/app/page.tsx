@@ -99,7 +99,14 @@ export default function Home() {
       const response = (await (await fetch('/api/events')).json()) as SummaryCardProp[];
       setSummaryCardJSON(response);
       //setLoading(false);
-      const Tags: string[] = response.map((e) => {return e.tag}).flat().map((e) => {return e.name});
+      const Tags: string[] = response
+        .map((e) => {
+          return e.tag;
+        })
+        .flat()
+        .map((e) => {
+          return e.name;
+        });
       const uniqueTags = Array.from(new Set(Tags).values());
       setTags(['すべて', ...uniqueTags]);
 
