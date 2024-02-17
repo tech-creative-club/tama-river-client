@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Label } from './Label';
 import Favorite from '@/components/icons/Favorite';
-import FavoriteActive from '@/components/icons/FavoriteActive';
 import { removeFavorite, setFavorite } from '@/model/localStorage';
 import SampleImage from '@/stories/assets/park.jpg';
 
@@ -39,7 +38,7 @@ function MobileSummaryCard(props: SummaryCardProps) {
     month: '2-digit',
     day: '2-digit',
   });
-  const [isFavorite, setIsFavorite] = useState(prop.isFavorite);
+  const [isFavorite, setIsFavorite] = useState(prop.isFavorite ?? false);
 
   function ClickFavoriteButton(url: string) {
     isFavorite ? removeFavorite(url) : setFavorite(url);
@@ -90,7 +89,7 @@ function MobileSummaryCard(props: SummaryCardProps) {
       </Link>
       <div className="absolute bottom-1 right-0 flex flex-row px-5">
         <button onClick={() => ClickFavoriteButton(prop.url)}>
-          {isFavorite ? <FavoriteActive /> : <Favorite />}
+          <Favorite active={isFavorite} />
         </button>
       </div>
     </div>
@@ -105,7 +104,7 @@ function DesktopSummaryCard(props: SummaryCardProps) {
     month: '2-digit',
     day: '2-digit',
   });
-  const [isFavorite, setIsFavorite] = useState(prop.isFavorite);
+  const [isFavorite, setIsFavorite] = useState(prop.isFavorite ?? false);
 
   function ClickFavoriteButton(url: string) {
     isFavorite ? removeFavorite(url) : setFavorite(url);
@@ -114,7 +113,6 @@ function DesktopSummaryCard(props: SummaryCardProps) {
 
   return (
     <div className="relative w-full p-5">
-      {/* <div className="aspect-video w-full rounded bg-zinc-200"></div> */}
       {loading ? (
         <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200"></div>
       ) : (
@@ -143,15 +141,14 @@ function DesktopSummaryCard(props: SummaryCardProps) {
         <Label variant="small">{formattedDate}</Label>
       )}
       <div className="absolute bottom-5 right-5 flex flex-row">
-        {/* TODO: FavoriteActiveと分けるんじゃなく、variant="filled"で設定できるようにする。 */}
         <button onClick={() => ClickFavoriteButton(prop.url)}>
-          {isFavorite ? <FavoriteActive /> : <Favorite />}
+          <Favorite active={isFavorite} />
         </button>
       </div>
     </div>
   );
 }
-// TODO: SummaryCards というコンポーネントを作成して、map関数を吸収する
+
 export function SummaryCard(props: SummaryCardProps) {
   const { desktop } = props;
   return desktop ? <DesktopSummaryCard {...props} /> : <MobileSummaryCard {...props} />;
