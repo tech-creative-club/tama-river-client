@@ -27,7 +27,11 @@ function DesktopRenderComponent(props: RenderComponentProps) {
   return (
     <>
       <div className="w-full max-w-7xl p-5 pb-0">
-        <Notification title="開発中のお知らせ" text="現在開発中の画面のため、本番とは違う可能性があります。" notificationType="warning"/>
+        <Notification
+          title="開発中のお知らせ"
+          text="現在開発中の画面のため、本番とは違う可能性があります。"
+          notificationType="warning"
+        />
         <TagButton tags={tags} selectedTag={selectedTag} onClick={(str) => setTag(str)} variant="normal" />
       </div>
       <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
@@ -39,7 +43,7 @@ function DesktopRenderComponent(props: RenderComponentProps) {
       </div>
     </>
   );
-};
+}
 
 function MobileRenderComponent(props: RenderComponentProps) {
   const { summaryCardJSON, Loading, tags, selectedTag, setTag } = props;
@@ -52,7 +56,12 @@ function MobileRenderComponent(props: RenderComponentProps) {
           notificationType="warning"
         />
         <div className="p-5 pt-0">
-          <TagButton tags={tags} selectedTag={selectedTag} onClick={(tagStr) => setTag(tagStr)} variant="wrapped" />
+          <TagButton
+            tags={tags}
+            selectedTag={selectedTag}
+            onClick={(tagStr) => setTag(tagStr)}
+            variant="wrapped"
+          />
         </div>
         <div className="divide-y-smart border-border">
           {summaryCardJSON.map((prop, index) => {
@@ -64,16 +73,20 @@ function MobileRenderComponent(props: RenderComponentProps) {
       </div>
     </div>
   );
-};
+}
 
 function RenderComponent(props: RenderComponentProps) {
   const { device } = props;
   return (
     <>
-      {device === deviceType.mobile ? <MobileRenderComponent {...props} /> : <DesktopRenderComponent {...props} />}
+      {device === deviceType.mobile ? (
+        <MobileRenderComponent {...props} />
+      ) : (
+        <DesktopRenderComponent {...props} />
+      )}
     </>
   );
-};
+}
 
 export default function Home() {
   const [summaryCardJSON, setSummaryCardJSON] = useState<SummaryCardProp[]>([]);
@@ -85,9 +98,18 @@ export default function Home() {
     async function fetchData() {
       let response = (await (await fetch('/api/events')).json()) as SummaryCardProp[];
       setSummaryCardJSON(response);
-      // TODO: ここでタグを取得する処理を書く
-      // TODO: 視覚と聴覚障害は別だろうと思うのと、発達障害と精神障害は同じ括りで良いかもしれない。
-      setTags(['すべて', '身体障害', '発達障害', '視覚・聴覚障害', '知的障害', '精神障害']);
+
+      let newTags: string[] = [];
+      for (let i = 0; i < response.length; i++) {
+        for (let j = 0; j < response[i].tag.length; j++) {
+          if (!newTags.includes(response[i].tag[j].name)) {
+            newTags.push(response[i].tag[j].name);
+          }
+        }
+      }
+      setTags(['すべて', ...newTags]);
+
+      // // TODO: 視覚と聴覚障害は別だろうと思うのと、発達障害と精神障害は同じ括りで良いかもしれない。
     }
 
     fetchData();
@@ -103,11 +125,11 @@ export default function Home() {
     <main className="flex-1 overflow-scroll">
       {/* スマホ&タブレット用 */}
       <div className="flex size-full justify-center space-y-5 p-2 md:hidden">
-        <RenderComponent device='mobile' {...props} />
+        <RenderComponent device="mobile" {...props} />
       </div>
       {/* PC用 */}
       <div className="hidden size-full flex-col items-center md:flex">
-        <RenderComponent device='desktop' {...props} />
+        <RenderComponent device="desktop" {...props} />
       </div>
     </main>
   );
