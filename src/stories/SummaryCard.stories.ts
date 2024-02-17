@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SummaryCard, SummaryCardProp } from '@/components/common/SummaryCard';
-import sampleImageFile from '@stories/assets/park.jpg';
+import sampleImageFile from '@/stories/assets/park.jpg';
 const meta: Meta = {
   title: 'Components/SummaryCard',
   component: SummaryCard,
