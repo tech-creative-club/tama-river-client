@@ -1,12 +1,26 @@
 'use client';
 
 import React, { useState } from 'react';
-import SummaryCardType from '@/types/SummaryCardType';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Label } from './Label';
 import Favorite from '@/components/icons/Favorite';
 import FavoriteActive from '@/components/icons/FavoriteActive';
 import { getFavorite, removeFavorite, setFavorite } from '@/model/localStorage';
+
+export type SummaryCardType = {
+  title: string;
+  sport: string[];
+  tag: { name: string }[];
+  date: string;
+  url: string;
+  image_url?: string;
+  location: {
+    name: string;
+    address: string;
+    capacity: number | string;
+  };
+};
 
 interface SummaryCardProps {
   prop: SummaryCardType;
@@ -16,6 +30,7 @@ interface SummaryCardProps {
 // TODO: localstorage系の処理関数を変える
 // TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
 // TODO: functionで書き直す
+// TODO: image_urlを指定する
 export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCardProps) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
@@ -45,7 +60,11 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
           className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${pulse && 'animate-pulse'}`}
         >
           <div className="flex w-full max-w-md flex-row">
-            <div className="m-1 h-20 w-28 rounded bg-zinc-200"></div>
+            {/* TODO: pulse false時はbgを変える */}
+            <div className="m-1 h-20 w-28 rounded bg-zinc-200">
+              {!pulse ? (
+                prop.image_url ? <Image src={prop.image_url} width={200} height={200} alt="photos" /> : <p>No Image</p>) : (<></>)}
+            </div>
             <div className="m-1 flex w-full flex-1 flex-col space-y-1.5 truncate">
               {pulse ? (
                 <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
@@ -57,7 +76,6 @@ export const SummaryCard = ({ prop, pulse = false, desktop = false }: SummaryCar
                   className="w-full overflow-hidden truncate text-left text-zinc-900"
                 />
               )}
-
               {pulse ? (
                 <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
               ) : (

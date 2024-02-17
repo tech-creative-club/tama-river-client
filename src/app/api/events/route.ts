@@ -1,6 +1,6 @@
 // URL一覧とSummaryCardを定義
 export const runtime = 'edge';
-import SummaryCard from '@/types/SummaryCardType';
+import { SummaryCardType } from '@/stories/SummaryCard';
 import { nanoid } from 'nanoid';
 import { fakeDataJson } from './const';
 
@@ -44,13 +44,13 @@ function randomItems() {
         address: '住所',
         capacity: '100',
       },
-    } as SummaryCard;
+    } as SummaryCardType;
   });
 }
 
 async function Handler() {
   // const content: SummaryCard[] = randomItems();
-  const content: SummaryCard[] = fakeDataJson;
+  const content: SummaryCardType[] = fakeDataJson;
   return Response.json(content);
 }
 

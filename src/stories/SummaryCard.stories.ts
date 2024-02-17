@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SummaryCard } from './SummaryCard';
-import SummaryCardType from '@/types/SummaryCardType';
-
+import { SummaryCard, SummaryCardType } from './SummaryCard';
+import sampleImageFile from './assets/park.jpg';
 const meta: Meta = {
   title: 'Components/SummaryCard',
   component: SummaryCard,
@@ -10,33 +9,44 @@ const meta: Meta = {
     layout: 'fullscreen',
   },
   argTypes: {
+    pulse: {
+      control: 'boolean',
+    },
+    desktop: {
+      control: 'boolean',
+    },
     prop: {
-      description: 'SummaryCardのデータ',
-      control: {
-        type: 'object',
+      title: { control: 'text' },
+      sport: { control: 'array' },
+      date: { control: 'date' },
+      url: { control: 'text' },
+      image_url: { control: 'text' },
+      location: {
+        name: { control: 'text' },
+        address: { control: 'text' },
+        capacity: { control: 'text' },
       },
     },
   },
 } satisfies Meta<typeof SummaryCard>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof meta> = {
   args: {
     prop: {
       title: 'イベントの名前',
       sport: ['サッカー', '野球'],
       date: '2024-01-01T00:00:00Z',
       url: 'https://example.com',
-      image_url: 'https://source.unsplash.com/700x500?park',
+      image_url: sampleImageFile.src,
       location: {
         name: '会場の名前',
         address: '住所',
         capacity: '100',
       },
     } as SummaryCardType,
-    pulse: true,
+    pulse: false,
     desktop: false,
   },
-} satisfies Story;
+};

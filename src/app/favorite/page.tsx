@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { SummaryCard } from '@/stories/SummaryCard';
-import SummaryCardType from '@/types/SummaryCardType';
+import { SummaryCard, SummaryCardType } from '@/stories/SummaryCard';
 
 export default function Favorite() {
   const [favoriteSummaryCardJSON, setFavoriteSummaryCardJSON] = useState<SummaryCardType[]>([]);

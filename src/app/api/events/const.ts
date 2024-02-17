@@ -1,4 +1,4 @@
-import SummaryCard from "@/types/SummaryCardType";
+import {SummaryCardType} from "@/stories/SummaryCard";
 
 const fakeData = [
   {
@@ -279,4 +279,4 @@ const fakeData = [
   }
 ];
 
-export const fakeDataJson : SummaryCard[]= JSON.parse(JSON.stringify(fakeData, null, 2));
+export const fakeDataJson : SummaryCardType[]= JSON.parse(JSON.stringify(fakeData, null, 2));
