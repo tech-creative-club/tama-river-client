@@ -10,7 +10,7 @@ interface TagButtonProps {
 export const TagButton = (props: TagButtonProps) => {
   const { tags, selectedTag, onClick } = props;
   return (
-    <>
+    <div className="flex flex-row space-x-3">
       {/* TODO: オプショナルチェイニングは本来おかしい。string[]なので、mapは動くはず。何かおかしい。 */}
       {tags?.map((tag, index) => {
         return (
@@ -19,6 +19,6 @@ export const TagButton = (props: TagButtonProps) => {
           </Button>
         );
       })}
-    </>
+    </div>
   );
 };

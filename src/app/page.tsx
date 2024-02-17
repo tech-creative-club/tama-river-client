@@ -26,10 +26,9 @@ function RenderComponent(props: RenderComponentProps) {
           notificationType="warning"
         />
         <div className="p-5 pt-0">
+          {/* TODO: TagButtonのVariantで吸収したい気持ちある */}
           <div className="hidden-scrollbar w-full overflow-scroll">
-            <div className="flex flex-row space-x-3">
-              <TagButton tags={tags} selectedTag={selectedTag} onClick={(tagStr) => setTag(tagStr)} />
-            </div>
+            <TagButton tags={tags} selectedTag={selectedTag} onClick={(tagStr) => setTag(tagStr)} />
           </div>
         </div>
         <div className="divide-y-smart border-border">
@@ -70,7 +69,6 @@ export default function Home() {
 
   return (
     <main className="flex-1 overflow-scroll">
-      {/* TODO: コンポーネントを切り出す */}
       {/* スマホ&タブレット用 */}
       <div className="flex size-full justify-center space-y-5 p-2 md:hidden">
         <RenderComponent summaryCardJSON={summaryCardJSON} Loading={Loading} tags={tags} selectedTag={selectedTag} setTag={setTag} />
@@ -79,9 +77,7 @@ export default function Home() {
       <div className="hidden size-full flex-col items-center md:flex">
         <div className="hidden-scrollbar w-full max-w-7xl overflow-scroll p-5 pb-0">
           <Notification title="開発中のお知らせ" text="現在開発中の画面のため、本番とは違う可能性があります。" notificationType="warning"/>
-          <div className="flex flex-row space-x-3">
-            <TagButton tags={tags} selectedTag={selectedTag} onClick={(str) => setTag(str)} />
-          </div>
+          <TagButton tags={tags} selectedTag={selectedTag} onClick={(str) => setTag(str)} />
         </div>
         <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
           {summaryCardJSON.map((prop, index) => {
