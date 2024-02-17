@@ -13,7 +13,7 @@
     "lint:fix": "next lint --fix",
     "clean": "rm -r ./.next ./node_modules ./.vercel ; npm i",
     "format": "prettier --write src/**/*.{ts,tsx}",
-    "format:check": "prettier --check -l src/**/*.{ts,tsx} && eslint ./src",
+    "format:check": "prettier -l src/**/*.{ts,tsx} && eslint ./src",
     "pages:build": "npx @cloudflare/next-on-pages",
     "pages:preview": "npm run pages:build && wrangler pages dev .vercel/output/static --compatibility-date=2024-01-29 --compatibility-flag=nodejs_compat",
     "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
