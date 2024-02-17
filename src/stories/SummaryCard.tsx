@@ -28,9 +28,9 @@ interface SummaryCardProps {
   loading?: boolean;
   desktop?: boolean;
 }
+
 // TODO: FavoriteIconをbooleanで切り替えられるようなcomponentにする
-// TODO: functionで書き直す
-export const SummaryCard = ({ prop, loading = false, desktop = false }: SummaryCardProps) => {
+export function SummaryCard ({ prop, loading = false, desktop = false }: SummaryCardProps){
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
   const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
     year: 'numeric',
@@ -120,9 +120,8 @@ export const SummaryCard = ({ prop, loading = false, desktop = false }: SummaryC
   );
 };
 
-// TODO: ここもfunctionで書き直す
 // TODO: DesktopでComponent分けるのバグの温床なのでなんとか考える(SOLID原則のOCP違反)
-const DesktopSummaryCard = (prop: SummaryCardType, formattedDate: string, loading: boolean) => {
+function DesktopSummaryCard (prop: SummaryCardType, formattedDate: string, loading: boolean){
   const [isFavorite, setIsFavorite] = useState<boolean>(getFavorite().includes(prop.url));
 
   const favorite = (url: string) => {
