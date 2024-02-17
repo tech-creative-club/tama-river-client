@@ -77,12 +77,12 @@ function MobileSummaryCard(props: SummaryCardProps) {
               {loading ? (
                 <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
               ) : (
-                <Label type="large">{prop.title}</Label>
+                <Label variant="large">{prop.title}</Label>
               )}
               {loading ? (
                 <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
               ) : (
-                <Label type="small">{formattedDate}</Label>
+                <Label variant="small">{formattedDate}</Label>
               )}
             </div>
           </div>
@@ -118,13 +118,13 @@ function DesktopSummaryCard(props: SummaryCardProps) {
       {loading ? (
         <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
       ) : (
-        <Label type="large">{prop.title}</Label>
+        <Label variant="large">{prop.title}</Label>
       )}
 
       {loading ? (
         <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
       ) : (
-        <Label type="small">{formattedDate}</Label>
+        <Label variant="small">{formattedDate}</Label>
       )}
       <div className="absolute bottom-5 right-5 flex flex-row">
         {/* TODO: FavoriteActiveと分けるんじゃなく、variant="filled"で設定できるようにする。 */}

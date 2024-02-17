@@ -7,7 +7,7 @@ export default function Add() {
     <div className="flex size-full flex-col items-center space-y-5 pt-20">
       <CameraActivation />
       <LoadImageFromSaved />
-      <Label type="p" className="max-w-64">
+      <Label tag="p" className="max-w-64">
         エージェントを追加することにより、さまざまな情報を受け取る事ができるようになります。
       </Label>
     </div>

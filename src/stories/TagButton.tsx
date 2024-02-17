@@ -22,7 +22,7 @@ function NomalTagButton(props: TagButtonProps) {
       {tags.map((tag, index) => {
         return (
           <Button key={index} onClick={() => onClick(tag)} active={selectedTag === tag}>
-            <Label type="small">{tag}</Label>
+            <Label variant="small">{tag}</Label>
           </Button>
         );
       })}
@@ -38,7 +38,7 @@ const WappedTagButton = (props: TagButtonProps) => {
         {tags.map((tag, index) => {
           return (
             <Button key={index} onClick={() => onClick(tag)} active={selectedTag === tag}>
-              <Label type="small">{tag}</Label>
+              <Label variant="small">{tag}</Label>
             </Button>
           );
         })}
