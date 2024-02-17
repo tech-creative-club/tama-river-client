@@ -94,22 +94,13 @@ export default function Home() {
   const [tags, setTags] = useState<string[]>([]);
   const [selectedTag, setTag] = useState<string>('すべて');
 
-  function onlyUnique(value: any, index: any, array: any) {
-    return array.indexOf(value) === index;
-  }
-
   useEffect(() => {
     async function fetchData() {
-      let response = (await (await fetch('/api/events')).json()) as SummaryCardProp[];
+      const response = (await (await fetch('/api/events')).json()) as SummaryCardProp[];
       setSummaryCardJSON(response);
-
-      const tagsLists = response.map((e) => {
-        return e.tag.map((t) => {
-          return t.name;
-        });
-      });
-      let uniqueTags = tagsLists.flat().filter(onlyUnique);
-      console.log(uniqueTags);
+      //setLoading(false);
+      const Tags: string[] = response.map((e) => {return e.tag}).flat().map((e) => {return e.name});
+      const uniqueTags = Array.from(new Set(Tags).values());
       setTags(['すべて', ...uniqueTags]);
 
       // TODO: 視覚と聴覚障害は別だろうと思うのと、発達障害と精神障害は同じ括りで良いかもしれない。
@@ -119,7 +110,7 @@ export default function Home() {
 
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
