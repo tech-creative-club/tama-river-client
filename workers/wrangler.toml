@@ -1,12 +1,16 @@
 name = "tama-river-workers"
 compatibility_date = "2023-12-01"
 
+kv_namespaces = [
+  { binding = "tama-river", id = "79dc5ba4f1b9487f95d441fbc935bf12" }
+]
+
 # [vars]
 # MY_VARIABLE = "production_value"
 
 # [[kv_namespaces]]
-# binding = "tama-river"
-# id = "79dc5ba4f1b9487f95d441fbc935bf12"
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 # [[r2_buckets]]
 # binding = "MY_BUCKET"
