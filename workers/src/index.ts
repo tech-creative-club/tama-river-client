@@ -26,12 +26,10 @@ app.post('/api/items', async (c) => {
       typeof location === 'object' &&
       typeof location.name === 'string' &&
       typeof location.address === 'string' &&
-      typeof location.capacity === 'number'
+      (typeof location.capacity === 'number' || typeof location.capacity === 'string')
     ) {
-      await c.env.MY_KV.put(
-        title,
-        JSON.stringify({ title, sport, tag: [tag], date, url, image_url, location: {} })
-      );
+      const data = JSON.stringify({ title, sport, tag, date, url, image_url, location });
+      await c.env.MY_KV.put(title, data);
       return c.json({ success: true });
     } else {
       return c.json({ error: 'Invalid request body format' }, { status: 400 });
