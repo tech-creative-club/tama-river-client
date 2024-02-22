@@ -2,7 +2,7 @@ name = "tama-river-workers"
 compatibility_date = "2023-12-01"
 
 kv_namespaces = [
-  { binding = "MY_KV", id = "79dc5ba4f1b9487f95d441fbc935bf12" }
+  { binding = "TAMARIVER_KV", id = "79dc5ba4f1b9487f95d441fbc935bf12" }
 ]
 
 # [vars]

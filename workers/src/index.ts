@@ -2,7 +2,7 @@ import { KVNamespace } from '@cloudflare/workers-types';
 import { Hono } from 'hono';
 
 type Bindings = {
-  MY_KV: KVNamespace;
+  TAMARIVER_KV: KVNamespace;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -29,7 +29,7 @@ app.post('/api/items', async (c) => {
       (typeof location.capacity === 'number' || typeof location.capacity === 'string')
     ) {
       const data = JSON.stringify({ title, sport, tag, date, url, image_url, location });
-      await c.env.MY_KV.put(title, data);
+      await c.env.TAMARIVER_KV.put(title, data);
       return c.json({ success: true });
     } else {
       return c.json({ error: 'Invalid request body format' }, { status: 400 });
