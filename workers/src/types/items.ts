@@ -1,6 +1,6 @@
 export type Items = {
   FQDN: string;
-  data: Data;
+  data: Data[];
 };
 
 type tag = {

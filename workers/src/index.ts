@@ -14,10 +14,10 @@ const archiveKeyPrefix = 'archive';
 
 const validator = zValidator(
   'json',
-  z.array(
-    z.object({
-      FQDN: z.string(),
-      data: z.object({
+  z.object({
+    FQDN: z.string(),
+    data: z.array(
+      z.object({
         title: z.string(),
         sport: z.array(z.string()),
         tags: z.array(
@@ -33,9 +33,9 @@ const validator = zValidator(
           address: z.string(),
           capacity: z.union([z.string(), z.number()]),
         }),
-      }),
-    })
-  )
+      })
+    ),
+  })
 );
 
 app.get('/', async (c) => {
@@ -64,7 +64,7 @@ app.post('/api/items', validator, async (c) => {
 app.get('/api/items', async (c) => {
   try {
     const items: Items[] = [];
-    const { keys } = await c.env.TAMARIVER_KV.list({ prefix: `${archiveKeyPrefix}::` });
+    const { keys } = await c.env.TAMARIVER_KV.list({ prefix: archiveKeyPrefix });
     for (const key of keys) {
       const value = await c.env.TAMARIVER_KV.get(key.name);
       if (value !== null) {
