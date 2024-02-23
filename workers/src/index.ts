@@ -10,23 +10,28 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
+const keyPrefix = 'archive::';
+
 const validator = zValidator(
   'json',
   z.object({
-    title: z.string(),
-    sport: z.array(z.string()),
-    tags: z.array(
-      z.object({
+    FQDN: z.string(),
+    data: z.object({
+      title: z.string(),
+      sport: z.array(z.string()),
+      tags: z.array(
+        z.object({
+          name: z.string(),
+        })
+      ),
+      date: z.string(),
+      url: z.string(),
+      image_url: z.string(),
+      location: z.object({
         name: z.string(),
-      })
-    ),
-    date: z.string(),
-    url: z.string(),
-    image_url: z.string(),
-    location: z.object({
-      name: z.string(),
-      address: z.string(),
-      capacity: z.union([z.string(), z.number()]),
+        address: z.string(),
+        capacity: z.union([z.string(), z.number()]),
+      }),
     }),
   })
 );
@@ -39,12 +44,12 @@ app.get('/', async (c) => {
 
 app.post('/api/items', validator, async (c) => {
   try {
-    const { title, sport, tags, date, url, image_url, location } = (await c.req.json()) as Items;
+    const { FQDN, data } = (await c.req.json()) as Items;
 
-    const data = JSON.stringify({ title, sport, tags, date, url, image_url, location });
+    const stringData = JSON.stringify(data);
     try {
-      const key = `url::${url}`;
-      await c.env.TAMARIVER_KV.put(key, data);
+      const key = keyPrefix + FQDN;
+      await c.env.TAMARIVER_KV.put(key, stringData);
       return c.json({ success: true });
     } catch (error) {
       return c.json({ error: 'Internal server error' }, { status: 500 });
@@ -57,7 +62,7 @@ app.post('/api/items', validator, async (c) => {
 app.get('/api/items', async (c) => {
   try {
     const items: Items[] = [];
-    const { keys } = await c.env.TAMARIVER_KV.list({ prefix: 'url::' });
+    const { keys } = await c.env.TAMARIVER_KV.list({ prefix: keyPrefix });
     for (const key of keys) {
       const value = await c.env.TAMARIVER_KV.get(key.name);
       if (value !== null) {
@@ -69,8 +74,6 @@ app.get('/api/items', async (c) => {
     return c.json({ error: 'Internal server error' }, { status: 500 });
   }
 });
-
-// TODO: GET endpoint /api/itemsで記事情報のkv全件取得(key prefixが "url" であるものを取得する)
 
 // TODO: GET endpoint /api/image/?url=...で画像を取得するAPIを作成
 // (enhance) (e.g. /api/image/?url=example.com/image.png のようなクエリパラメータを受け取り、BASE64で返す)
