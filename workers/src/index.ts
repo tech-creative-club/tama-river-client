@@ -37,9 +37,9 @@ app.get('/', async (c) => {
 
 app.post('/api/items', validator, async (c) => {
   try {
-    const { title, sport, tag, date, url, image_url, location } = (await c.req.json()) as Items;
+    const { title, sport, tags, date, url, image_url, location } = (await c.req.json()) as Items;
 
-    const data = JSON.stringify({ title, sport, tag, date, url, image_url, location });
+    const data = JSON.stringify({ title, sport, tags, date, url, image_url, location });
     try {
       const key = `url::${url}`;
       await c.env.TAMARIVER_KV.put(key, data);

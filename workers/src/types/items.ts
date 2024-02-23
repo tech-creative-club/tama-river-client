@@ -1,7 +1,7 @@
 export type Items = {
   title: string;
   sport: string[];
-  tag: {
+  tags: {
     name: string;
   };
   date: string;
