@@ -43,6 +43,22 @@ app.post('/api/items', async (c) => {
   }
 });
 
+app.get('/api/items', async (c) => {
+  try {
+    const items: Items[] = [];
+    const { keys } = await c.env.TAMARIVER_KV.list();
+    for (const key of keys) {
+      const value = await c.env.TAMARIVER_KV.get(key.name);
+      if (value !== null) {
+        items.push(JSON.parse(value));
+      }
+    }
+    return c.json(items);
+  } catch (error) {
+    return c.json({ error: 'Internal server error' }, { status: 500 });
+  }
+});
+
 // TODO: GET endpoint /api/itemsで記事情報のkv全件取得(key prefixが "url" であるものを取得する)
 
 // TODO: GET endpoint /api/image/?url=...で画像を取得するAPIを作成
