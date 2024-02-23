@@ -19,21 +19,21 @@ const validator = zValidator(
     data: z.array(
       z.object({
         title: z.string(),
-        sport: z.array(z.string()),
+        sport: z.array(z.string().nullable()),
         tags: z.array(
           z.object({
             name: z.string(),
-          })
+          }).nullable()
         ),
-        date: z.string(),
+        date: z.string().nullable(),
         url: z.string(),
-        image_url: z.string(),
+        image_url: z.string().nullable(),
         location: z.object({
-          name: z.string(),
-          address: z.string(),
-          capacity: z.union([z.string(), z.number()]),
+          name: z.string().nullable(),
+          address: z.string().nullable(),
+          capacity: z.union([z.string(), z.number()]).nullable(),
         }),
-      })
+      }).nullable()
     ),
   })
 );
@@ -42,12 +42,9 @@ app.get('/', async (c) => {
   return c.text('Hello, world!');
 });
 
-// TODO: url::{domain} というキーで情報をリスト化して保存する
-
 app.post('/api/items', validator, async (c) => {
   try {
     const { FQDN, data } = (await c.req.json()) as Items;
-
     const stringData = JSON.stringify(data);
     try {
       const key = `${archiveKeyPrefix}::${FQDN}`;
