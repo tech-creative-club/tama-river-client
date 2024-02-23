@@ -10,30 +10,32 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-const keyPrefix = 'archive::';
+const archiveKeyPrefix = 'archive';
 
 const validator = zValidator(
   'json',
-  z.object({
-    FQDN: z.string(),
-    data: z.object({
-      title: z.string(),
-      sport: z.array(z.string()),
-      tags: z.array(
-        z.object({
+  z.array(
+    z.object({
+      FQDN: z.string(),
+      data: z.object({
+        title: z.string(),
+        sport: z.array(z.string()),
+        tags: z.array(
+          z.object({
+            name: z.string(),
+          })
+        ),
+        date: z.string(),
+        url: z.string(),
+        image_url: z.string(),
+        location: z.object({
           name: z.string(),
-        })
-      ),
-      date: z.string(),
-      url: z.string(),
-      image_url: z.string(),
-      location: z.object({
-        name: z.string(),
-        address: z.string(),
-        capacity: z.union([z.string(), z.number()]),
+          address: z.string(),
+          capacity: z.union([z.string(), z.number()]),
+        }),
       }),
-    }),
-  })
+    })
+  )
 );
 
 app.get('/', async (c) => {
@@ -48,7 +50,7 @@ app.post('/api/items', validator, async (c) => {
 
     const stringData = JSON.stringify(data);
     try {
-      const key = keyPrefix + FQDN;
+      const key = `${archiveKeyPrefix}::${FQDN}`;
       await c.env.TAMARIVER_KV.put(key, stringData);
       return c.json({ success: true });
     } catch (error) {
@@ -62,7 +64,7 @@ app.post('/api/items', validator, async (c) => {
 app.get('/api/items', async (c) => {
   try {
     const items: Items[] = [];
-    const { keys } = await c.env.TAMARIVER_KV.list({ prefix: keyPrefix });
+    const { keys } = await c.env.TAMARIVER_KV.list({ prefix: `${archiveKeyPrefix}::` });
     for (const key of keys) {
       const value = await c.env.TAMARIVER_KV.get(key.name);
       if (value !== null) {
