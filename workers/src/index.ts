@@ -35,6 +35,8 @@ app.get('/', async (c) => {
   return c.text('Hello, world!');
 });
 
+// TODO: url::{domain} というキーで情報をリスト化して保存する
+
 app.post('/api/items', validator, async (c) => {
   try {
     const { title, sport, tags, date, url, image_url, location } = (await c.req.json()) as Items;
