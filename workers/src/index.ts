@@ -15,9 +15,11 @@ const validator = zValidator(
   z.object({
     title: z.string(),
     sport: z.array(z.string()),
-    tag: z.object({
-      name: z.string(),
-    }),
+    tag: z.array(
+      z.object({
+        name: z.string(),
+      })
+    ),
     date: z.string(),
     url: z.string(),
     image_url: z.string(),
