@@ -1,5 +1,6 @@
 import { KVNamespace } from '@cloudflare/workers-types';
 import { Hono } from 'hono';
+import { Items } from './types/items';
 
 type Bindings = {
   TAMARIVER_KV: KVNamespace;
@@ -13,8 +14,7 @@ app.get('/', async (c) => {
 
 app.post('/api/items', async (c) => {
   try {
-    const { title, sport, tag, date, url, image_url, location } = await c.req.json();
-    // TODO: 型ちゃんと書いてバリデーションする
+    const { title, sport, tag, date, url, image_url, location } = (await c.req.json()) as Items;
     if (
       typeof title === 'string' &&
       Array.isArray(sport) &&
@@ -31,7 +31,7 @@ app.post('/api/items', async (c) => {
       const data = JSON.stringify({ title, sport, tag, date, url, image_url, location });
       // TODO: putでerrorが返ってきた時に500エラーを返す。
       // TODO: keyはtitleではなくurlを使う (e.g. url::example.com/kankou/sport.html のようなKeyを入れる)
-      await c.env.TAMARIVER_KV.put(title, data);
+      await c.env.TAMARIVER_KV.put(url, data);
       return c.json({ success: true });
     } else {
       return c.json({ error: 'Invalid request body format' }, { status: 400 });
