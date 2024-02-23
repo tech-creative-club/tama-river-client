@@ -1,4 +1,13 @@
 export type Items = {
+  FQDN: string;
+  data: Data[];
+};
+
+type tag = {
+  name: string;
+};
+
+type Data = {
   title: string;
   sport: string[];
   tags: tag[];
@@ -10,8 +19,4 @@ export type Items = {
     address: string;
     capacity: number | string;
   };
-};
-
-type tag = {
-  name: string;
 };
