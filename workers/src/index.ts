@@ -39,7 +39,8 @@ app.post('/api/items', validator, async (c) => {
 
     const data = JSON.stringify({ title, sport, tag, date, url, image_url, location });
     try {
-      await c.env.TAMARIVER_KV.put(url, data);
+      const key = `url::${url}`;
+      await c.env.TAMARIVER_KV.put(key, data);
       return c.json({ success: true });
     } catch (error) {
       return c.json({ error: 'Internal server error' }, { status: 500 });
@@ -52,7 +53,7 @@ app.post('/api/items', validator, async (c) => {
 app.get('/api/items', async (c) => {
   try {
     const items: Items[] = [];
-    const { keys } = await c.env.TAMARIVER_KV.list();
+    const { keys } = await c.env.TAMARIVER_KV.list({ prefix: 'url::' });
     for (const key of keys) {
       const value = await c.env.TAMARIVER_KV.get(key.name);
       if (value !== null) {
