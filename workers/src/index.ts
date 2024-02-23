@@ -29,10 +29,12 @@ app.post('/api/items', async (c) => {
       (typeof location.capacity === 'number' || typeof location.capacity === 'string')
     ) {
       const data = JSON.stringify({ title, sport, tag, date, url, image_url, location });
-      // TODO: putでerrorが返ってきた時に500エラーを返す。
-      // TODO: keyはtitleではなくurlを使う (e.g. url::example.com/kankou/sport.html のようなKeyを入れる)
-      await c.env.TAMARIVER_KV.put(url, data);
-      return c.json({ success: true });
+      try {
+        await c.env.TAMARIVER_KV.put(url, data);
+        return c.json({ success: true });
+      } catch (error) {
+        return c.json({ error: 'Internal server error' }, { status: 500 });
+      }
     } else {
       return c.json({ error: 'Invalid request body format' }, { status: 400 });
     }
