@@ -3,7 +3,7 @@
 import re
 import os
 import glob
-from requests import Response
+import json
 from loguru import logger
 
 html_tmp_path = os.path.abspath(__file__).replace('aggregator.py', '') + 'temp/'
@@ -30,8 +30,9 @@ def get_location(html):
 
 def get_date(html):
   try:
-    return re.search(r'更新日:[0-9]{4}.[0-9]{2}.[0-9]{2}', html).group().split('更新日:')[1]
+    return re.search(r'更新日：[0-9]{4}.[0-9]{1,2}.[0-9]{1,2}日', html).group().split('更新日：')[1]
   except AttributeError:
+    logger.warning("日付が見つかりませんでした")
     return ""
 
 def get_attribute(html):
@@ -74,4 +75,6 @@ for html_path in html_list:
     if data is not None:
       req_json["data"].append(data)
 
-print(req_json)
+with open(html_tmp_path + "data.json", 'w') as f:
+  f.write(json.dumps(req_json, ensure_ascii=False, indent=2))
+
