@@ -1,9 +1,7 @@
 export type Items = {
   title: string;
   sport: string[];
-  tags: {
-    name: string;
-  };
+  tags: tag[];
   date: string;
   url: string;
   image_url: string;
@@ -12,4 +10,8 @@ export type Items = {
     address: string;
     capacity: number | string;
   };
+};
+
+type tag = {
+  name: string;
 };
