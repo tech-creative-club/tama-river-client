@@ -69,6 +69,7 @@ export default function Page() {
                 {usedOSSLibs}
               </p>
               <SocialLink Icon={GitHubIcon} id="tama-river-client" href="https://github.com/tech-creative-club/tama-river-client" />
+              <SocialLink Icon={GitHubIcon} id="tama-river(agent)" href="https://github.com/tech-creative-club/tama-river" />
             </div>
           </div>
         </div>
