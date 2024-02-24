@@ -50,11 +50,7 @@ function MobileRenderComponent(props: RenderComponentProps) {
   return (
     <div className="size-full max-w-md">
       <div className="flex flex-col space-y-5 pb-5">
-        <Notification
-          title="使い方ヒント"
-          text={notificationText}
-          notificationType="info"
-        />
+        <Notification title="使い方ヒント" text={notificationText} notificationType="info" />
         <div className="p-5 pt-0">
           <TagButton
             tags={tags}

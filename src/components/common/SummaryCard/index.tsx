@@ -8,6 +8,7 @@ import Favorite from '@/components/icons/Favorite';
 import { removeFavorite, setFavorite } from '@/model/localStorage';
 import SampleImage from '@/stories/assets/park.jpg';
 import { NoImage } from './NoImage';
+import { Card } from '@mui/material';
 
 export type SummaryCardProp = {
   title: string;
@@ -42,7 +43,7 @@ function MobileSummaryCard(props: SummaryCardProps) {
 
   return (
     <div className="relative h-fit w-full">
-      <Link href={prop ? prop.url : 'http://localhost:3000'} legacyBehavior>
+      <Link href={prop.url} legacyBehavior>
         <div
           className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${loading && 'animate-pulse'}`}
         >
@@ -103,37 +104,39 @@ function DesktopSummaryCard(props: SummaryCardProps) {
   }
 
   return (
-    <div className="relative w-full p-5">
-      {loading ? (
-        <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200"></div>
-      ) : prop.image_url ? (
-        <Image
-          src={SampleImage.src}
-          width={200}
-          height={200}
-          alt="photos"
-          className="relative m-1 h-20 w-28 overflow-hidden rounded"
-        />
-      ) : (
-        <NoImage />
-      )}
-      {loading ? (
-        <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
-      ) : (
-        <Label variant="large">{prop.title}</Label>
-      )}
+    <a href={prop.url} target="_blank">
+      <Card className="relative w-full p-5">
+        {loading ? (
+          <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200"></div>
+        ) : prop.image_url ? (
+          <Image
+            src={SampleImage.src}
+            width={200}
+            height={200}
+            alt="photos"
+            className="relative m-1 h-20 w-28 overflow-hidden rounded"
+          />
+        ) : (
+          <NoImage />
+        )}
+        {loading ? (
+          <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
+        ) : (
+          <Label variant="large">{prop.title}</Label>
+        )}
 
-      {loading ? (
-        <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
-      ) : (
-        <Label variant="small">{formattedDate}</Label>
-      )}
-      <div className="absolute bottom-5 right-5 flex flex-row">
-        <button onClick={() => ClickFavoriteButton(prop.url)}>
-          <Favorite active={isFavorite} />
-        </button>
-      </div>
-    </div>
+        {loading ? (
+          <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
+        ) : (
+          <Label variant="small">{formattedDate}</Label>
+        )}
+        <div className="absolute bottom-5 right-5 flex flex-row">
+          <button onClick={() => ClickFavoriteButton(prop.url)}>
+            <Favorite active={isFavorite} />
+          </button>
+        </div>
+      </Card>
+    </a>
   );
 }
 
