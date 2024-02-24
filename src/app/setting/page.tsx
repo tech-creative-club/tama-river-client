@@ -6,15 +6,14 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 interface SnackbarState extends SnackbarOrigin {
   open: boolean;
-};
+}
 
 const usedOSSLibs = `タマリバは
 Next.js
 Tailwind CSS
-MUI componentで構成されています。`
+MUI componentで構成されています。`;
 
 export default function Page() {
-
   const [snackbarState, setSnackbarState] = useState<SnackbarState>({
     open: false,
     vertical: 'top',
@@ -25,11 +24,11 @@ export default function Page() {
 
   const handleClick = (newState: SnackbarOrigin) => () => {
     setSnackbarState({ ...newState, open: true });
-  }
+  };
 
   const handleClose = () => {
     setSnackbarState({ ...snackbarState, open: false });
-  }
+  };
 
   function cleaeStorage() {
     localStorage.clear();
@@ -50,7 +49,9 @@ export default function Page() {
               </p>
               <button
                 className="mt-5 w-full rounded-lg bg-primary p-3 font-semibold text-white"
-                onClick={() => {cleaeStorage()}}
+                onClick={() => {
+                  cleaeStorage();
+                }}
               >
                 実行
               </button>
@@ -60,16 +61,21 @@ export default function Page() {
                 autoHideDuration={6000}
                 onClose={handleClose}
                 message="リセットしました"
-
               />
             </div>
             <div className="w-full rounded-lg border-2 p-5">
               <h2 className="pb-5 text-xl font-semibold">使用技術について</h2>
-              <p className="whitespace-normal text-sm text-secondary-foreground">
-                {usedOSSLibs}
-              </p>
-              <SocialLink Icon={GitHubIcon} id="tama-river-client" href="https://github.com/tech-creative-club/tama-river-client" />
-              <SocialLink Icon={GitHubIcon} id="tama-river(agent)" href="https://github.com/tech-creative-club/tama-river" />
+              <p className="whitespace-normal text-sm text-secondary-foreground">{usedOSSLibs}</p>
+              <SocialLink
+                Icon={GitHubIcon}
+                id="tama-river-client"
+                href="https://github.com/tech-creative-club/tama-river-client"
+              />
+              <SocialLink
+                Icon={GitHubIcon}
+                id="tama-river(agent)"
+                href="https://github.com/tech-creative-club/tama-river"
+              />
             </div>
           </div>
         </div>
