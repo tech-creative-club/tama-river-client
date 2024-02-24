@@ -6,6 +6,10 @@ import { TagButton } from '@/components/TagButton';
 import { SummaryCardProp } from '@/components/common/SummaryCard';
 import { Notification } from '@/components/common/Notification';
 
+const notificationText = `このアプリは、自分たちでFeedを選ぶことで情報を一元的に集められるWebアプリです。
+ログインは不要ですが、いいねを押すとお気に入りを保存できたり、集めたい情報元を保存できます。(v0.2.0開発予定)
+タグごとに情報のジャンル分けができ、画像をタップすると本記事にアクセスできます。`;
+
 type DeviceType = 'mobile' | 'desktop';
 
 interface RenderComponentProps {
@@ -28,10 +32,6 @@ const dictSort = (a: SummaryCardProp, b: SummaryCardProp) => {
 
 function DesktopRenderComponent(props: RenderComponentProps) {
   const { summaryCardJSON, Loading, tags, selectedTag, setTag } = props;
-  const notificationText = `
-  このアプリは、自分たちでFeedを選ぶことで情報を一元的に集められるWebアプリです。
-  ログインは不要ですが、いいねを押すとお気に入りを保存できたり、集めたい情報元を保存できます。(v0.2.0開発予定)
-  タグごとに情報のジャンル分けができ、画像をタップすると本記事にアクセスできます。`;
   return (
     <>
       <div className="w-full max-w-7xl p-5 pb-0">
@@ -51,9 +51,6 @@ function DesktopRenderComponent(props: RenderComponentProps) {
 
 function MobileRenderComponent(props: RenderComponentProps) {
   const { summaryCardJSON, Loading, tags, selectedTag, setTag } = props;
-  const notificationText = `このアプリは、自分たちでFeedを選ぶことで情報を一元的に集められるWebアプリです。
-  ログインは不要ですが、いいねを押すとお気に入りを保存できたり、集めたい情報元を保存できます。(v0.2.0開発予定)
-  タグごとに情報のジャンル分けができ、画像をタップすると本記事にアクセスできます。`;
   return (
     <div className="size-full max-w-md">
       <div className="flex flex-col space-y-5 pb-5">

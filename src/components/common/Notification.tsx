@@ -39,7 +39,7 @@ function NotificationTitle({ title, type }: NotificationTitleProps) {
 }
 
 function NotificationText({ text }: { text: string }) {
-  return <p className="text-gray-500">{text}</p>;
+  return <p className="whitespace-pre-wrap text-gray-500">{text}</p>;
 }
 
 export function Notification(props: NotificationProps) {
