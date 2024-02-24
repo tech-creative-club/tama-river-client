@@ -76,7 +76,7 @@ function MobileSummaryCard(props: SummaryCardProps) {
               {loading ? (
                 <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
               ) : (
-                <Label variant="small">{formattedDate + "更新"}</Label>
+                <Label variant="small">{formattedDate + '更新'}</Label>
               )}
             </div>
           </div>
@@ -128,7 +128,7 @@ function DesktopSummaryCard(props: SummaryCardProps) {
         {loading ? (
           <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
         ) : (
-          <Label variant="small">{formattedDate + "更新"}</Label>
+          <Label variant="small">{formattedDate + '更新'}</Label>
         )}
         <div className="absolute bottom-5 right-5 flex flex-row">
           <button onClick={() => ClickFavoriteButton(prop.url)}>
