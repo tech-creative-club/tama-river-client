@@ -24,14 +24,12 @@ const deviceType = {
 
 function DesktopRenderComponent(props: RenderComponentProps) {
   const { summaryCardJSON, Loading, tags, selectedTag, setTag } = props;
+  const notificationText = `タグごとに情報のジャンル分けができ、画像をタップすると本記事に飛びます。
+  いいねを押すとお気に入りを保存できます。`;
   return (
     <>
       <div className="w-full max-w-7xl p-5 pb-0">
-        <Notification
-          title="開発中のお知らせ"
-          text="現在開発中の画面のため、本番とは違う可能性があります。"
-          notificationType="warning"
-        />
+        <Notification title="使い方ヒント" text={notificationText} notificationType="info" />
         <TagButton tags={tags} selectedTag={selectedTag} onClick={(str) => setTag(str)} variant="normal" />
       </div>
       <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
@@ -47,13 +45,15 @@ function DesktopRenderComponent(props: RenderComponentProps) {
 
 function MobileRenderComponent(props: RenderComponentProps) {
   const { summaryCardJSON, Loading, tags, selectedTag, setTag } = props;
+  const notificationText = `タグごとに情報のジャンル分けができ、画像をタップすると本記事に飛びます。
+  いいねを押すとお気に入りを保存できます。`;
   return (
     <div className="size-full max-w-md">
       <div className="flex flex-col space-y-5 pb-5">
         <Notification
-          title="開発中のお知らせ"
-          text="現在開発中の画面のため、本番とは違う可能性があります。"
-          notificationType="warning"
+          title="使い方ヒント"
+          text={notificationText}
+          notificationType="info"
         />
         <div className="p-5 pt-0">
           <TagButton
