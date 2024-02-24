@@ -3,11 +3,11 @@ export type Items = {
   data: Data[];
 };
 
-type tag = {
+export type tag = {
   name: string;
 };
 
-type Data = {
+export type Data = {
   title: string;
   sport: string[];
   tags: tag[];

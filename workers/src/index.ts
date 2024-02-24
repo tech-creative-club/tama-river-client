@@ -2,7 +2,7 @@ import { KVNamespace } from '@cloudflare/workers-types';
 import { Hono } from 'hono';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
-import { Items } from './types/items';
+import { Items, Data } from './types/items';
 
 type Bindings = {
   TAMARIVER_KV: KVNamespace;
@@ -63,10 +63,9 @@ app.get('/api/items', async (c) => {
     const items: Items[] = [];
     const { keys } = await c.env.TAMARIVER_KV.list({ prefix: archiveKeyPrefix });
     for (const key of keys) {
-      const value = await c.env.TAMARIVER_KV.get(key.name);
-      if (value !== null) {
-        items.push(JSON.parse(value));
-      }
+      const value = await c.env.TAMARIVER_KV.get(key.name) as string | null;
+      const valueJson = JSON.parse(value ?? "[]") as Data[];
+      items.push({ FQDN: key.name.replace(`${archiveKeyPrefix}::`, ''), data: valueJson });
     }
     return c.json(items);
   } catch (error) {
