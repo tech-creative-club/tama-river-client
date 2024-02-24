@@ -33,9 +33,13 @@ export const Header = ({ title, fixed, className }: HeaderProps) => {
     >
       <div className="flex w-full max-w-sm justify-between p-1 md:max-w-full">
         <Label variant="large">{title ?? 'タマリバ'}</Label>
-        {isDesktop && (
+        {isDesktop ? (
           <div className="flex">
             <Items hideIcon={true} />
+          </div>
+        ) : (
+          <div className="flex">
+            <span>v0.1.0</span>
           </div>
         )}
       </div>

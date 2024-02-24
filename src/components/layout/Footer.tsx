@@ -43,7 +43,7 @@ export const Footer = ({ path, fixed, className }: FooterProps) => {
       <footer>
         {/* Copylight */}
         <div className={`${isDesktop ? 'flex' : 'hidden'} justify-start p-6 px-5`}>
-          <Label variant="small">{`© ${year} タマリバ`}</Label>
+          <Label variant="small">{`© ${year} タマリバ v0.1.0`}</Label>
         </div>
       </footer>
     </>
