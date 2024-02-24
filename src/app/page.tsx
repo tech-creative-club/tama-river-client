@@ -22,6 +22,10 @@ const deviceType = {
   desktop: 'desktop',
 };
 
+const dictSort = (a: SummaryCardProp, b: SummaryCardProp) => {
+  return a.date < b.date ? 1 : -1;
+};
+
 function DesktopRenderComponent(props: RenderComponentProps) {
   const { summaryCardJSON, Loading, tags, selectedTag, setTag } = props;
   const notificationText = `
@@ -35,7 +39,7 @@ function DesktopRenderComponent(props: RenderComponentProps) {
         <TagButton tags={tags} selectedTag={selectedTag} onClick={(str) => setTag(str)} variant="normal" />
       </div>
       <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
-        {summaryCardJSON.map((prop, index) => {
+        {summaryCardJSON.sort(dictSort).map((prop, index) => {
           if (selectedTag === 'すべて' || prop.tags[0].name === selectedTag) {
             return <SummaryCard prop={prop} key={index} loading={Loading} desktop={true} />;
           }
@@ -63,7 +67,7 @@ function MobileRenderComponent(props: RenderComponentProps) {
           />
         </div>
         <div className="divide-y-smart border-border">
-          {summaryCardJSON.map((prop, index) => {
+          {summaryCardJSON.sort(dictSort).map((prop, index) => {
             if (selectedTag === 'すべて' || prop.tags[0].name === selectedTag) {
               return <SummaryCard prop={prop} key={index} loading={Loading} />;
             }
