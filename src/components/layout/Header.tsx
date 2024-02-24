@@ -32,7 +32,7 @@ export const Header = ({ title, fixed, className }: HeaderProps) => {
       className={`${header({ className: `${fixed && 'fixed top-0'} ${className}`, isDesktop })} ${NotoSansJP.className}`}
     >
       <div className="flex w-full max-w-sm justify-between p-1 md:max-w-full">
-        <Label variant="large">{title ?? 'たまりば'}</Label>
+        <Label variant="large">{title ?? 'タマリバ'}</Label>
         {isDesktop && (
           <div className="flex">
             <Items hideIcon={true} />

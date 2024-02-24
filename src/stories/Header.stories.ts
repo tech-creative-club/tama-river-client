@@ -14,7 +14,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
-    title: 'たまりば',
+    title: 'タマリバ',
     fixed: true,
     desktop: false,
   },
