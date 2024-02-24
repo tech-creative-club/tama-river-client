@@ -104,8 +104,8 @@ function DesktopSummaryCard(props: SummaryCardProps) {
   }
 
   return (
-    <a href={prop.url} target="_blank">
-      <Card className="relative w-full p-5">
+    <Card className="relative w-full p-5">
+      <a href={prop.url} target="_blank">
         {loading ? (
           <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200"></div>
         ) : prop.image_url ? (
@@ -130,13 +130,13 @@ function DesktopSummaryCard(props: SummaryCardProps) {
         ) : (
           <Label variant="small">{formattedDate + '更新'}</Label>
         )}
-        <div className="absolute bottom-5 right-5 flex flex-row">
-          <button onClick={() => ClickFavoriteButton(prop.url)}>
-            <Favorite active={isFavorite} />
-          </button>
-        </div>
-      </Card>
-    </a>
+      </a>
+      <div className="absolute bottom-5 right-5 flex flex-row">
+        <button onClick={() => ClickFavoriteButton(prop.url)}>
+          <Favorite active={isFavorite} />
+        </button>
+      </div>
+    </Card>
   );
 }
 
