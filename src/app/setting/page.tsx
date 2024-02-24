@@ -1,9 +1,33 @@
 'use client';
+import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+import { useState } from 'react';
+
+interface SnackbarState extends SnackbarOrigin {
+  open: boolean;
+};
 
 export default function Page() {
+
+  const [snackbarState, setSnackbarState] = useState<SnackbarState>({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = snackbarState;
+
+  const handleClick = (newState: SnackbarOrigin) => () => {
+    setSnackbarState({ ...newState, open: true });
+  }
+
+  const handleClose = () => {
+    setSnackbarState({ ...snackbarState, open: false });
+  }
+
   function cleaeStorage() {
     localStorage.clear();
     console.log('cleared');
+    handleClick({ vertical: 'top', horizontal: 'center' })();
   }
 
   return (
@@ -19,10 +43,18 @@ export default function Page() {
               </p>
               <button
                 className="mt-5 w-full rounded-lg bg-primary p-3 font-semibold text-white"
-                onClick={() => cleaeStorage()}
+                onClick={() => {cleaeStorage()}}
               >
                 実行
               </button>
+              <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                message="リセットしました"
+
+              />
             </div>
           </div>
         </div>
