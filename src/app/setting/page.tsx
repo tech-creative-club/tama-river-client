@@ -1,10 +1,17 @@
 'use client';
 import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import { useState } from 'react';
+import SocialLink from '@/components/misc/SocialLink';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 interface SnackbarState extends SnackbarOrigin {
   open: boolean;
 };
+
+const usedOSSLibs = `タマリバは
+Next.js
+Tailwind CSS
+MUI componentで構成されています。`
 
 export default function Page() {
 
@@ -34,7 +41,7 @@ export default function Page() {
     <div className="flex size-full flex-col items-center">
       <div className="hidden-scrollbar size-full max-w-7xl overflow-scroll p-5 pb-0">
         <div className="relative flex size-full flex-col">
-          <h2 className="text-2xl font-semibold">設定</h2>
+          <h2 className="text-2xl font-semibold">設定・その他</h2>
           <div className="grid size-full max-w-7xl grid-rows-2 gap-8 py-5 md:grid-cols-3">
             <div className="w-full rounded-lg border-2 p-5">
               <h2 className="pb-5 text-xl font-semibold">タマリバユーザデータのリセット</h2>
@@ -55,6 +62,13 @@ export default function Page() {
                 message="リセットしました"
 
               />
+            </div>
+            <div className="w-full rounded-lg border-2 p-5">
+              <h2 className="pb-5 text-xl font-semibold">使用技術について</h2>
+              <p className="whitespace-normal text-sm text-secondary-foreground">
+                {usedOSSLibs}
+              </p>
+              <SocialLink Icon={GitHubIcon} id="tama-river-client" href="https://github.com/tech-creative-club/tama-river-client" />
             </div>
           </div>
         </div>
