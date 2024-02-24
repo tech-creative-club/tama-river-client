@@ -32,7 +32,7 @@ const makeClassLabel = tv({
 });
 
 interface LabelProps {
-  children?: React.ReactNode;
+  children?: string;
   className?: string; // user defined Tailwind CSS class
   tag?: tagType; //HTML tag
   variant?: variantType; // Tailwind css variant

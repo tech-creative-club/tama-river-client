@@ -12,7 +12,7 @@ import { NoImage } from './NoImage';
 export type SummaryCardProp = {
   title: string;
   sport: string[];
-  tag: { name: string }[];
+  tags: { name: string }[];
   date: string;
   url: string;
   image_url?: string;
@@ -29,14 +29,10 @@ interface SummaryCardProps {
   loading?: boolean;
   desktop?: boolean;
 }
-
+//TODO: 現状、デスクトップ版とモバイル版でコンポーネントを分けているが、これだと2回ロードが走るため、非効率
 function MobileSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
-  const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
+  const formattedDate = prop.date;
   const [isFavorite, setIsFavorite] = useState(prop.isFavorite ?? false);
 
   function ClickFavoriteButton(url: string) {
@@ -98,11 +94,7 @@ function MobileSummaryCard(props: SummaryCardProps) {
 // TODO: Desktopの場合はカードのようにして表示したい。
 function DesktopSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
-  const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
+  const formattedDate = prop.date;
   const [isFavorite, setIsFavorite] = useState(prop.isFavorite ?? false);
 
   function ClickFavoriteButton(url: string) {

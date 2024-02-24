@@ -36,7 +36,7 @@ function DesktopRenderComponent(props: RenderComponentProps) {
       </div>
       <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
         {summaryCardJSON.map((prop, index) => {
-          if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
+          if (selectedTag === 'すべて' || prop.tags[0].name === selectedTag) {
             return <SummaryCard prop={prop} key={index} loading={Loading} desktop={true} />;
           }
         })}
@@ -65,7 +65,7 @@ function MobileRenderComponent(props: RenderComponentProps) {
         </div>
         <div className="divide-y-smart border-border">
           {summaryCardJSON.map((prop, index) => {
-            if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
+            if (selectedTag === 'すべて' || prop.tags[0].name === selectedTag) {
               return <SummaryCard prop={prop} key={index} loading={Loading} />;
             }
           })}
@@ -101,7 +101,7 @@ export default function Home() {
       //setLoading(false);
       const Tags: string[] = response
         .map((e) => {
-          return e.tag;
+          return e.tags;
         })
         .flat()
         .map((e) => {
