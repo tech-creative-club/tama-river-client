@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Label } from '@/components/common/Label';
 import Favorite from '@/components/icons/Favorite';
-import { removeFavorite, setFavorite } from '@/model/localStorage';
+import { getFavorite, removeFavorite, setFavorite } from '@/model/localStorage';
 import SampleImage from '@/stories/assets/park.jpg';
 import { NoImage } from './NoImage';
 import { Card } from '@mui/material';
@@ -34,7 +34,8 @@ interface SummaryCardProps {
 function MobileSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
   const formattedDate = prop.date;
-  const [isFavorite, setIsFavorite] = useState(prop.isFavorite ?? false);
+  const alreadyFavorite = getFavorite().includes(prop.url);
+  const [isFavorite, setIsFavorite] = useState(alreadyFavorite ?? false);
 
   function ClickFavoriteButton(url: string) {
     isFavorite ? removeFavorite(url) : setFavorite(url);
@@ -98,7 +99,8 @@ function MobileSummaryCard(props: SummaryCardProps) {
 function DesktopSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
   const formattedDate = prop.date;
-  const [isFavorite, setIsFavorite] = useState(prop.isFavorite ?? false);
+  const alreadyFavorite = getFavorite().includes(prop.url);
+  const [isFavorite, setIsFavorite] = useState(alreadyFavorite ?? false);
 
   function ClickFavoriteButton(url: string) {
     isFavorite ? removeFavorite(url) : setFavorite(url);
