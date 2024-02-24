@@ -6,6 +6,7 @@ import { tv } from 'tailwind-variants';
 import { Items } from '@/components/Items';
 import { Noto_Sans_JP } from 'next/font/google';
 import useIsDesktop from '@/utils/useIsDesktop';
+import { useRouter } from 'next/navigation';
 
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
@@ -26,16 +27,27 @@ interface HeaderProps {
 
 export const Header = ({ title, fixed, className }: HeaderProps) => {
   const isDesktop = useIsDesktop();
-
+  const router = useRouter();
   return (
     <header
       className={`${header({ className: `${fixed && 'fixed top-0'} ${className}`, isDesktop })} ${NotoSansJP.className}`}
     >
       <div className="flex w-full max-w-sm justify-between p-1 md:max-w-full">
-        <Label variant="large">{title ?? 'たまりば'}</Label>
-        {isDesktop && (
+        <button
+          className="flex items-center"
+          onClick={() => {
+            router.push('/');
+          }}
+        >
+          <Label variant="large">{title ?? 'タマリバ'}</Label>
+        </button>
+        {isDesktop ? (
           <div className="flex">
             <Items hideIcon={true} />
+          </div>
+        ) : (
+          <div className="flex">
+            <span>v0.1.0</span>
           </div>
         )}
       </div>

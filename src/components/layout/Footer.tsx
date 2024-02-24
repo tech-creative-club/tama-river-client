@@ -14,28 +14,25 @@ const footer = tv({
   variants: {
     isDesktop: {
       true: 'hidden',
-    },
-    fixed: {
-      true: 'fixed bottom-0',
+      false: 'fixed bottom-0',
     },
   },
 });
 
 interface FooterProps {
   path?: string;
-  fixed?: boolean;
   className?: string;
 }
 
 const year = new Date().getFullYear();
 
-export const Footer = ({ path, fixed, className }: FooterProps) => {
+export const Footer = ({ path, className }: FooterProps) => {
   const isDesktop = useIsDesktop();
   className = `${className} ${NotoSansJP.className}`;
 
   return (
     <>
-      <footer className={footer({ className, isDesktop, fixed })}>
+      <footer className={footer({ className, isDesktop })}>
         <div className="flex w-full max-w-sm justify-between">
           <Items />
         </div>
@@ -43,7 +40,7 @@ export const Footer = ({ path, fixed, className }: FooterProps) => {
       <footer>
         {/* Copylight */}
         <div className={`${isDesktop ? 'flex' : 'hidden'} justify-start p-6 px-5`}>
-          <Label variant="small">{`© ${year} たまりば`}</Label>
+          <Label variant="small">{`© ${year} タマリバ v0.1.0`}</Label>
         </div>
       </footer>
     </>

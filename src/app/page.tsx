@@ -6,6 +6,10 @@ import { TagButton } from '@/components/TagButton';
 import { SummaryCardProp } from '@/components/common/SummaryCard';
 import { Notification } from '@/components/common/Notification';
 
+const notificationText = `このアプリは、自分たちでFeedを選ぶことで情報を一元的に集められるWebアプリです。
+ログインは不要ですが、いいねを押すとお気に入りを保存できたり、集めたい情報元を保存できます。(v0.2.0開発予定)
+タグごとに情報のジャンル分けができ、画像をタップすると本記事にアクセスできます。`;
+
 type DeviceType = 'mobile' | 'desktop';
 
 interface RenderComponentProps {
@@ -22,21 +26,21 @@ const deviceType = {
   desktop: 'desktop',
 };
 
+const dictSort = (a: SummaryCardProp, b: SummaryCardProp) => {
+  return a.date < b.date ? 1 : -1;
+};
+
 function DesktopRenderComponent(props: RenderComponentProps) {
   const { summaryCardJSON, Loading, tags, selectedTag, setTag } = props;
   return (
     <>
       <div className="w-full max-w-7xl p-5 pb-0">
-        <Notification
-          title="開発中のお知らせ"
-          text="現在開発中の画面のため、本番とは違う可能性があります。"
-          notificationType="warning"
-        />
+        <Notification title="使い方ヒント" text={notificationText} notificationType="info" />
         <TagButton tags={tags} selectedTag={selectedTag} onClick={(str) => setTag(str)} variant="normal" />
       </div>
       <div className="hidden h-fit w-full max-w-7xl grid-cols-4 gap-4 md:grid">
-        {summaryCardJSON.map((prop, index) => {
-          if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
+        {summaryCardJSON.sort(dictSort).map((prop, index) => {
+          if (selectedTag === 'すべて' || prop.tags[0].name === selectedTag) {
             return <SummaryCard prop={prop} key={index} loading={Loading} desktop={true} />;
           }
         })}
@@ -50,11 +54,7 @@ function MobileRenderComponent(props: RenderComponentProps) {
   return (
     <div className="size-full max-w-md">
       <div className="flex flex-col space-y-5 pb-5">
-        <Notification
-          title="開発中のお知らせ"
-          text="現在開発中の画面のため、本番とは違う可能性があります。"
-          notificationType="warning"
-        />
+        <Notification title="使い方ヒント" text={notificationText} notificationType="info" />
         <div className="p-5 pt-0">
           <TagButton
             tags={tags}
@@ -64,8 +64,8 @@ function MobileRenderComponent(props: RenderComponentProps) {
           />
         </div>
         <div className="divide-y-smart border-border">
-          {summaryCardJSON.map((prop, index) => {
-            if (selectedTag === 'すべて' || prop.tag[0].name === selectedTag) {
+          {summaryCardJSON.sort(dictSort).map((prop, index) => {
+            if (selectedTag === 'すべて' || prop.tags[0].name === selectedTag) {
               return <SummaryCard prop={prop} key={index} loading={Loading} />;
             }
           })}
@@ -101,7 +101,7 @@ export default function Home() {
       //setLoading(false);
       const Tags: string[] = response
         .map((e) => {
-          return e.tag;
+          return e.tags;
         })
         .flat()
         .map((e) => {

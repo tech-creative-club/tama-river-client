@@ -5,14 +5,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Label } from '@/components/common/Label';
 import Favorite from '@/components/icons/Favorite';
-import { removeFavorite, setFavorite } from '@/model/localStorage';
+import { getFavorite, removeFavorite, setFavorite } from '@/model/localStorage';
 import SampleImage from '@/stories/assets/park.jpg';
 import { NoImage } from './NoImage';
+import { Card } from '@mui/material';
 
 export type SummaryCardProp = {
   title: string;
   sport: string[];
-  tag: { name: string }[];
+  tags: { name: string }[];
   date: string;
   url: string;
   image_url?: string;
@@ -29,15 +30,12 @@ interface SummaryCardProps {
   loading?: boolean;
   desktop?: boolean;
 }
-
+//TODO: 現状、デスクトップ版とモバイル版でコンポーネントを分けているが、これだと2回ロードが走るため、非効率
 function MobileSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
-  const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-  const [isFavorite, setIsFavorite] = useState(prop.isFavorite ?? false);
+  const formattedDate = prop.date;
+  const alreadyFavorite = getFavorite().includes(prop.url);
+  const [isFavorite, setIsFavorite] = useState(alreadyFavorite ?? false);
 
   function ClickFavoriteButton(url: string) {
     isFavorite ? removeFavorite(url) : setFavorite(url);
@@ -46,7 +44,7 @@ function MobileSummaryCard(props: SummaryCardProps) {
 
   return (
     <div className="relative h-fit w-full">
-      <Link href={prop ? prop.url : 'http://localhost:3000'} legacyBehavior>
+      <Link href={prop.url} legacyBehavior>
         <div
           className={`my-4 flex w-full cursor-pointer flex-col justify-center space-x-3 bg-white px-5 pt-4 ${loading && 'animate-pulse'}`}
         >
@@ -74,12 +72,14 @@ function MobileSummaryCard(props: SummaryCardProps) {
               {loading ? (
                 <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
               ) : (
-                <Label variant="large">{prop.title}</Label>
+                <Label variant="small" tag="p" className="whitespace-pre-wrap">
+                  {prop.title}
+                </Label>
               )}
               {loading ? (
                 <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
               ) : (
-                <Label variant="small">{formattedDate}</Label>
+                <Label variant="small">{formattedDate + '更新'}</Label>
               )}
             </div>
           </div>
@@ -98,12 +98,9 @@ function MobileSummaryCard(props: SummaryCardProps) {
 // TODO: Desktopの場合はカードのようにして表示したい。
 function DesktopSummaryCard(props: SummaryCardProps) {
   const { prop, loading } = props;
-  const formattedDate = new Date(prop.date).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-  const [isFavorite, setIsFavorite] = useState(prop.isFavorite ?? false);
+  const formattedDate = prop.date;
+  const alreadyFavorite = getFavorite().includes(prop.url);
+  const [isFavorite, setIsFavorite] = useState(alreadyFavorite ?? false);
 
   function ClickFavoriteButton(url: string) {
     isFavorite ? removeFavorite(url) : setFavorite(url);
@@ -111,37 +108,39 @@ function DesktopSummaryCard(props: SummaryCardProps) {
   }
 
   return (
-    <div className="relative w-full p-5">
-      {loading ? (
-        <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200"></div>
-      ) : prop.image_url ? (
-        <Image
-          src={SampleImage.src}
-          width={200}
-          height={200}
-          alt="photos"
-          className="relative m-1 h-20 w-28 overflow-hidden rounded"
-        />
-      ) : (
-        <NoImage />
-      )}
-      {loading ? (
-        <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
-      ) : (
-        <Label variant="large">{prop.title}</Label>
-      )}
+    <Card className="relative w-full p-5">
+      <a href={prop.url} target="_blank">
+        {loading ? (
+          <div className="relative m-1 h-20 w-28 overflow-hidden rounded bg-zinc-200"></div>
+        ) : prop.image_url ? (
+          <Image
+            src={SampleImage.src}
+            width={200}
+            height={200}
+            alt="photos"
+            className="relative m-1 h-20 w-28 overflow-hidden rounded"
+          />
+        ) : (
+          <NoImage />
+        )}
+        {loading ? (
+          <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
+        ) : (
+          <Label variant="large">{prop.title}</Label>
+        )}
 
-      {loading ? (
-        <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
-      ) : (
-        <Label variant="small">{formattedDate}</Label>
-      )}
+        {loading ? (
+          <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
+        ) : (
+          <Label variant="small">{formattedDate + '更新'}</Label>
+        )}
+      </a>
       <div className="absolute bottom-5 right-5 flex flex-row">
         <button onClick={() => ClickFavoriteButton(prop.url)}>
           <Favorite active={isFavorite} />
         </button>
       </div>
-    </div>
+    </Card>
   );
 }
 
