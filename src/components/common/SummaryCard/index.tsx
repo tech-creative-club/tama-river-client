@@ -71,7 +71,9 @@ function MobileSummaryCard(props: SummaryCardProps) {
               {loading ? (
                 <div className="h-6 w-full animate-pulse rounded bg-zinc-200"></div>
               ) : (
-                <Label variant="small" tag="p" className='text-wrap'>{prop.title}</Label>
+                <Label variant="small" tag="p" className="text-wrap">
+                  {prop.title}
+                </Label>
               )}
               {loading ? (
                 <div className="h-6 w-9/12 animate-pulse rounded bg-zinc-200"></div>
