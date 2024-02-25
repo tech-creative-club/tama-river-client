@@ -10,7 +10,7 @@ import { Label } from '@/components/common/Label';
 const NotoSansJP = Noto_Sans_JP({ subsets: ['latin'] });
 
 const footer = tv({
-  base: `flex w-full justify-center border-t border-border pb-6 pt-5`,
+  base: `flex w-full justify-center border-t border-border p-4`,
   variants: {
     isDesktop: {
       true: 'hidden',
