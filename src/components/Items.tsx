@@ -44,7 +44,7 @@ export const Items = ({ hideIcon = false }: ItemsProps) => {
         <Link key={index} className="cursor-pointer p-3" href={item.link}>
           <div className={itemsStyle({ hideIcon })}>
             {hideIcon === false && item.icon}
-            <Label variant="small">{item.label}</Label>
+            <Label variant="footer">{item.label}</Label>
           </div>
         </Link>
       ))}

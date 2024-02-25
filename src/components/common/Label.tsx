@@ -24,6 +24,7 @@ const makeClassLabel = tv({
       large: 'text-lg font-semibold',
       small: 'text-sm font-medium leading-none',
       muthed: 'text-sm text-muted-foreground',
+      footer: 'pt-2 text-2xs font-medium leading-none',
     },
     border: {
       true: 'border-b pb-2',
@@ -41,10 +42,10 @@ interface LabelProps {
 
 type tagType = 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
 
-type variantType = 'blockquote' | 'inline-code' | 'lead' | 'large' | 'small' | 'muthed';
+type variantType = 'blockquote' | 'inline-code' | 'lead' | 'large' | 'small' | 'muthed' | 'footer';
 
 export function Label(props: LabelProps) {
-  const { children, className = '', tag = 'p', variant, border = tag === 'h2' } = props;
+  const { children, tag = 'p', variant, border = tag === 'h2', className } = props;
   const HTMLTag = tag as keyof JSX.IntrinsicElements;
   const styleClass = `${className} ${inter.className} ${NotoSansJP.className} ${makeClassLabel({ tag: tag, variant: variant, border: border })}`;
   return <HTMLTag className={styleClass}>{children}</HTMLTag>;
