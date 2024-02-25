@@ -43,7 +43,7 @@ const validator = zValidator(
 app.use(
   '/api/items/post',
   cors({
-    origin: ['https://stg.tama-river.pages.dev', 'https://tama-river.pages.dev'],
+    origin: ['https://stg.tama-river.pages.dev', 'https://tama-river.pages.dev', 'localhost'],
     allowHeaders: ['Content-Type', 'X-Custom-Header', 'Upgrade-Insecure-Requests'],
     allowMethods: ['POST'],
     exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
