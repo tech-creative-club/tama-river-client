@@ -8,3 +8,6 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 bun.lockb
+
+# Ignore production config files
+wrangler.prd.toml

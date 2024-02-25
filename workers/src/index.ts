@@ -1,11 +1,13 @@
 import { KVNamespace } from '@cloudflare/workers-types';
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
 import { Items, Data } from './types/items';
 
 type Bindings = {
   TAMARIVER_KV: KVNamespace;
+  POST_TOKEN: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -38,11 +40,26 @@ const validator = zValidator(
   })
 );
 
+app.use(
+  '/api/items/post',
+  cors({
+    origin: ['https://stg.tama-river.pages.dev', 'https://tama-river.pages.dev'],
+    allowHeaders: ['Content-Type', 'X-Custom-Header', 'Upgrade-Insecure-Requests'],
+    allowMethods: ['POST'],
+    exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
+    maxAge: 600,
+  })
+);
+
 app.get('/', async (c) => {
   return c.text('Hello, world!');
 });
 
-app.post('/api/items', validator, async (c) => {
+app.post('/api/items/post', validator, async (c) => {
+  const token = c.req.header('X-API-TOKEN');
+  if (token !== c.env.POST_TOKEN) {
+    return c.json({ error: 'access forbidden' }, { status: 403 });
+  }
   try {
     const { FQDN, data } = (await c.req.json()) as Items;
     const stringData = JSON.stringify(data);
