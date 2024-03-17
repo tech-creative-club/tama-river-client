@@ -42,7 +42,7 @@ interface LabelProps {
 
 type tagType = 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
 
-type variantType = 'blockquote' | 'inline-code' | 'lead' | 'large' | 'small' | 'muthed' | 'footer';
+export type variantType = 'blockquote' | 'inline-code' | 'lead' | 'large' | 'small' | 'muthed' | 'footer';
 
 export function Label(props: LabelProps) {
   const { children, tag = 'p', variant, border = tag === 'h2', className } = props;
