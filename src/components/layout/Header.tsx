@@ -43,7 +43,7 @@ export const Header = ({ title, fixed, className }: HeaderProps) => {
         </button>
         {isDesktop ? (
           <div className="flex">
-            <Items hideIcon={true} />
+            <Items hideIcon={true} variant="small" />
           </div>
         ) : (
           <div className="flex">
